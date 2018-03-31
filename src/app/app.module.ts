@@ -15,7 +15,7 @@ import { TopComponent } from './top/top.component';
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule
+    BrowserModule.withServerTransition({ appId: 'schubert-front' }),
   ],
   providers: [],
   bootstrap: [AppComponent]
