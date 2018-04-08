@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions, Response, Headers,
+         URLSearchParams, ResponseContentType } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import * as urljoin from 'url-join';
+
+import { environment } from '../../environments/environment';
+
+@Injectable()
+export class RecruitService {
+
+  private apiUrl: string = environment.apiUrl;
+  private endpointUrl: string = urljoin(this.apiUrl, '/recruit');
+
+  constructor(
+    private http: Http,
+  ) { }
+
+
+  getRecruits(): Observable<any> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+
+    return this.http.get(this.endpointUrl, options)
+                    .map((r: Response) => r.json() as any);
+  }
+
+
+  /**
+   * このサービスで利用する基本の RequestOptions を作成する
+   * @return {RequestOptions}
+   */
+  private generateBasicRequestOptions(): RequestOptions {
+    return new RequestOptions({ withCredentials: true });
+  }
+}

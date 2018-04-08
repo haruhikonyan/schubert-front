@@ -11,6 +11,9 @@ import { RecruitComponent } from './recruit/recruit.component';
 import { TeamComponent } from './team/team.component';
 import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
+import { ConcertService } from './concert/concert.service';
+import { TeamService } from './team/team.service';
+import { RecruitService } from './recruit/recruit.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,7 @@ import { ConcertComponent } from './concert/concert.component';
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
   ],
-  providers: [],
+  providers: [ConcertService, TeamService, RecruitService],
   bootstrap: [AppComponent]
 })
 

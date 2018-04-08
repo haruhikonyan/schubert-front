@@ -23,7 +23,7 @@ npm manifest:
     },
     "scripts": {
       "ng": "ng",
-      "start": "node server",
+      "start": "npm run build:ssr && npm run serve:ssr",
       "build": "ng build",
       "test": "ng test",
       "lint": "ng lint",
@@ -32,7 +32,7 @@ npm manifest:
       "serve:ssr": "node dist/server.js",
       "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
       "build:client-and-server-bundles": "ng build --prod && ng build --prod --app 1 --output-hashing=false",
-      "postinstall": "ng build --aot -prod"
+      "postinstall": "npm run build:client-and-server-bundles && npm run webpack:server"
     },
     "private": true,
     "dependencies": {
@@ -55,8 +55,9 @@ npm manifest:
       "core-js": "^2.4.1",
       "express": "^4.16.2",
       "rxjs": "^5.5.6",
-      "ts-loader": "^4.1.0",
+      "ts-loader": "^2.3.7",
       "typescript": "2.6.2",
+      "url-join": "^4.0.0",
       "zone.js": "^0.8.20"
     },
     "devDependencies": {
@@ -1057,7 +1058,7 @@ Lockfile:
       strip-ansi "^3.0.0"
       supports-color "^2.0.0"
   
-  chalk@^2.0.0, chalk@^2.3.0, chalk@^2.3.1:
+  chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.1:
     version "2.3.2"
     resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
     dependencies:
@@ -1866,7 +1867,7 @@ Lockfile:
       engine.io-parser "1.3.2"
       ws "1.1.2"
   
-  enhanced-resolve@^3.1.0, enhanced-resolve@^3.4.0:
+  enhanced-resolve@^3.0.0, enhanced-resolve@^3.1.0, enhanced-resolve@^3.4.0:
     version "3.4.1"
     resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-3.4.1.tgz#0421e339fd71419b3da13d129b3979040230476e"
     dependencies:
@@ -1874,14 +1875,6 @@ Lockfile:
       memory-fs "^0.4.0"
       object-assign "^4.0.1"
       tapable "^0.2.7"
-  
-  enhanced-resolve@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-4.0.0.tgz#e34a6eaa790f62fccd71d93959f56b2b432db10a"
-    dependencies:
-      graceful-fs "^4.1.2"
-      memory-fs "^0.4.0"
-      tapable "^1.0.0"
   
   ent@~2.2.0:
     version "2.2.0"
@@ -5642,10 +5635,6 @@ Lockfile:
     version "0.2.8"
     resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
   
-  tapable@^1.0.0:
-    version "1.0.0"
-    resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.0.0.tgz#cbb639d9002eed9c6b5975eb20598d7936f1f9f2"
-  
   tar-pack@^3.4.0:
     version "3.4.1"
     resolved "https://registry.yarnpkg.com/tar-pack/-/tar-pack-3.4.1.tgz#e1dbc03a9b9d3ba07e896ad027317eb679a10a1f"
@@ -5776,14 +5765,13 @@ Lockfile:
     dependencies:
       glob "^6.0.4"
   
-  ts-loader@^4.1.0:
-    version "4.1.0"
-    resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-4.1.0.tgz#6216e75600941df3270bc4a7125e20aefb2dc5ea"
+  ts-loader@^2.3.7:
+    version "2.3.7"
+    resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-2.3.7.tgz#a9028ced473bee12f28a75f9c5b139979d33f2fc"
     dependencies:
-      chalk "^2.3.0"
-      enhanced-resolve "^4.0.0"
+      chalk "^2.0.1"
+      enhanced-resolve "^3.0.0"
       loader-utils "^1.0.2"
-      micromatch "^3.1.4"
       semver "^5.0.1"
   
   ts-node@~3.2.0:
@@ -5978,6 +5966,10 @@ Lockfile:
   urix@^0.1.0:
     version "0.1.0"
     resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
+  
+  url-join@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
   
   url-loader@^0.6.2:
     version "0.6.2"
@@ -6449,7 +6441,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c ng build --aot -prod
+  Arguments: -c npm run build:client-and-server-bundles && npm run webpack:server
   Directory: /Users/haruhiko/schubert-front
   Output:
   
