@@ -8,7 +8,7 @@ export class Recruit {
   title: string;
   practicePlace: string;
   practiceTime: string;
-  discription: string;
+  description: string;
   publishedFrom: Date;
   publishedTo: Date;
   team: Team;

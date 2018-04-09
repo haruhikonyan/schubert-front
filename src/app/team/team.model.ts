@@ -6,6 +6,6 @@ export class Team {
   name: string;
   mail: string;
   url: string;
-  discription: string;
+  description: string;
   isPublished: boolean;
 }
