@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/',
-  // apiUrl: 'https://stormy-mountain-99791.herokuapp.com/,
+  apiUrl: 'http://localhost:3000/api',
+  // apiUrl: 'https://schubert-back.herokuapp.com/api,
 };

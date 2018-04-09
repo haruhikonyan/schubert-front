@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class RecruitService {
 
   private apiUrl: string = environment.apiUrl;
-  private endpointUrl: string = urljoin(this.apiUrl, '/recruit');
+  private endpointUrl: string = urljoin(this.apiUrl, '/recruits');
 
   constructor(
     private http: Http,

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpModule} from '@angular/http';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +28,7 @@ import { RecruitService } from './recruit/recruit.service';
   imports: [
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
+    HttpModule
   ],
   providers: [ConcertService, TeamService, RecruitService],
   bootstrap: [AppComponent]

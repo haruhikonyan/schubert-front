@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://stormy-mountain-99791.herokuapp.com/',
+  apiUrl: 'https://schubert-back.herokuapp.com/api',
 };
