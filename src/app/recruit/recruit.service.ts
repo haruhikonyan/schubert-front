@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
+import { Recruit } from './recruit.model';
+
 
 @Injectable()
 export class RecruitService {
@@ -19,11 +21,11 @@ export class RecruitService {
   ) { }
 
 
-  getRecruits(): Observable<any> {
+  getRecruits(): Observable<Recruit[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as any);
+                    .map((r: Response) => r.json() as Recruit[]);
   }
 
 

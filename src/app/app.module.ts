@@ -12,6 +12,7 @@ import { RecruitComponent } from './recruit/recruit.component';
 import { TeamComponent } from './team/team.component';
 import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
+import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamService } from './team/team.service';
 import { RecruitService } from './recruit/recruit.service';
@@ -30,7 +31,12 @@ import { RecruitService } from './recruit/recruit.service';
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
     HttpModule
   ],
-  providers: [ConcertService, TeamService, RecruitService],
+  providers: [
+    AppService,
+    ConcertService,
+    TeamService,
+    RecruitService,
+  ],
   bootstrap: [AppComponent]
 })
 

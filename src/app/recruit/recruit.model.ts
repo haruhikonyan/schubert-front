@@ -1,4 +1,6 @@
 import { Team } from '../team/team.model';
+import { Instrument } from '../app.model';
+
 
 /**
  * Recruit Entity
@@ -13,23 +15,4 @@ export class Recruit {
   publishedTo: Date;
   team: Team;
   instruments: Instrument;
-}
-
-/**
- * Instrument Entity
- */
-export class Instrument {
-  id: number;
-  name: string;
-  shortName: string;
-  sortNumber: number;
-  instrumentCategory: InstrumentCategory;
-}
-
-/**
- * InstrumentCategory Entity
- */
-export class InstrumentCategory {
-  id: number;
-  name: string;
 }
