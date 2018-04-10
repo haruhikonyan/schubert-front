@@ -17,6 +17,7 @@ import { ConcertService } from './concert/concert.service';
 import { TeamService } from './team/team.service';
 import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-edit-page/recruit-edit-page.component';
+import { RecruitFormComponent } from './recruit/recruit-edit-page/recruit-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RecruitEditPageComponent } from './recruit/recruit-edit-page/recruit-ed
     TeamComponent,
     AboutComponent,
     ConcertComponent,
-    RecruitEditPageComponent
+    RecruitEditPageComponent,
+    RecruitFormComponent
   ],
   imports: [
     AppRoutingModule,
