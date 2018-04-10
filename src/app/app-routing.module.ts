@@ -11,12 +11,12 @@ import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: TopComponent},
-  { path: 'recruit', component: RecruitComponent},
-  { path: 'recruit/new', component: RecruitEditPageComponent},
+  { path: 'recruits', component: RecruitComponent},
+  { path: 'recruits/new', component: RecruitEditPageComponent},
   // resolve をつけて team 取得
-  { path: 'team/:id/recruit/new', component: RecruitEditPageComponent},
-  { path: 'team', component: TeamComponent},
-  { path: 'concert', component: ConcertComponent},
+  { path: 'teams/:id/recruit/new', component: RecruitEditPageComponent},
+  { path: 'teams', component: TeamComponent},
+  { path: 'concerts', component: ConcertComponent},
   { path: 'about', component: AboutComponent}
 ];
 
