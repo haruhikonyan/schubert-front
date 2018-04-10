@@ -5,11 +5,11 @@ import { RecruitService } from './recruit.service';
 
 
 @Component({
-  selector: 'app-recruit',
-  templateUrl: './recruit.component.html',
-  styleUrls: ['./recruit.component.scss']
+  selector: 'app-recruits',
+  templateUrl: './recruits.component.html',
+  styleUrls: ['./recruits.component.scss']
 })
-export class RecruitComponent implements OnInit {
+export class RecruitsComponent implements OnInit {
 
   recruits: Recruit[] = [];
 

@@ -8,8 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { TopComponent } from './top/top.component';
-import { RecruitComponent } from './recruit/recruit.component';
-import { TeamComponent } from './team/team.component';
+import { RecruitsComponent } from './recruit/recruits.component';
+import { TeamsComponent } from './team/teams.component';
 import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
 import { AppService } from './app.service';
@@ -23,8 +23,8 @@ import { RecruitFormComponent } from './recruit/recruit-edit-page/recruit-form.c
   declarations: [
     AppComponent,
     TopComponent,
-    RecruitComponent,
-    TeamComponent,
+    RecruitsComponent,
+    TeamsComponent,
     AboutComponent,
     ConcertComponent,
     RecruitEditPageComponent,
