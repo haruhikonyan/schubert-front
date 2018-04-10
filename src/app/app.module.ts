@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,8 @@ import { RecruitFormComponent } from './recruit/recruit-edit-page/recruit-form.c
   imports: [
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     AppService,
