@@ -15,32 +15,43 @@ export class AppService {
 
   private apiUrl: string = environment.apiUrl;
 
+  // サイトで汎用的に使うモデルは AppService で持っておく
+  types: Type[];
+  instruments: Instrument[];
+  instrumentCategories: InstrumentCategory[];
+
   constructor(
     private http: Http,
   ) { }
 
-  getTypes(): Observable<Type[]> {
+  getTypes(): void {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/types');
 
-    return this.http.get(endpointUrl, options)
-                    .map((r: Response) => r.json() as Type[]);
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Type[])
+             .map((types: Type[]) => this.types = types)
+             .subscribe();
   }
 
-  getInstruments(): Observable<Instrument[]> {
+  getInstruments(): void {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/instruments');
 
-    return this.http.get(endpointUrl, options)
-                    .map((r: Response) => r.json() as Instrument[]);
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Instrument[])
+             .map((instruments: Instrument[]) => this.instruments = instruments)
+             .subscribe();
   }
 
-  getInstrumentCategories(): Observable<InstrumentCategory[]> {
+  getInstrumentCategories(): void {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/instrument_categories');
 
-    return this.http.get(endpointUrl, options)
-                    .map((r: Response) => r.json() as InstrumentCategory[]);
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as InstrumentCategory[])
+             .map((instrumentCategories: InstrumentCategory[]) => this.instrumentCategories = instrumentCategories)
+             .subscribe();
   }
 
 

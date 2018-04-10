@@ -8,15 +8,12 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  types: Type[];
 
   constructor(private appServise: AppService) { }
 
   ngOnInit() {
-    this.appServise.getTypes()
-      .map((types: Type[]) => {
-        this.types = types;
-      })
-      .subscribe();
+    this.appServise.getTypes();
+    this.appServise.getInstruments();
+    this.appServise.getInstrumentCategories();
   }
 }
