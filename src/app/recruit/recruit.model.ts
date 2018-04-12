@@ -11,8 +11,8 @@ export class Recruit {
   practicePlace: string;
   practiceTime: string;
   description: string;
-  publishedFrom: Date;
-  publishedTo: Date;
+  publishedFrom: Date = new Date();
+  publishedTo: Date = new Date();
   team: Team;
-  instruments: Instrument;
+  instruments: Instrument[];
 }
