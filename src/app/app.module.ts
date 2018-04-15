@@ -17,8 +17,9 @@ import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamService } from './team/team.service';
 import { RecruitService } from './recruit/recruit.service';
-import { RecruitEditPageComponent } from './recruit/recruit-edit-page/recruit-edit-page.component';
-import { RecruitFormComponent } from './recruit/recruit-edit-page/recruit-form.component';
+import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
+import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
+import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RecruitFormComponent } from './recruit/recruit-edit-page/recruit-form.c
     AboutComponent,
     ConcertComponent,
     RecruitEditPageComponent,
-    RecruitFormComponent
+    RecruitFormComponent,
+    RecruitNewPageComponent
   ],
   imports: [
     AppRoutingModule,
