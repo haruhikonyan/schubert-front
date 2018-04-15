@@ -17,6 +17,7 @@ import { ConcertComponent } from './concert/concert.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamService } from './team/team.service';
+import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
@@ -46,6 +47,7 @@ import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-pa
     ConcertService,
     TeamService,
     RecruitService,
+    RecruitResolver,
   ],
   bootstrap: [AppComponent]
 })

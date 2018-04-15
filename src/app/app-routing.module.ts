@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './top/top.component';
+import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitsComponent } from './recruit/recruits.component';
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
@@ -14,8 +15,8 @@ const routes: Routes = [
   { path: '', component: TopComponent},
   { path: 'recruits', component: RecruitsComponent},
   { path: 'recruits/new', component: RecruitNewPageComponent},
-  // resolve をつけて recruit 取得
-  { path: 'recruits/:recruitId/edit', component: RecruitEditPageComponent},
+  { path: 'recruits/:recruitId/edit', component: RecruitEditPageComponent,
+                                      resolve: { recruit: RecruitResolver }},
   { path: 'teams', component: TeamsComponent},
   { path: 'concerts', component: ConcertComponent},
   { path: 'about', component: AboutComponent}
