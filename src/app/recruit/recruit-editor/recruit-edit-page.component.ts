@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Recruit } from './../recruit.model';
 
 @Component({
   selector: 'app-recruit-edit-page',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecruitEditPageComponent implements OnInit {
 
-  constructor() { }
+  recruit: Recruit;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.recruit = this.route.snapshot.data['recruit'];
   }
 
 }

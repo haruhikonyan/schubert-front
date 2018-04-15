@@ -8,11 +8,11 @@
   <ng-container *ngIf="team?.id == null">
     <div class="field">
       <label>団体名</label>
-      <input class="form-control" placeholder="シューベルト管弦楽団" [(ngModel)]="team.name" rows="2" name="name">
+      <input class="form-control" placeholder="シューベルト管弦楽団" [(ngModel)]="recruit.team.name" rows="2" name="name">
     </div>
     <div class="field">
       <label>password</label>
-      <input type="password" class="form-control" [(ngModel)]="team.password" rows="2" name="password">
+      <input type="password" class="form-control" [(ngModel)]="recruit.team.password" rows="2" name="password">
     </div>
     <div class="field">
       <label>団体種別</label>
@@ -24,11 +24,11 @@
     </div>
     <div class="field">
       <label>連絡用メールアドレス</label>
-      <input class="form-control" placeholder="info@schubert.jp" [(ngModel)]="team.mail" rows="2" name="mail">
+      <input class="form-control" placeholder="info@schubert.jp" [(ngModel)]="recruit.team.mail" rows="2" name="mail">
     </div>
     <div class="field">
       <label>団体ホームメージ</label>
-      <input class="form-control" placeholder="https://schubert.jp" [(ngModel)]="team.url" rows="2" name="url">
+      <input class="form-control" placeholder="https://schubert.jp" [(ngModel)]="recruit.team.url" rows="2" name="url">
     </div>
   </ng-container>
   <div class="field">

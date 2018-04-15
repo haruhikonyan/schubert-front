@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: '', component: TopComponent},
   { path: 'recruits', component: RecruitsComponent},
   { path: 'recruits/new', component: RecruitNewPageComponent},
-  // resolve をつけて team 取得
+  // resolve をつけて recruit 取得
   { path: 'recruits/:recruitId/edit', component: RecruitEditPageComponent},
   { path: 'teams', component: TeamsComponent},
   { path: 'concerts', component: ConcertComponent},
