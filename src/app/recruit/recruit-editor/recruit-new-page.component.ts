@@ -19,12 +19,13 @@ export class RecruitNewPageComponent implements OnInit {
 
   ngOnInit() {
     this.recruit = new Recruit();
-    const teamId: string = this.route.snapshot.queryParams['teamId']
+    const teamId: string = this.route.snapshot.queryParams['teamId'];
     if (teamId == null) {
       this.recruit.team = new Team();
     }
     else {
       // TODO id から team を取得するようにする
+      // this.teamService.getTeam(teamId) うんぬん
     }
   }
 
