@@ -20,12 +20,19 @@ export class RecruitService {
     private http: Http,
   ) { }
 
-
   getRecruits(): Observable<Recruit[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(this.endpointUrl, options)
                     .map((r: Response) => r.json() as Recruit[]);
+  }
+
+  getRecruit(id: string): Observable<Recruit> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, id);
+
+    return this.http.get(url, options)
+                    .map((r: Response) => r.json() as Recruit);
   }
 
 
