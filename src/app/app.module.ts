@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,8 @@ import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-pa
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
     HttpModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     AppService,

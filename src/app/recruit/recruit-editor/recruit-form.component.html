@@ -54,7 +54,9 @@
   <div class="field">
     <label>掲載開始期間</label>
     <!-- いい感じの日付選択にする -->
-    <input type="date" class="form-control" [(ngModel)]="recruit.publishedFrom" rows="2" name="published-from">
+    <input type="text" class="form-control" [(ngModel)]="recruit.publishedFrom" rows="2" name="published-from"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
     {{recruit.publishedFrom | date: 'y-MM-dd'}}
   </div>
 
