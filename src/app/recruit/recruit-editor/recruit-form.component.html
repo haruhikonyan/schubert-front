@@ -1,5 +1,5 @@
 <!-- TODO エラーあったら flash message を出す -->
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm">
 
   <div class="field">
     <label>募集タイトル</label>
@@ -68,9 +68,4 @@
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
     <timepicker [showMeridian]="false" [(ngModel)]="recruit.publishedTo" name="published-to-time"></timepicker>
   </div>
-
-  <div class="actions">
-    <button>Submit</button>
-  </div>
-
 </form>
