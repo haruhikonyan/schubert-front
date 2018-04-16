@@ -53,16 +53,20 @@
 
   <div class="field">
     <label>掲載開始期間</label>
-    <!-- いい感じの日付選択にする -->
-    <input type="text" class="form-control" [(ngModel)]="recruit.publishedFrom" rows="2" name="published-from"
+    <!-- TODO スタイル調整 １行表示にするとか -->
+    <input type="text" class="form-control" [(ngModel)]="recruit.publishedFrom" rows="2" name="published-from-date"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-    {{recruit.publishedFrom | date: 'y-MM-dd'}}
+    <timepicker [showMeridian]="false" [(ngModel)]="recruit.publishedFrom" name="published-from-time"></timepicker>
   </div>
 
   <div class="field">
     <label>掲載終了期間</label>
-    <input type="date" class="form-control" [(ngModel)]="recruit.publishedTo" rows="2" name="published-to">
+    <!-- TODO スタイル調整 １行表示にするとか -->
+    <input type="text" class="form-control" [(ngModel)]="recruit.publishedTo" rows="2" name="published-to-date"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+    <timepicker [showMeridian]="false" [(ngModel)]="recruit.publishedTo" name="published-to-time"></timepicker>
   </div>
 
   <div class="actions">

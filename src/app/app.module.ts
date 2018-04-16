@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +42,7 @@ import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-pa
     HttpModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
   ],
   providers: [
     AppService,
