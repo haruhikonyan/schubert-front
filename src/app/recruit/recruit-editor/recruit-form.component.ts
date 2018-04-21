@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { AppService } from './../../app.service';
 import { Recruit } from '../recruit.model';
 import { Team } from '../../team/team.model';
 
@@ -13,7 +14,9 @@ export class RecruitFormComponent implements OnInit {
 
   @Input()
   recruit: Recruit;
-  constructor() { }
+  constructor(
+    public appService: AppService
+  ) { }
 
   ngOnInit() {
   }

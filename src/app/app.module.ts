@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { SelectModule } from 'ng2-select';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +44,7 @@ import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-pa
     FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
+    SelectModule,
   ],
   providers: [
     AppService,
