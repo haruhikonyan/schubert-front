@@ -35,6 +35,13 @@ export class RecruitService {
                     .map((r: Response) => r.json() as Recruit);
   }
 
+  createRecruit(recruit: Recruit): Observable<Recruit> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+
+    return this.http.post(this.endpointUrl, {recruit: recruit}, options)
+                    .map((r: Response) => r.json() as Recruit);
+  }
+
 
   /**
    * このサービスで利用する基本の RequestOptions を作成する

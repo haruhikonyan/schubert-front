@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { RecruitService } from './../recruit.service';
 import { Recruit } from '../recruit.model';
 import { Team } from '../../team/team.model';
 
@@ -15,6 +16,7 @@ export class RecruitNewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private recruitService: RecruitService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,11 @@ export class RecruitNewPageComponent implements OnInit {
       // TODO id から team を取得するようにする
       // this.teamService.getTeam(teamId) うんぬん
     }
+  }
+
+  createRecruitButtonClickHander(): void {
+    this.recruitService.createRecruit(this.recruit)
+      .subscribe();
   }
 
 }
