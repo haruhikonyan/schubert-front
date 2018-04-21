@@ -11,6 +11,6 @@ export class Team {
   url: string;
   description: string;
   isPublished: boolean;
-  types: Type[];
-  regions: Region[];
+  types: Type[] = [];
+  regions: Region[] = [];
 }

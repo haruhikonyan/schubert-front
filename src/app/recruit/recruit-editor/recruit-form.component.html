@@ -18,10 +18,8 @@
       <label>団体種別</label>
       <ng-select [multiple]="true"
         [items]="appService.ng2selectTypes"
-        [disabled]="disabled"
-        (data)="refreshValue($event)"
-        (selected)="selected($event)"
-        (removed)="removed($event)"
+        (selected)="typeSelected($event)"
+        (removed)="typeRemoved($event)"
         placeholder="団体種別を選択してください">
       </ng-select>
       <!-- <%= t.select :type_ids, Type.all.map {|t| [t.name, t.id]}, {}, multiple: true, class: 'form-control select2' %> -->

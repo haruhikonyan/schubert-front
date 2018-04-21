@@ -14,7 +14,7 @@ export class Recruit {
   publishedFrom: Date = new Date();
   publishedTo: Date = new Date();
   team: Team;
-  instruments: Instrument[];
+  instruments: Instrument[] = [];
   constructor() {
     // date-fns とか使ったらもっとスマートにできるかも？
     // 初期値は現在の日付かつ時間は０時０分０秒にしたい
