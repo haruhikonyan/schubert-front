@@ -7,7 +7,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --proxy-config proxy.conf.json --open=true",
+    "start:dev:heroku-back": "ng serve --proxy-config proxy.conf.heroku.json --open=true",
+    "start:dev:local-back": "ng serve --proxy-config proxy.conf.local.json --open=true",
     "start": "npm run build:ssr && npm run serve:ssr",
     "build": "ng build",
     "test": "ng test",
