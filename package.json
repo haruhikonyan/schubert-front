@@ -7,6 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "dev": "ng serve --proxy-config proxy.conf.json --open=true",
     "start": "npm run build:ssr && npm run serve:ssr",
     "build": "ng build",
     "test": "ng test",
