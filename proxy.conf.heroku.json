@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://schubert-back.herokuapp.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
