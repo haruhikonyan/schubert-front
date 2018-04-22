@@ -15,5 +15,6 @@ export class AppComponent implements OnInit {
     this.appServise.getTypes();
     this.appServise.getInstruments();
     this.appServise.getInstrumentCategories();
+    this.appServise.getRegions();
   }
 }

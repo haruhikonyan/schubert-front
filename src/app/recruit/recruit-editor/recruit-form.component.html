@@ -22,11 +22,15 @@
         (removed)="typeRemoved($event)"
         placeholder="団体種別を選択してください">
       </ng-select>
-      <!-- <%= t.select :type_ids, Type.all.map {|t| [t.name, t.id]}, {}, multiple: true, class: 'form-control select2' %> -->
     </div>
     <div class="field">
       <label>活動地域</label>
-      <!-- <%= t.select :region_ids, Region.all.map {|r| [r.name, r.id]}, {}, multiple: true, class: 'form-control select2' %> -->
+      <ng-select [multiple]="true"
+        [items]="appService.ng2selectRegions"
+        (selected)="typeSelected($event)"
+        (removed)="typeRemoved($event)"
+        placeholder="活動地域を選択してください">
+      </ng-select>
     </div>
     <div class="field">
       <label>連絡用メールアドレス</label>
@@ -49,7 +53,12 @@
 
   <div class="field">
     <label>募集楽器</label>
-    <!-- <%= f.select :instrument_ids, Instrument.all.map {|i| [i.to_name_and_short_name, i.id]}, {}, multiple: true, class: 'form-control select2' %> -->
+    <ng-select [multiple]="true"
+      [items]="appService.ng2selectInstruments"
+      (selected)="typeSelected($event)"
+      (removed)="typeRemoved($event)"
+      placeholder="募集楽器を選択してください">
+    </ng-select>
   </div>
 
   <div class="field">

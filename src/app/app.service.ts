@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../environments/environment';
-import { Type, Instrument, InstrumentCategory } from './app.model';
+import { Type, Instrument, InstrumentCategory, Region } from './app.model';
 
 
 @Injectable()
@@ -19,6 +19,7 @@ export class AppService {
   types: Type[] = [];
   instruments: Instrument[] = [];
   instrumentCategories: InstrumentCategory[] = [];
+  regions: Region[] = [];
 
   constructor(
     private http: Http,
@@ -54,6 +55,16 @@ export class AppService {
              .subscribe();
   }
 
+  getRegions(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/regions');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Region[])
+             .map((regions: Region[]) => this.regions = regions)
+             .subscribe();
+  }
+
   /**
    * ng2-select で利用可能な形式の Object の配列
    */
@@ -67,17 +78,26 @@ export class AppService {
    * ng2-select で利用可能な形式の Object の配列
    */
   get ng2selectInstruments(): Array<{id: string, text: string}> {
-    return this.instruments.map((instruments: Instrument) => {
-      return { id: instruments.id.toString(), text: instruments.name };
+    return this.instruments.map((instrument: Instrument) => {
+      return { id: instrument.id.toString(), text: instrument.name };
     });
   }
 
   /**
-   * ng2-select で利用可能な形式の Object の配列s
+   * ng2-select で利用可能な形式の Object の配列
    */
   get ng2selectInstrumentCategories(): Array<{id: string, text: string}> {
-    return this.instrumentCategories.map((instrumentCategories: InstrumentCategory) => {
-      return { id: instrumentCategories.id.toString(), text: instrumentCategories.name };
+    return this.instrumentCategories.map((instrumentCategorie: InstrumentCategory) => {
+      return { id: instrumentCategorie.id.toString(), text: instrumentCategorie.name };
+    });
+  }
+
+  /**
+   * ng2-select で利用可能な形式の Object の配列
+   */
+  get ng2selectRegions(): Array<{id: string, text: string}> {
+    return this.regions.map((region: Region) => {
+      return { id: region.id.toString(), text: region.name };
     });
   }
 
