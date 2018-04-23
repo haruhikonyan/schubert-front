@@ -29,7 +29,7 @@ export class RecruitFormComponent implements OnInit {
    */
   typeSelected(value: any): void {
     const selectedType = this.appService.types.find((type: Type) => {
-      return type.id === value.id;
+      return type.id.toString() === value.id;
     });
     this.recruit.team.types.push(selectedType);
   }
@@ -41,7 +41,7 @@ export class RecruitFormComponent implements OnInit {
    */
   typeRemoved(value: any): void {
     this.recruit.team.types = this.recruit.team.types.filter((type: Type) => {
-      return type.id !== value.id;
+      return type.id.toString() !== value.id;
     });
   }
 
@@ -51,10 +51,10 @@ export class RecruitFormComponent implements OnInit {
    * @param value
    */
   regionSelected(value: any): void {
-    const selectedType = this.appService.regions.find((region: Region) => {
-      return region.id === value.id;
+    const selectedRegion: Region = this.appService.regions.find((region: Region) => {
+      return region.id.toString() === value.id;
     });
-    this.recruit.team.regions.push(selectedType);
+    this.recruit.team.regions.push(selectedRegion);
   }
 
   /**
@@ -64,7 +64,7 @@ export class RecruitFormComponent implements OnInit {
    */
   regionRemoved(value: any): void {
     this.recruit.team.regions = this.recruit.team.regions.filter((region: Region) => {
-      return region.id !== value.id;
+      return region.id.toString() !== value.id;
     });
   }
 
@@ -74,7 +74,7 @@ export class RecruitFormComponent implements OnInit {
    */
   instrumentSelected(value: any): void {
     const selectedType = this.appService.instruments.find((instrument: Instrument) => {
-      return instrument.id === value.id;
+      return instrument.id.toString() === value.id;
     });
     this.recruit.instruments.push(selectedType);
   }
