@@ -40,7 +40,7 @@ export class RecruitFormComponent implements OnInit {
    * @param value
    */
   typeRemoved(value: any): void {
-    this.recruit.team.types = this.appService.types.filter((type: Type) => {
+    this.recruit.team.types = this.recruit.team.types.filter((type: Type) => {
       return type.id !== value.id;
     });
   }
@@ -63,7 +63,7 @@ export class RecruitFormComponent implements OnInit {
    * @param value
    */
   regionRemoved(value: any): void {
-    this.recruit.team.regions = this.appService.regions.filter((region: Region) => {
+    this.recruit.team.regions = this.recruit.team.regions.filter((region: Region) => {
       return region.id !== value.id;
     });
   }
@@ -84,7 +84,7 @@ export class RecruitFormComponent implements OnInit {
    * @param value
    */
   instrumentRemoved(value: any): void {
-    this.recruit.instruments = this.appService.instruments.filter((instrument: Instrument) => {
+    this.recruit.instruments = this.recruit.instruments.filter((instrument: Instrument) => {
       return instrument.id !== value.id;
     });
   }
