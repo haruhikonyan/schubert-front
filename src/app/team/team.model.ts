@@ -6,6 +6,7 @@ import { Type, Region } from '../app.model';
  */
 export class Team {
   id: number;
+  password: string;
   name: string;
   mail: string;
   url: string;
