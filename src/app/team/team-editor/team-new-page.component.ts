@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Team } from './../team.model';
+import { TeamService } from './../team.service';
+
 @Component({
   selector: 'app-team-new-page',
   templateUrl: './team-new-page.component.html',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamNewPageComponent implements OnInit {
 
-  constructor() { }
+  team: Team;
+  constructor(
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
+    this.team = new Team();
+  }
+
+  createTeamButtonClickHander(): void {
+    this.teamService.createTeam(this.team)
+      .subscribe();
   }
 
 }

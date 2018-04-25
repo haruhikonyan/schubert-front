@@ -1,3 +1,13 @@
-<p>
-  team-new-page works!
-</p>
+<div class="container">
+  <div class="row">
+  <h1>団体新規登録</h1>
+
+  <app-team-form [team]="team"></app-team-form>
+
+  <div class="actions">
+    <button (click)="createTeamButtonClickHander()">団体新規登録</button>
+  </div>
+
+  <a [routerLink]="['/teams']">登録団体一覧に戻る</a>
+  </div>
+</div>
