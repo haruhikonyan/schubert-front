@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
+import { TeamResolver } from './team/team.resolve';
 import { TeamService } from './team/team.service';
 import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitService } from './recruit/recruit.service';
@@ -26,6 +27,7 @@ import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.comp
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
 import { TeamNewPageComponent } from './team/team-editor/team-new-page.component';
 import { TeamFormComponent } from './team/team-editor/team-form.component';
+import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { TeamFormComponent } from './team/team-editor/team-form.component';
     RecruitFormComponent,
     RecruitNewPageComponent,
     TeamNewPageComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    TeamEditPageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -54,6 +57,7 @@ import { TeamFormComponent } from './team/team-editor/team-form.component';
     AppService,
     ConcertService,
     TeamService,
+    TeamResolver,
     RecruitService,
     RecruitResolver,
   ],
