@@ -18,8 +18,10 @@ import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
+import { TeamsResolver } from './team/teams.resolve';
 import { TeamResolver } from './team/team.resolve';
 import { TeamService } from './team/team.service';
+import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
@@ -58,8 +60,10 @@ import { TeamEditPageComponent } from './team/team-editor/team-edit-page.compone
     ConcertService,
     TeamService,
     TeamResolver,
+    TeamsResolver,
     RecruitService,
     RecruitResolver,
+    RecruitsResolver,
   ],
   bootstrap: [AppComponent]
 })
