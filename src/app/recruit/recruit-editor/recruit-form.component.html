@@ -6,40 +6,7 @@
     <input class="form-control" placeholder="一緒にオーケストラで弾いてくれる弦楽器大募集！" [(ngModel)]="recruit.title" rows="2" name="title">
   </div>
   <ng-container *ngIf="recruit?.team?.id == null">
-    <div class="field">
-      <label>団体名</label>
-      <input class="form-control" placeholder="シューベルト管弦楽団" [(ngModel)]="recruit.team.name" rows="2" name="name">
-    </div>
-    <div class="field">
-      <label>password</label>
-      <input type="password" class="form-control" [(ngModel)]="recruit.team.password" rows="2" name="password">
-    </div>
-    <div class="field">
-      <label>団体種別</label>
-      <ng-select [multiple]="true"
-        [items]="appService.ng2selectTypes"
-        (selected)="typeSelected($event)"
-        (removed)="typeRemoved($event)"
-        placeholder="団体種別を選択してください">
-      </ng-select>
-    </div>
-    <div class="field">
-      <label>活動地域</label>
-      <ng-select [multiple]="true"
-        [items]="appService.ng2selectRegions"
-        (selected)="regionSelected($event)"
-        (removed)="regionRemoved($event)"
-        placeholder="活動地域を選択してください">
-      </ng-select>
-    </div>
-    <div class="field">
-      <label>連絡用メールアドレス</label>
-      <input class="form-control" placeholder="info@schubert.jp" [(ngModel)]="recruit.team.mail" rows="2" name="mail">
-    </div>
-    <div class="field">
-      <label>団体ホームメージ</label>
-      <input class="form-control" placeholder="https://schubert.jp" [(ngModel)]="recruit.team.url" rows="2" name="url">
-    </div>
+    <app-team-form [team]="recruit.team"></app-team-form>
   </ng-container>
   <div class="field">
     <label>練習場所</label>
