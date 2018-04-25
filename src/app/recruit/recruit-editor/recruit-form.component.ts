@@ -27,7 +27,7 @@ export class RecruitFormComponent implements OnInit {
    */
   instrumentSelected(value: any): void {
     const selectedType = this.appService.instruments.find((instrument: Instrument) => {
-      return instrument.id.toString() === value.id;
+      return instrument.id === value.id;
     });
     this.recruit.instruments.push(selectedType);
   }
@@ -38,7 +38,7 @@ export class RecruitFormComponent implements OnInit {
    */
   instrumentRemoved(value: any): void {
     this.recruit.instruments = this.recruit.instruments.filter((instrument: Instrument) => {
-      return instrument.id.toString() !== value.id;
+      return instrument.id !== value.id;
     });
   }
 }

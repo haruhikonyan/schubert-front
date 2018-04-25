@@ -27,7 +27,7 @@ export class TeamFormComponent implements OnInit {
    */
   typeSelected(value: any): void {
     const selectedType = this.appService.types.find((type: Type) => {
-      return type.id.toString() === value.id;
+      return type.id === value.id;
     });
     this.team.types.push(selectedType);
   }
@@ -38,7 +38,7 @@ export class TeamFormComponent implements OnInit {
    */
   typeRemoved(value: any): void {
     this.team.types = this.team.types.filter((type: Type) => {
-      return type.id.toString() !== value.id;
+      return type.id !== value.id;
     });
   }
 
@@ -48,7 +48,7 @@ export class TeamFormComponent implements OnInit {
    */
   regionSelected(value: any): void {
     const selectedRegion: Region = this.appService.regions.find((region: Region) => {
-      return region.id.toString() === value.id;
+      return region.id === value.id;
     });
     this.team.regions.push(selectedRegion);
   }
@@ -59,7 +59,7 @@ export class TeamFormComponent implements OnInit {
    */
   regionRemoved(value: any): void {
     this.team.regions = this.team.regions.filter((region: Region) => {
-      return region.id.toString() !== value.id;
+      return region.id !== value.id;
     });
   }
 

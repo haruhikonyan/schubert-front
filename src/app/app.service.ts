@@ -68,36 +68,36 @@ export class AppService {
   /**
    * ng2-select で利用可能な形式の Object の配列
    */
-  get ng2selectTypes(): Array<{id: string, text: string}> {
+  get ng2selectTypes(): Array<{id: number, text: string}> {
     return this.types.map((type: Type) => {
-      return { id: type.id.toString(), text: type.name };
+      return { id: type.id, text: type.name };
     });
   }
 
   /**
    * ng2-select で利用可能な形式の Object の配列
    */
-  get ng2selectInstruments(): Array<{id: string, text: string}> {
+  get ng2selectInstruments(): Array<{id: number, text: string}> {
     return this.instruments.map((instrument: Instrument) => {
-      return { id: instrument.id.toString(), text: instrument.name };
+      return { id: instrument.id, text: instrument.name };
     });
   }
 
   /**
    * ng2-select で利用可能な形式の Object の配列
    */
-  get ng2selectInstrumentCategories(): Array<{id: string, text: string}> {
+  get ng2selectInstrumentCategories(): Array<{id: number, text: string}> {
     return this.instrumentCategories.map((instrumentCategorie: InstrumentCategory) => {
-      return { id: instrumentCategorie.id.toString(), text: instrumentCategorie.name };
+      return { id: instrumentCategorie.id, text: instrumentCategorie.name };
     });
   }
 
   /**
    * ng2-select で利用可能な形式の Object の配列
    */
-  get ng2selectRegions(): Array<{id: string, text: string}> {
+  get ng2selectRegions(): Array<{id: number, text: string}> {
     return this.regions.map((region: Region) => {
-      return { id: region.id.toString(), text: region.name };
+      return { id: region.id, text: region.name };
     });
   }
 
