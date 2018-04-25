@@ -24,6 +24,8 @@ import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
+import { TeamNewPageComponent } from './team/team-editor/team-new-page.component';
+import { TeamFormComponent } from './team/team-editor/team-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-pa
     ConcertComponent,
     RecruitEditPageComponent,
     RecruitFormComponent,
-    RecruitNewPageComponent
+    RecruitNewPageComponent,
+    TeamNewPageComponent,
+    TeamFormComponent
   ],
   imports: [
     AppRoutingModule,
