@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Recruit } from './recruit.model';
 import { RecruitService } from './recruit.service';
@@ -14,16 +15,14 @@ export class RecruitsComponent implements OnInit {
   recruits: Recruit[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     private recruitService: RecruitService
   ) { }
 
   ngOnInit() {
-    // TODO resolve にする
-    this.recruitService.getRecruits()
-      .map((recruits: Recruit[]) => {
-        this.recruits = recruits;
-      })
-      .subscribe();
+    this.route.data.forEach((data: any) => {
+      this.recruits = data.recruits;
+    });
   }
 
 }
