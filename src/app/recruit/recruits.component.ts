@@ -25,7 +25,7 @@ export class RecruitsComponent implements OnInit {
       return [];
 
     return recruit.instruments
-             .map(i => i.instrumentCategory)
+             .map(i => i.instrumentCategory.name)
              .filter((elem, idx, arr) => arr.indexOf(elem) === idx);
   }
 
