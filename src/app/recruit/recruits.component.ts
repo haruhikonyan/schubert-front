@@ -19,6 +19,16 @@ export class RecruitsComponent implements OnInit {
     private recruitService: RecruitService
   ) { }
 
+  // recruit のカテゴリ一覧を取得する
+  getCategoriesOfRecruitInstrument(recruit: Recruit) {
+    if (recruit.instruments === undefined)
+      return [];
+
+    return recruit.instruments
+             .map(i => i.instrumentCategory)
+             .filter((elem, idx, arr) => arr.indexOf(elem) === idx);
+  }
+
   ngOnInit() {
     this.route.data.forEach((data: any) => {
       this.recruits = data.recruits;
