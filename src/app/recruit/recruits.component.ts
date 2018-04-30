@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Recruit } from './recruit.model';
 import { RecruitService } from './recruit.service';
 import { Instrument, InstrumentCategory } from '../app.model';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-recruits',
@@ -16,7 +17,8 @@ export class RecruitsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recruitService: RecruitService
+    private recruitService: RecruitService,
+    private appService: AppService
   ) { }
 
   // recruit のカテゴリ一覧を取得する
@@ -25,13 +27,11 @@ export class RecruitsComponent implements OnInit {
       return [];
     }
 
-    const categories: String[] = [];
-    recruit.instruments.forEach((i: Instrument) => {
-      if (!categories.includes(i.instrumentCategory.name)) {
-        categories.push(i.instrumentCategory.name);
-      }
-    });
-    return categories.sort();
+    return this.appService.instrumentCategories.filter((ic: InstrumentCategory) =>
+      recruit.instruments
+        .map((i: Instrument) => i.instrumentCategory)
+        .find((icRecruit: Instrument) => icRecruit.id === ic.id)
+    );
   }
 
   ngOnInit() {

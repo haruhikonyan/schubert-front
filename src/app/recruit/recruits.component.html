@@ -14,9 +14,9 @@
     <div>練習時間:{{recruit.practiceTime}}</div>
     <div>募集楽器:
       <div *ngFor="let category of getCategoriesOfRecruitInstrument(recruit)">
-        <span>{{category}}</span>
+        <span>{{category.name}}</span>
         <span *ngFor="let instrument of recruit.instruments">
-          <span *ngIf="instrument.instrumentCategory.name === category"
+          <span *ngIf="instrument.instrumentCategory.id === category.id"
             class="badge badge-default">
             {{instrument.shortName}}
           </span>
