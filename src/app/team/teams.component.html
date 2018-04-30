@@ -1,6 +1,12 @@
-<p>
-  team works!
-</p>
+<h1>団体一覧</h1>
+
+<div *ngFor="let team of teams">
+  <div>
+    {{team.name}}
+    <a [routerLink]="['./' + team.id]">[TBD]詳細を表示</a>
+  </div>
+</div>
+
 
 {{teams.length}}団体が登録しています
 <a [routerLink]="['./new']">新しく団体登録をする</a>
