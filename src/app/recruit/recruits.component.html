@@ -1,6 +1,20 @@
-<p>
-  recruit works!
-</p>
+<h1>団員募集</h1>
+
+<div *ngFor="let recruit of recruits" class="panel panel-info">
+  <!-- [TODO] publishFrom, publishTo の中に含まれる場合のみ表示する -->
+  <div class="panel-heading">{{recruit.title}}</div>
+  <div class="panel-body">
+    <div *ngFor="let type of recruit.team.types">
+      <label class="label label-info">{{type.name}}</label>
+    </div>
+    <div>{{recruit.team.name}}</div>
+    <div>練習場所:{{recruit.practicePlace}}</div>
+    <div>練習時間:{{recruit.practiceTime}}</div>
+    <div *ngFor="let instrument of recruit.instrument">
+      募集楽器:{{instrument}}
+    </div>
+  </div>
+</div>
 
 
 {{recruits.length}}件の募集があります
