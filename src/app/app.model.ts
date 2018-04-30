@@ -26,10 +26,6 @@ export class Instrument {
   shortName: string;
   sortNumber: number;
   instrumentCategory: InstrumentCategory;
-
-  isSameCategory(name: string) {
-    return this.instrumentCategory.isSame(name);
-  }
 }
 
 /**
@@ -38,8 +34,4 @@ export class Instrument {
 export class InstrumentCategory {
   id: number;
   name: string;
-
-  isSame(name: string) {
-    return this.name == name;
-  }
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Recruit } from './recruit.model';
 import { RecruitService } from './recruit.service';
-
+import { Instrument, InstrumentCategory } from '../app.model';
 
 @Component({
   selector: 'app-recruits',
@@ -21,12 +21,17 @@ export class RecruitsComponent implements OnInit {
 
   // recruit のカテゴリ一覧を取得する
   getCategoriesOfRecruitInstrument(recruit: Recruit) {
-    if (recruit.instruments === undefined)
+    if (recruit.instruments === undefined) {
       return [];
+    }
 
-    return recruit.instruments
-             .map(i => i.instrumentCategory.name)
-             .filter((elem, idx, arr) => arr.indexOf(elem) === idx);
+    const categories: String[] = [];
+    recruit.instruments.forEach((i: Instrument) => {
+      if (!categories.includes(i.instrumentCategory.name)) {
+        categories.push(i.instrumentCategory.name);
+      }
+    });
+    return categories.sort();
   }
 
   ngOnInit() {

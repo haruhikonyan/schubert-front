@@ -4,17 +4,22 @@
   <!-- [TODO] publishFrom, publishTo の中に含まれる場合のみ表示する -->
   <div class="panel-heading">{{recruit.title}}</div>
   <div class="panel-body">
-    <div *ngFor="let type of recruit.team.types">
-      <label class="label label-info">{{type.name}}</label>
+    <div>
+      <label *ngFor="let type of recruit.team.types" class="label label-info">
+        {{type.name}}
+      </label>
     </div>
     <div>{{recruit.team.name}}</div>
     <div>練習場所:{{recruit.practicePlace}}</div>
     <div>練習時間:{{recruit.practiceTime}}</div>
-    <div>募集楽器:<br />
+    <div>募集楽器:
       <div *ngFor="let category of getCategoriesOfRecruitInstrument(recruit)">
         <span>{{category}}</span>
         <span *ngFor="let instrument of recruit.instruments">
-          <span *ngIf="instrument.isSameCategory(category)">{{instrument}}</span>
+          <span *ngIf="instrument.instrumentCategory.name === category"
+            class="badge badge-default">
+            {{instrument.name}}
+          </span>
         </span>
       </div>
     </div>
