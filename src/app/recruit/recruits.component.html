@@ -13,14 +13,16 @@
     <div>練習場所:{{recruit.practicePlace}}</div>
     <div>練習時間:{{recruit.practiceTime}}</div>
     <div>募集楽器:
-      <div *ngFor="let category of getCategoriesOfRecruitInstrument(recruit)">
-        <span>{{category.name}}</span>
-        <span *ngFor="let instrument of recruit.instruments">
-          <span *ngIf="instrument.instrumentCategory.id === category.id"
-            class="badge badge-default">
-            {{instrument.shortName}}
+      <div *ngFor="let ic of appService.instrumentCategories">
+        <div *ngIf="isExistCategoryFrom(recruit.instruments, ic)">
+          <span>{{ic.name}}</span>
+          <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic)">
+            <span *ngIf="instrument.instrumentCategory.id === ic.id"
+              class="badge badge-default">
+              {{instrument.shortName}}
+            </span>
           </span>
-        </span>
+        </div>
       </div>
     </div>
   </div>
