@@ -14,7 +14,7 @@
     <div>練習時間:{{recruit.practiceTime}}</div>
     <div>募集楽器:
       <div *ngFor="let ic of appService.instrumentCategories">
-        <div *ngIf="isExistCategoryFrom(recruit.instruments, ic)">
+        <div *ngIf="filteredInsturmentsByCategory(recruit.instruments, ic).length !== 0">
           <span>{{ic.name}}</span>
           <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic)">
             <span *ngIf="instrument.instrumentCategory.id === ic.id"

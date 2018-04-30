@@ -21,11 +21,6 @@ export class RecruitsComponent implements OnInit {
     private appService: AppService
   ) { }
 
-  // instruments に 指定の category が含まれてるかチェック
-  isExistCategoryFrom(instruments: Instrument[], ic: InstrumentCategory): boolean {
-    return instruments.find((instrument: Instrument) => instrument.instrumentCategory.id === ic.id) != null;
-  }
-
   // instruments から 指定の category のものだけ取り出す
   filteredInsturmentsByCategory(instruments: Instrument[], ic: InstrumentCategory): Instrument[] {
     return instruments.filter((instrument: Instrument) => {
