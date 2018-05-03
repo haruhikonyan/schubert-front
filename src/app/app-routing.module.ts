@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'teams/:teamId/edit', component: TeamEditPageComponent,
                                 resolve: { recruit: TeamResolver }},
   { path: 'teams/:teamId', component: TeamComponent,
-                           resolve: { recruit: TeamResolver }},
+                           resolve: { team: TeamResolver }},
   { path: 'concerts', component: ConcertComponent},
   { path: 'about', component: AboutComponent}
 ];
