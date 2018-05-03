@@ -21,22 +21,17 @@ export class RecruitsComponent implements OnInit {
     private appService: AppService
   ) { }
 
-  // recruit のカテゴリ一覧を取得する
-  getCategoriesOfRecruitInstrument(recruit: Recruit) {
-    if (recruit.instruments === undefined) {
-      return [];
-    }
-
-    return this.appService.instrumentCategories.filter((ic: InstrumentCategory) =>
-      recruit.instruments
-        .map((i: Instrument) => i.instrumentCategory)
-        .find((icRecruit: Instrument) => icRecruit.id === ic.id)
-    );
-  }
-
   ngOnInit() {
     this.route.data.forEach((data: any) => {
       this.recruits = data.recruits;
+    });
+  }
+
+  // TODO recruit-card.component へ移植予定
+  // instruments から 指定の category のものだけ取り出す
+  filteredInsturmentsByCategory(instruments: Instrument[], ic: InstrumentCategory): Instrument[] {
+    return instruments.filter((instrument: Instrument) => {
+      return instrument.instrumentCategory.id === ic.id;
     });
   }
 
