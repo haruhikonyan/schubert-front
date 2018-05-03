@@ -21,16 +21,17 @@ export class RecruitsComponent implements OnInit {
     private appService: AppService
   ) { }
 
+  ngOnInit() {
+    this.route.data.forEach((data: any) => {
+      this.recruits = data.recruits;
+    });
+  }
+
+  // TODO recruit-card.component へ移植予定
   // instruments から 指定の category のものだけ取り出す
   filteredInsturmentsByCategory(instruments: Instrument[], ic: InstrumentCategory): Instrument[] {
     return instruments.filter((instrument: Instrument) => {
       return instrument.instrumentCategory.id === ic.id;
-    });
-  }
-
-  ngOnInit() {
-    this.route.data.forEach((data: any) => {
-      this.recruits = data.recruits;
     });
   }
 
