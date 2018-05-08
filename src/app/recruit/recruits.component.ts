@@ -13,7 +13,18 @@ import { AppService } from '../app.service';
 })
 export class RecruitsComponent implements OnInit {
 
+  types: any = [
+    {name: 'オーケストラ', value: 1},
+    {name: '吹奏楽', value: 2},
+    {name: 'アンサンブル', value: 3},
+    {name: '合唱', value: 4},
+    {name: '大編成', value: 5},
+    {name: 'サブカル系', value: 6},
+  ];
   recruits: Recruit[] = [];
+  filteredRecruits: Recruit[] = [];
+
+  selectedType: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +35,7 @@ export class RecruitsComponent implements OnInit {
   ngOnInit() {
     this.route.data.forEach((data: any) => {
       this.recruits = data.recruits;
+      this.filteredRecruits = data.recruits;
     });
   }
 
@@ -37,5 +49,9 @@ export class RecruitsComponent implements OnInit {
 
   searchBtnClickHandler(): void {
     // TODO filter
+    console.log(this.selectedType);
+    this.filteredRecruits = this.recruits.filter((recruit: Recruit) => {
+      return recruit.team.types.map((x) => x.id).includes(+this.selectedType);
+    });
   }
 }

@@ -7,12 +7,9 @@
       <div class="form-group">
         <label class="col-sm-4" for="service_vlan_resource_id">団体種別</label>
         <div class="col-sm-8">
-          <select name="type_id" id="type_id" class="form-control chosen-select"><option value="" label=" "></option><option value="1">オーケストラ</option>
-            <option value="2">吹奏楽</option>
-            <option value="3">アンサンブル</option>
-            <option value="4">合唱</option>
-            <option value="5">大編成</option>
-            <option value="6">サブカル系</option>
+          <select [(ngModel)]="selectedType" class="form-control chosen-select">
+            <option value="" label=" "></option>
+            <option *ngFor="let type of types"value="{{type.value}}">{{type.name}}</option>
           </select>
         </div>
         <label class="col-sm-4" for="service_vlan_resource_id">募集楽器</label>
@@ -45,7 +42,7 @@
   </div>
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
-  <div *ngFor="let recruit of recruits" class="panel panel-info">
+  <div *ngFor="let recruit of filteredRecruits" class="panel panel-info">
     <!-- [TODO] publishFrom, publishTo の中に含まれる場合のみ表示する -->
     <div class="panel-heading">{{recruit.title}}</div>
     <div class="panel-body">
