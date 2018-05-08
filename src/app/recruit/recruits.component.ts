@@ -35,4 +35,7 @@ export class RecruitsComponent implements OnInit {
     });
   }
 
+  searchBtnClickHandler(): void {
+    // TODO filter
+  }
 }
