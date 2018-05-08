@@ -48,8 +48,12 @@ export class RecruitsComponent implements OnInit {
   }
 
   searchBtnClickHandler(): void {
-    // TODO filter
-    console.log(this.selectedType);
+    // 未選択状態ならfilter解除
+    if (this.selectedType === '') {
+      this.filteredRecruits = this.recruits;
+      return;
+    }
+
     this.filteredRecruits = this.recruits.filter((recruit: Recruit) => {
       return recruit.team.types.map((x) => x.id).includes(+this.selectedType);
     });
