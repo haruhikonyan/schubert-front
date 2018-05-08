@@ -5,6 +5,7 @@ import { Recruit } from './recruit.model';
 import { RecruitService } from './recruit.service';
 import { Instrument, InstrumentCategory } from '../app.model';
 import { AppService } from '../app.service';
+import { Type } from './../app.model';
 
 @Component({
   selector: 'app-recruits',
@@ -13,18 +14,10 @@ import { AppService } from '../app.service';
 })
 export class RecruitsComponent implements OnInit {
 
-  types: any = [
-    {name: 'オーケストラ', value: 1},
-    {name: '吹奏楽', value: 2},
-    {name: 'アンサンブル', value: 3},
-    {name: '合唱', value: 4},
-    {name: '大編成', value: 5},
-    {name: 'サブカル系', value: 6},
-  ];
   recruits: Recruit[] = [];
   filteredRecruits: Recruit[] = [];
 
-  selectedType: string;
+  selectedType: Type;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,15 +40,26 @@ export class RecruitsComponent implements OnInit {
     });
   }
 
+  /**
+   * 募集楽器を選択した際に recruit に追加する
+   * @param value
+   */
+  typeSelected(value: any): void {
+    this.selectedType = this.appService.types.find((type: Type) => {
+      return type.id === value.id;
+    });
+  }
+
   searchBtnClickHandler(): void {
     // 未選択状態ならfilter解除
-    if (this.selectedType === '') {
+    if (this.selectedType == null) {
       this.filteredRecruits = this.recruits;
       return;
     }
-
+    // 選択状態ならfilterする
     this.filteredRecruits = this.recruits.filter((recruit: Recruit) => {
-      return recruit.team.types.map((x) => x.id).includes(+this.selectedType);
+      // objectで比較するとtrueにならないのでidで比較
+      return recruit.team.types.map((type: Type) => type.id).includes(this.selectedType.id);
     });
   }
 }

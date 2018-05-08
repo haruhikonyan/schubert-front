@@ -7,10 +7,11 @@
       <div class="form-group">
         <label class="col-sm-4" for="service_vlan_resource_id">団体種別</label>
         <div class="col-sm-8">
-          <select [(ngModel)]="selectedType" class="form-control chosen-select">
-            <option value="" label=" "></option>
-            <option *ngFor="let type of types"value="{{type.value}}">{{type.name}}</option>
-          </select>
+            <ng-select
+            [items]="appService.ng2selectTypes"
+            (selected)="typeSelected($event)"
+            placeholder="募集種別を選択してください">
+          </ng-select>
         </div>
         <label class="col-sm-4" for="service_vlan_resource_id">募集楽器</label>
         <div class="col-sm-8">
