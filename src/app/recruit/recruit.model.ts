@@ -26,3 +26,13 @@ export class Recruit {
     this.publishedTo.setSeconds(0);
   }
 }
+
+/**
+ * SearchCondition Entity
+ */
+export class SearchCondition {
+  isPublished: boolean;
+  typeId: string;
+  instrumentId: string;
+  freeWord: string;
+}

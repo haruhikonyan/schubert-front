@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
-import { Recruit } from './recruit.model';
+import { Recruit, SearchCondition } from './recruit.model';
 
 
 @Injectable()
@@ -20,9 +20,13 @@ export class RecruitService {
     private http: Http,
   ) { }
 
-  getRecruits(): Observable<Recruit[]> {
+  getRecruits(seachCondition: SearchCondition = null): Observable<Recruit[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
-
+    const params: URLSearchParams = new URLSearchParams();
+    // 検索条件オブジェクトがあれば条件追加
+    if (seachCondition != null) {
+      params.appendAll(this.getAdditionalSearchParams(seachCondition));
+    }
     return this.http.get(this.endpointUrl, options)
                     .map((r: Response) => r.json() as Recruit[]);
   }
@@ -42,6 +46,23 @@ export class RecruitService {
                     .map((r: Response) => r.json() as Recruit);
   }
 
+  /**
+   * SearchConditionを元にbackに渡すためのパラメータを取得
+   *
+   * @param {SearchCondition} condition
+   * @returns {URLSearchParams}
+   * @memberof RecruitService
+   */
+  getAdditionalSearchParams(condition: SearchCondition): URLSearchParams {
+    const params: URLSearchParams = new URLSearchParams();
+    // 空文字列チェック
+    if (condition.freeWord != null && condition.freeWord.trim().length > 0) {
+      params.set('freeWord', condition.freeWord);
+    }
+    params.set('typeId', condition.typeId);
+    params.set('instrumentId', condition.instrumentId);
+    return params;
+  }
 
   /**
    * このサービスで利用する基本の RequestOptions を作成する
@@ -50,4 +71,5 @@ export class RecruitService {
   private generateBasicRequestOptions(): RequestOptions {
     return new RequestOptions({ withCredentials: true });
   }
+
 }

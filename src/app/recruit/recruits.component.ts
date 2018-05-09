@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Recruit } from './recruit.model';
+import { Recruit, SearchCondition } from './recruit.model';
 import { RecruitService } from './recruit.service';
 import { Instrument, InstrumentCategory } from '../app.model';
 import { AppService } from '../app.service';
@@ -15,9 +15,8 @@ import { Type } from './../app.model';
 export class RecruitsComponent implements OnInit {
 
   recruits: Recruit[] = [];
-  filteredRecruits: Recruit[] = [];
 
-  selectedType: Type;
+  condition: SearchCondition = new SearchCondition();
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +27,6 @@ export class RecruitsComponent implements OnInit {
   ngOnInit() {
     this.route.data.forEach((data: any) => {
       this.recruits = data.recruits;
-      this.filteredRecruits = data.recruits;
     });
   }
 
@@ -45,21 +43,21 @@ export class RecruitsComponent implements OnInit {
    * @param value
    */
   typeSelected(value: any): void {
-    this.selectedType = this.appService.types.find((type: Type) => {
+    this.condition.typeId = this.appService.types.find((type: Type) => {
       return type.id === value.id;
-    });
+    }).id.toString();
   }
 
+  /**
+   * 検索ボタンクリックハンドラ
+   *
+   * @memberof RecruitsComponent
+   */
   searchBtnClickHandler(): void {
-    // 未選択状態ならfilter解除
-    if (this.selectedType == null) {
-      this.filteredRecruits = this.recruits;
-      return;
-    }
-    // 選択状態ならfilterする
-    this.filteredRecruits = this.recruits.filter((recruit: Recruit) => {
-      // objectで比較するとtrueにならないのでidで比較
-      return recruit.team.types.map((type: Type) => type.id).includes(this.selectedType.id);
-    });
+    this.recruitService.getRecruits(this.condition)
+      .map((recruits: Recruit[]) => {
+        this.recruits = recruits;
+      })
+      .subscribe();
   }
 }
