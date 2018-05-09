@@ -29,7 +29,7 @@ export class Recruit {
 
 /**
  * SearchCondition Entity
- * // TODO 別の場所に移したほうが良いかもしれない
+ * TODO 別の場所に移したほうが良いかもしれない
  */
 export class SearchCondition {
   isPublished: boolean;
