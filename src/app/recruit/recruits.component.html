@@ -5,36 +5,25 @@
     <div class="col-md-9">
       <h3>団員募集検索</h3>
       <div class="form-group">
-        <label class="col-sm-4" for="service_vlan_resource_id">団体種別</label>
+        <label class="col-sm-4" for="type_id">団体種別</label>
         <div class="col-sm-8">
-            <ng-select
+          <ng-select
             [items]="appService.ng2selectTypes"
             (selected)="typeSelected($event)"
-            placeholder="募集種別を選択してください">
+            placeholder="団体種別を選択してください">
           </ng-select>
         </div>
-        <label class="col-sm-4" for="service_vlan_resource_id">募集楽器</label>
+        <label class="col-sm-4" for="instrument_id">募集楽器</label>
         <div class="col-sm-8">
-          <select name="instrument_id" id="instrument_id" class="form-control chosen-select"><option value="" label=" "></option><option value="1">フルート/Fl</option>
-            <option value="2">オーボエ/Ob</option>
-            <option value="3">クラリネット/Cl</option>
-            <option value="4">ファゴット/Fg</option>
-            <option value="5">ホルン/Hr</option>
-            <option value="6">トランペット/Tp</option>
-            <option value="7">トロンボーン/Tb</option>
-            <option value="8">チューバ/Tu</option>
-            <option value="9">ヴァイオリン/Vn</option>
-            <option value="10">1stヴァイオリン/1stVn</option>
-            <option value="11">2stヴァイオリン/2ndVn</option>
-            <option value="12">ヴィオラ/Va</option>
-            <option value="13">チェロ/Vc</option>
-            <option value="14">コントラバス/Cb</option>
-            <option value="15">パーカッション/Perc</option>
-          </select>
+          <ng-select
+            [items]="appService.ng2selectInstruments"
+            (selected)="instrumentSelected($event)"
+            placeholder="募集楽器を選択してください">
+          </ng-select>
         </div>
-        <label class="col-sm-4" for="service_vlan_resource_id">フリーワード検索</label>
+        <label class="col-sm-4" for="free_word">フリーワード検索</label>
         <div class="col-sm-8">
-          <input type="text" name="freeword" id="freeword" value="" class="form-control" placeholder="複数キーワードには対応してません">
+          <input type="text" name="free_word" [(ngModel)]="condition.freeWord" class="form-control" placeholder="複数キーワードには対応してません">
         </div>
       </div>
     </div>

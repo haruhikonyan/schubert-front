@@ -23,10 +23,13 @@ export class RecruitService {
   getRecruits(seachCondition: SearchCondition = null): Observable<Recruit[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const params: URLSearchParams = new URLSearchParams();
+
     // 検索条件オブジェクトがあれば条件追加
     if (seachCondition != null) {
       params.appendAll(this.getAdditionalSearchParams(seachCondition));
     }
+    options.search = params;
+
     return this.http.get(this.endpointUrl, options)
                     .map((r: Response) => r.json() as Recruit[]);
   }
