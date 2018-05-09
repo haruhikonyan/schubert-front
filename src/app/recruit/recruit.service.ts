@@ -64,6 +64,7 @@ export class RecruitService {
     }
     params.set('typeId', condition.typeId);
     params.set('instrumentId', condition.instrumentId);
+    // TODO 条件を増やした場合はparamsにセットするコードを増やすこと
     return params;
   }
 
