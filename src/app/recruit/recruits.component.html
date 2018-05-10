@@ -7,6 +7,7 @@
       <div class="form-group">
         <label class="col-sm-4" for="type_id">団体種別</label>
         <div class="col-sm-8">
+          <!-- TODO multi select に対応する -->
           <ng-select
             [items]="appService.ng2selectTypes"
             (selected)="typeSelected($event)"
@@ -15,6 +16,7 @@
         </div>
         <label class="col-sm-4" for="instrument_id">募集楽器</label>
         <div class="col-sm-8">
+          <!-- TODO multi select に対応する -->
           <ng-select
             [items]="appService.ng2selectInstruments"
             (selected)="instrumentSelected($event)"
