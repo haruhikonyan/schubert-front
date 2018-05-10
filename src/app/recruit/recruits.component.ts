@@ -32,6 +32,20 @@ export class RecruitsComponent implements OnInit {
     return selTypes || [];
   }
 
+  /**
+   * 募集楽器の選択中のデータを返す
+   *
+   * @readonly
+   * @type {*}
+   * @memberof RecruitsComponent
+   */
+  get selectedInstruments(): Array<{id: number, text: string}> {
+    const selInstruments: Array<{id: number, text: string}> = this.appService.ng2selectInstruments
+      .filter((data) => data.id.toString() === this.condition.instrumentId);
+
+    return selInstruments || [];
+  }
+
   constructor(
     private route: ActivatedRoute,
     private recruitService: RecruitService,
