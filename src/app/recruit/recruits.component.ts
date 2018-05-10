@@ -27,6 +27,7 @@ export class RecruitsComponent implements OnInit {
   ngOnInit() {
     this.route.data.forEach((data: any) => {
       this.recruits = data.recruits;
+      this.restoreSearchCondition();
     });
   }
 
@@ -69,5 +70,22 @@ export class RecruitsComponent implements OnInit {
         this.recruits = recruits;
       })
       .subscribe();
+  }
+
+  /**
+   * urlを元にSearchFiltersを復元する
+   * @private
+   *
+   * @memberOf RecruitsComponent
+   */
+  private restoreSearchCondition(): void {
+    // パラメータを元にconditionを作成
+    const params: {[key: string]: any} = this.route.snapshot.queryParams;
+    // キーワード
+    this.condition.freeWord =  params['freeWord'];
+    // 募集楽器
+    this.condition.instrumentId = params['instrumentId'];
+    // 団体種別
+    this.condition.typeId = params['typeId'];
   }
 }
