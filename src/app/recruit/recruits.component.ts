@@ -18,9 +18,18 @@ export class RecruitsComponent implements OnInit {
 
   condition: SearchCondition = new SearchCondition();
 
-  get selectedType(): string {
-    return this.condition.typeId != null ? this.appService.ng2selectTypes
-      .filter((data) => data.id.toString() === this.condition.typeId)[0].text : null;
+  /**
+   * 団体種別の選択中のデータを返す
+   *
+   * @readonly
+   * @type {*}
+   * @memberof RecruitsComponent
+   */
+  get selectedTypes(): Array<{id: number, text: string}> {
+    const selTypes: Array<{id: number, text: string}> = this.appService.ng2selectTypes
+      .filter((data) => data.id.toString() === this.condition.typeId);
+
+    return selTypes || [];
   }
 
   constructor(

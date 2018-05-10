@@ -10,7 +10,7 @@
           <!-- TODO multi select に対応する -->
           <ng-select
             [items]="appService.ng2selectTypes"
-            [active]="condition.typeId != null ? [selectedType] : []"
+            [active]="selectedTypes"
             (selected)="typeSelected($event)"
             placeholder="団体種別を選択してください">
           </ng-select>
