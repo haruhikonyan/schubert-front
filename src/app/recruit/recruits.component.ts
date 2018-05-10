@@ -18,6 +18,11 @@ export class RecruitsComponent implements OnInit {
 
   condition: SearchCondition = new SearchCondition();
 
+  get selectedType(): string {
+    return this.condition.typeId != null ? this.appService.ng2selectTypes
+      .filter((data) => data.id.toString() === this.condition.typeId)[0].text : null;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private recruitService: RecruitService,
