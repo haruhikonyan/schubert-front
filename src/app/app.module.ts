@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { TopComponent } from './top/top.component';
 import { RecruitsComponent } from './recruit/recruits.component';
 import { TeamsComponent } from './team/teams.component';
-import { TeamComponent } from './team/team.component';
+import { TeamDetailComponent } from './team/team-detail.component';
 import { AboutComponent } from './about/about.component';
 import { ConcertComponent } from './concert/concert.component';
 import { AppService } from './app.service';
@@ -38,7 +38,7 @@ import { TeamEditPageComponent } from './team/team-editor/team-edit-page.compone
     TopComponent,
     RecruitsComponent,
     TeamsComponent,
-    TeamComponent,
+    TeamDetailComponent,
     AboutComponent,
     ConcertComponent,
     RecruitEditPageComponent,

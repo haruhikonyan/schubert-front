@@ -10,7 +10,7 @@ import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-
 import { TeamResolver } from './team/team.resolve';
 import { TeamsResolver } from './team/teams.resolve';
 import { TeamsComponent } from './team/teams.component';
-import { TeamComponent } from './team/team.component';
+import { TeamDetailComponent } from './team/team-detail.component';
 import { TeamNewPageComponent } from './team/team-editor/team-new-page.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { ConcertComponent } from './concert/concert.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'teams/new', component: TeamNewPageComponent},
   { path: 'teams/:teamId/edit', component: TeamEditPageComponent,
                                 resolve: { recruit: TeamResolver }},
-  { path: 'teams/:teamId', component: TeamComponent,
+  { path: 'teams/:teamId', component: TeamDetailComponent,
                            resolve: { team: TeamResolver }},
   { path: 'concerts', component: ConcertComponent},
   { path: 'about', component: AboutComponent}
