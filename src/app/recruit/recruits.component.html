@@ -32,8 +32,7 @@
   </div>
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
-  <div *ngFor="let recruit of filteredRecruits" class="panel panel-info">
-    <!-- [TODO] publishFrom, publishTo の中に含まれる場合のみ表示する -->
+  <div *ngFor="let recruit of recruits" class="panel panel-info">
     <div class="panel-heading">{{recruit.title}}</div>
     <div class="panel-body">
       <div>
