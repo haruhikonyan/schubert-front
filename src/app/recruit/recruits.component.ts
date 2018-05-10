@@ -26,6 +26,7 @@ export class RecruitsComponent implements OnInit {
    * @memberof RecruitsComponent
    */
   get selectedTypes(): Array<{id: number, text: string}> {
+    // TODO multiに対応。その際filter内の比較部分が変わるはず
     const selTypes: Array<{id: number, text: string}> = this.appService.ng2selectTypes
       .filter((data) => data.id.toString() === this.condition.typeId);
 
@@ -40,6 +41,7 @@ export class RecruitsComponent implements OnInit {
    * @memberof RecruitsComponent
    */
   get selectedInstruments(): Array<{id: number, text: string}> {
+    // TODO multiに対応。その際filter内の比較部分が変わるはず
     const selInstruments: Array<{id: number, text: string}> = this.appService.ng2selectInstruments
       .filter((data) => data.id.toString() === this.condition.instrumentId);
 
