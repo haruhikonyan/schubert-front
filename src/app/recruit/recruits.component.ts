@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 import { Recruit, SearchCondition } from './recruit.model';
 import { RecruitService } from './recruit.service';
@@ -50,6 +50,7 @@ export class RecruitsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private recruitService: RecruitService,
     private appService: AppService
   ) { }
@@ -97,6 +98,8 @@ export class RecruitsComponent implements OnInit {
   searchBtnClickHandler(): void {
     this.recruitService.getRecruits(this.condition)
       .map((recruits: Recruit[]) => {
+        // url書き換え
+        this.updateUrl();
         this.recruits = recruits;
       })
       .subscribe();
@@ -117,5 +120,41 @@ export class RecruitsComponent implements OnInit {
     this.condition.instrumentId = params['instrumentId'];
     // 団体種別
     this.condition.typeId = params['typeId'];
+  }
+
+  /**
+   * 検索条件オブジェクト（searchFilters）を元にurlをアップデートする
+   *
+   * @private
+   *
+   * @memberOf RecruitsComponent
+   */
+  private updateUrl(): void {
+    // queryParamsを生成する(URL書き換え用)
+    const qPs = {};
+
+    // conditionを元にqueryParamsを追加(ページのURLのためでback用ではない)
+    Object.keys(this.condition).forEach((key: string) => {
+      let value = this.condition[key];
+
+      // 全文検索クエリの場合は空文字列チェック
+      if (key === 'freeWord') {
+        if (value != null && value.trim().length > 0) {
+          value = value.trim();
+        }
+        else {
+          value = undefined;
+        }
+      }
+
+      qPs[key] = value;
+    });
+
+    const navigationExtras: NavigationExtras = {
+      relativeTo: this.route,
+      queryParams: qPs,
+    };
+      // url 書き換え
+    this.router.navigate(['.'], navigationExtras);
   }
 }
