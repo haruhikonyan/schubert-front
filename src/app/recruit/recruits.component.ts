@@ -73,7 +73,7 @@ export class RecruitsComponent implements OnInit {
    * 団体種別を選択した際に recruit に追加する
    * @param value
    */
-  typeSelected(value: any): void {
+  typeSelectHandler(value: any): void {
     this.condition.typeId = this.appService.types.find((type: Type) => {
       return type.id === value.id;
     }).id.toString();
@@ -83,7 +83,7 @@ export class RecruitsComponent implements OnInit {
    * 募集楽器を選択した際に recruit に追加する
    * @param value
    */
-  instrumentSelected(value: any): void {
+  instrumentSelectHandler(value: any): void {
     this.condition.instrumentId = this.appService.instruments.find((instrument: Instrument) => {
       return instrument.id === value.id;
     }).id.toString();
