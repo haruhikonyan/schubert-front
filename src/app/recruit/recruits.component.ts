@@ -52,7 +52,7 @@ export class RecruitsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private recruitService: RecruitService,
-    private appService: AppService
+    public appService: AppService
   ) { }
 
   ngOnInit() {
