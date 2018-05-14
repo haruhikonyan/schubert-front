@@ -1,0 +1,27 @@
+<div *ngIf="team.isPublished; else elseBlock">
+  <div>{{team.name}}</div>
+  <div>
+    <span *ngFor="let type of team.types" class="badge badge-default">{{type.name}}</span>
+  </div>
+  <div>
+    <span *ngFor="let region of team.regions" class="badge badge-default">{{region.name}}</span>
+  </div>
+  <div>
+    <div class="col-sm-offset-1 col-md-11">
+      <div>連絡先:{{team.mail}}</div>
+      <div>URL:{{team.url}}</div>
+      <div>{{team.description}}</div>
+      <div>
+        Password:
+        <input type="password" class="form-control" name="password">
+        <button (click)="editTeamButtonClickHander()">(TBD)団体編集</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+<div>この団体は非公開です</div>
+</ng-template>
+
+<div><a [routerLink]="['../']">チーム一覧</a></div>
