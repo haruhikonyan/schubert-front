@@ -26,3 +26,15 @@ export class Recruit {
     this.publishedTo.setSeconds(0);
   }
 }
+
+/**
+ * SearchCondition Entity
+ * TODO 別の場所に移したほうが良いかもしれない
+ */
+export class SearchCondition {
+  isPublished: boolean;
+  typeId: string;
+  instrumentId: string;
+  freeWord: string;
+  // TODO 条件追加
+}

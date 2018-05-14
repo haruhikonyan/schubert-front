@@ -1,29 +1,63 @@
-<h1>団員募集</h1>
+<div class="container">
+  <h1>団員募集</h1>
 
-<!-- TODO recruit-card.component 的なものへコンポーネント化 -->
-<div *ngFor="let recruit of recruits" class="panel panel-info">
-  <!-- [TODO] publishFrom, publishTo の中に含まれる場合のみ表示する -->
-  <div class="panel-heading">{{recruit.title}}</div>
-  <div class="panel-body">
-    <div>
-      <label *ngFor="let type of recruit.team.types" class="label label-info">
-        {{type.name}}
-      </label>
+  <div class="row">
+    <div class="col-md-9">
+      <h3>団員募集検索</h3>
+      <div class="form-group">
+        <label class="col-sm-4" for="type_id">団体種別</label>
+        <div class="col-sm-8">
+          <!-- TODO multi select に対応する -->
+          <ng-select
+            [items]="appService.ng2selectTypes"
+            [active]="selectedTypes"
+            (selected)="typeSelectHandler($event)"
+            placeholder="団体種別を選択してください">
+          </ng-select>
+        </div>
+        <label class="col-sm-4" for="instrument_id">募集楽器</label>
+        <div class="col-sm-8">
+          <!-- TODO multi select に対応する -->
+          <ng-select
+            [items]="appService.ng2selectInstruments"
+            [active]="selectedInstruments"
+            (selected)="instrumentSelectHandler($event)"
+            placeholder="募集楽器を選択してください">
+          </ng-select>
+        </div>
+        <label class="col-sm-4" for="free_word">フリーワード検索</label>
+        <div class="col-sm-8">
+          <input type="text" name="free_word" [(ngModel)]="condition.freeWord" class="form-control" placeholder="複数キーワードには対応してません">
+        </div>
+      </div>
     </div>
-    <div>{{recruit.team.name}}</div>
-    <div>練習場所:{{recruit.practicePlace}}</div>
-    <div>練習時間:{{recruit.practiceTime}}</div>
-    <div>募集楽器:
-      <div *ngFor="let ic of appService.instrumentCategories">
-        <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic); first as isFirst">
-          <span *ngIf="isFirst">{{ic.name}}</span>
-          <span class="badge badge-default">{{instrument.shortName}}</span>
-        </span>
+    <div class="col-sm-offset-1 col-md-2"><br><br><br><br>
+      <button type="button" class="btn btn-default btn-lg" (click)="searchBtnClickHandler()">検索</button></div>
+  </div>
+
+  <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
+  <div *ngFor="let recruit of recruits" class="panel panel-info">
+    <div class="panel-heading">{{recruit.title}}</div>
+    <div class="panel-body">
+      <div>
+        <label *ngFor="let type of recruit.team.types" class="label label-info">
+          {{type.name}}
+        </label>
+      </div>
+      <div>{{recruit.team.name}}</div>
+      <div>練習場所:{{recruit.practicePlace}}</div>
+      <div>練習時間:{{recruit.practiceTime}}</div>
+      <div>募集楽器:
+        <div *ngFor="let ic of appService.instrumentCategories">
+          <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic); first as isFirst">
+            <span *ngIf="isFirst">{{ic.name}}</span>
+            <span class="badge badge-default">{{instrument.shortName}}</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
+
+  {{recruits.length}}件の募集があります
+  <a [routerLink]="['./new']">新しく団員募集する</a>
 </div>
-
-
-{{recruits.length}}件の募集があります
-<a [routerLink]="['./new']">新しく団員募集する</a>
