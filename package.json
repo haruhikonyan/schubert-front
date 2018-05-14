@@ -45,7 +45,7 @@
     "ngx-bootstrap": "2.0.5",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
-    "ts-loader": "^2.3.7",
+    "ts-loader": "^4.3.0",
     "typescript": "2.7.2",
     "url-join": "^4.0.0",
     "zone.js": "^0.8.26"
