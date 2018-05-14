@@ -1,6 +1,6 @@
 import { Inject, forwardRef } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { Recruit, SearchCondition } from './recruit.model';
 import { RecruitService } from './recruit.service';

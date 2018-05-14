@@ -1,6 +1,6 @@
 import { Inject, forwardRef } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { Team } from './team.model';
 import { TeamService } from './team.service';
