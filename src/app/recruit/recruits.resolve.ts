@@ -15,8 +15,8 @@ export class RecruitsResolver implements Resolve<Recruit[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Recruit[]> {
     // パラメータを元にcondition作成
     const condition: SearchCondition = new SearchCondition();
-    condition.typeId = route.queryParams['typeId'];
-    condition.instrumentId = route.queryParams['instrumentId'];
+    condition.typeIds = route.queryParams['typeIds'];
+    condition.instrumentIds = route.queryParams['instrumentIds'];
     condition.freeWord = route.queryParams['freeWord'];
 
     return this.recruitService.getRecruits(condition);

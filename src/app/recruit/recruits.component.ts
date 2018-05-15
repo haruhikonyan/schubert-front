@@ -28,7 +28,7 @@ export class RecruitsComponent implements OnInit {
   get selectedTypes(): Array<{id: number, text: string}> {
     // TODO multiに対応。その際filter内の比較部分が変わるはず
     const selTypes: Array<{id: number, text: string}> = this.appService.ng2selectTypes
-      .filter((data) => data.id.toString() === this.condition.typeId);
+      .filter((data) => data.id.toString() === this.condition.typeIds);
 
     return selTypes || [];
   }
@@ -43,7 +43,7 @@ export class RecruitsComponent implements OnInit {
   get selectedInstruments(): Array<{id: number, text: string}> {
     // TODO multiに対応。その際filter内の比較部分が変わるはず
     const selInstruments: Array<{id: number, text: string}> = this.appService.ng2selectInstruments
-      .filter((data) => data.id.toString() === this.condition.instrumentId);
+      .filter((data) => data.id.toString() === this.condition.instrumentIds);
 
     return selInstruments || [];
   }
@@ -75,7 +75,7 @@ export class RecruitsComponent implements OnInit {
    * @param value
    */
   typeSelectHandler(value: any): void {
-    this.condition.typeId = this.appService.types.find((type: Type) => {
+    this.condition.typeIds = this.appService.types.find((type: Type) => {
       return type.id === value.id;
     }).id.toString();
   }
@@ -85,7 +85,7 @@ export class RecruitsComponent implements OnInit {
    * @param value
    */
   instrumentSelectHandler(value: any): void {
-    this.condition.instrumentId = this.appService.instruments.find((instrument: Instrument) => {
+    this.condition.instrumentIds = this.appService.instruments.find((instrument: Instrument) => {
       return instrument.id === value.id;
     }).id.toString();
   }
@@ -117,9 +117,9 @@ export class RecruitsComponent implements OnInit {
     // キーワード
     this.condition.freeWord =  params['freeWord'];
     // 募集楽器
-    this.condition.instrumentId = params['instrumentId'];
+    this.condition.instrumentIds = params['instrumentIds'];
     // 団体種別
-    this.condition.typeId = params['typeId'];
+    this.condition.typeIds = params['typeIds'];
   }
 
   /**

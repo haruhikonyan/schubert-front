@@ -33,8 +33,8 @@ export class Recruit {
  */
 export class SearchCondition {
   isPublished: boolean;
-  typeId: string;
-  instrumentId: string;
+  typeIds: string;
+  instrumentIds: string;
   freeWord: string;
   // TODO 条件追加
 }

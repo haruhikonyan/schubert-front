@@ -62,8 +62,8 @@ export class RecruitService {
     if (condition.freeWord != null && condition.freeWord.trim().length > 0) {
       params.set('freeWord', condition.freeWord);
     }
-    params.set('typeId', condition.typeId);
-    params.set('instrumentId', condition.instrumentId);
+    params.set('typeIds', condition.typeIds);
+    params.set('instrumentIds', condition.instrumentIds);
     // TODO 条件を増やした場合はparamsにセットするコードを増やすこと
     return params;
   }
