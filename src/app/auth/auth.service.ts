@@ -17,7 +17,7 @@ import { LocalStorageKeyConsts } from './local-storage-key.consts';
 export class AuthService {
   private apiUrl: string = environment.apiUrl;
 
-  private endpointUrl: string = urljoin(this.apiUrl, '/api/team');
+  private endpointUrl: string = urljoin(this.apiUrl, '/teams');
 
 
   constructor(
@@ -37,11 +37,12 @@ export class AuthService {
    */
   login(teamId: string, password: string): Observable<Boolean> {
     const options: RequestOptions = this.generateBasicRequestOptions();
-    const url: string = urljoin(this.endpointUrl, teamId, 'login');
+    // TODO back から送られてくる teamId は objectId にする
+    const url: string = urljoin(this.endpointUrl, teamId.toString(), '/login');
 
     return this.http.post(
         url,
-        JSON.stringify({ teamId, password }),
+        {password: password},
         options)
       .map((res: Response) => {
         // 200 じゃない場合は false を返して抜ける
@@ -50,11 +51,12 @@ export class AuthService {
         }
         // 成功した場合は token をセットする
         const data: any = res.json();
-        // ログイン結果データからは、access_token のみを localStorage に保存
-        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.access_token);
+        console.log(data);
+        // ログイン結果データからは、token のみを localStorage に保存
+        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.token);
         const currentData: any = this.getStoredTeamdata() || {};
-        currentData.id = teamId;
-        currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(data.access_token);
+        currentData.id = data.teamId;
+        currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
         localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
         return true;
       });

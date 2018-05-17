@@ -5,7 +5,7 @@ import { Type, Region } from '../app.model';
  * Team Entity
  */
 export class Team {
-  id: number;
+  id: string;
   password: string;
   name: string;
   mail: string;

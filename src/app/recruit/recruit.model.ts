@@ -6,7 +6,7 @@ import { Instrument } from '../app.model';
  * Recruit Entity
  */
 export class Recruit {
-  id: number;
+  id: string;
   title: string;
   practicePlace: string;
   practiceTime: string;
