@@ -11,11 +11,6 @@
       <div>連絡先:{{team.mail}}</div>
       <div>URL:{{team.url}}</div>
       <div>{{team.description}}</div>
-      <div>
-        Password:
-        <input type="password" class="form-control" name="password">
-        <button (click)="editTeamButtonClickHander()">(TBD)団体編集</button>
-      </div>
     </div>
   </div>
 </div>
@@ -23,5 +18,11 @@
 <ng-template #elseBlock>
 <div>この団体は非公開です</div>
 </ng-template>
+
+<div>
+  Password:
+  <input type="password" class="form-control" name="password">
+  <button (click)="editTeamButtonClickHander()">(TBD)団体編集</button>
+</div>
 
 <div><a [routerLink]="['../']">チーム一覧</a></div>

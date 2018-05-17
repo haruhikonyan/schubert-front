@@ -1,0 +1,98 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Http, Response, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import * as urljoin from 'url-join';
+
+import { environment } from '../../environments/environment';
+import { LocalStorageKeyConsts } from './local-storage-key.consts';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl: string = environment.apiUrl;
+
+  private endpointUrl: string = urljoin(this.apiUrl, '/api/team');
+
+
+  constructor(
+    private http: Http,
+    private router: Router,
+    private jwtHelper: JwtHelper = new JwtHelper()
+  ) { }
+
+  /**
+   * username, password でログインする
+   *
+   * @param {string} username
+   * @param {string} password
+   * @returns {Observable<Boolean>} ログイン成功したかどうか
+   *
+   * @memberOf AuthService
+   */
+  login(teamId: string, password: string): Observable<Boolean> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, teamId, 'login');
+
+    return this.http.post(
+        url,
+        JSON.stringify({ teamId, password }),
+        options)
+      .map((res: Response) => {
+        // 200 じゃない場合は false を返して抜ける
+        if (res.status !== 200) {
+          return false;
+        }
+        // 成功した場合は token をセットする
+        const data: any = res.json();
+        // ログイン結果データからは、access_token のみを localStorage に保存
+        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.access_token);
+        const currentData: any = this.getStoredTeamdata() || {};
+        currentData.id = teamId;
+        currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(data.access_token);
+        localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
+        return true;
+      });
+  }
+
+  /**
+   * localStorage に保存されている、チームデータを取得する
+   *
+   * @private
+   * @returns {any}
+   *
+   * @memberOf AuthService
+   */
+  private getStoredTeamdata(): any {
+    return JSON.parse(localStorage.getItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY));
+  }
+
+  /**
+   * localStorage に保存されているアクセストークンを返す
+   * angular2-jwt AuthHttp が使えないモジュール向けに用意している(EventSource など)
+   *
+   * @returns {string}
+   *
+   * @memberOf AuthService
+   */
+  getAccessToken(): string {
+    return localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
+  }
+
+
+
+
+
+  /**
+   * このサービスで利用する基本の RequestOptions を作成する
+   * @return {RequestOptions}
+   */
+  private generateBasicRequestOptions(): RequestOptions {
+    return new RequestOptions({ withCredentials: true });
+  }
+}
