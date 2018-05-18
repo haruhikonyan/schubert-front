@@ -19,7 +19,7 @@ const DIST_FOLDER = join(process.cwd(), 'dist');
 const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main.bundle');
+const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
 
 // Express Engine
 import {ngExpressEngine} from '@nguniversal/express-engine';
@@ -48,7 +48,7 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
 
 // ALl regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', { req });
+  res.render(join(DIST_FOLDER, 'browser', 'index.html'), { req });
 });
 
 // Start up the Node server
