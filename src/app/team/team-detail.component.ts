@@ -14,6 +14,7 @@ export class TeamDetailComponent implements OnInit {
 
   team: Team;
   password: string;
+  isLoggedIn: boolean;
 
   /**
    * ログインに失敗したときに true になりエラーメッセージを表示する
@@ -30,6 +31,7 @@ export class TeamDetailComponent implements OnInit {
     this.route.data.forEach((data: any) => {
       this.team = data.team;
     });
+    this.isLoggedIn = this.authService.isLoggedInByTeamId(this.team.id);
   }
 
   editTeamButtonClickHander(): void {
@@ -40,6 +42,7 @@ export class TeamDetailComponent implements OnInit {
     .subscribe((isLoginSuccessful: boolean) => {
         if (isLoginSuccessful) {
           console.log('ログイン成功');
+          // TODO team編集画面かadmin画面に飛ばす
         }
       },
       (error: Error) => {

@@ -53,8 +53,8 @@ export class AuthService {
         const data: any = res.json();
         // ログイン結果データからは、token のみを localStorage に保存
         localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.token);
-        const currentData: any = this.getStoredTeamdata() || {};
-        currentData.id = data.team.id;
+        const currentData: any = this.getStoredTeamData() || {};
+        currentData.teamId = data.team.id;
         currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
         localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
         return true;
@@ -69,7 +69,7 @@ export class AuthService {
    *
    * @memberOf AuthService
    */
-  private getStoredTeamdata(): any {
+  private getStoredTeamData(): any {
     return JSON.parse(localStorage.getItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY));
   }
 
@@ -85,7 +85,17 @@ export class AuthService {
     return localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
   }
 
-
+  /**
+   * ログイン中かどうかを返す
+   *
+   * @returns {boolean}
+   *
+   * @memberOf AuthService
+   */
+  isLoggedInByTeamId(id: string): boolean {
+    const data: any = this.getStoredTeamData();
+    return tokenNotExpired() && data.teamId === id;
+  }
 
 
 

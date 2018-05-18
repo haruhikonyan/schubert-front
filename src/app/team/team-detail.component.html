@@ -20,7 +20,7 @@
 </ng-template>
 
 <form (ngSubmit)="editTeamButtonClickHander()">
-  <div class="form-group">
+  <div class="form-group" *ngIf="!isLoggedIn">
     <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
         placeholder="Password">
   </div>
@@ -30,7 +30,7 @@
       団体編集
     </button>
     <div class="alert alert-danger m-t-1" *ngIf="canShowflushMessage">
-      <small>ユーザ名、パスワードの入力に誤りがあるか登録されていません。</small>
+      <small>パスワードの入力に誤りがあります</small>
     </div>
   </div>
 </form>
