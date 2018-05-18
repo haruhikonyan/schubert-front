@@ -37,17 +37,24 @@ export class TeamDetailComponent implements OnInit {
   editTeamButtonClickHander(): void {
     // エラー表示を消す
     this.canShowflushMessage = false;
+    if (this.isLoggedIn) {
+      // TODO team編集画面かadmin画面に飛ばす
+    }
+    else {
+      // 別 team でログイン中の場合もあるので一旦ログアウトさせる
+      this.authService.logout();
 
-    this.authService.login(this.team.id, this.password)
-    .subscribe((isLoginSuccessful: boolean) => {
-        if (isLoginSuccessful) {
-          console.log('ログイン成功');
-          // TODO team編集画面かadmin画面に飛ばす
-        }
-      },
-      (error: Error) => {
-        this.canShowflushMessage = true;
-      });
+      this.authService.login(this.team.id, this.password)
+      .subscribe((isLoginSuccessful: boolean) => {
+          if (isLoginSuccessful) {
+            console.log('ログイン成功');
+            // TODO team編集画面かadmin画面に飛ばす
+          }
+        },
+        (error: Error) => {
+          this.canShowflushMessage = true;
+        });
+    }
   }
 
 }

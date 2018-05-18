@@ -97,6 +97,11 @@ export class AuthService {
     return tokenNotExpired() && data.teamId === id;
   }
 
+  logout(): void {
+    localStorage.removeItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY);
+    localStorage.removeItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
+  }
+
 
 
   /**
