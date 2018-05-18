@@ -51,11 +51,10 @@ export class AuthService {
         }
         // 成功した場合は token をセットする
         const data: any = res.json();
-        console.log(data);
         // ログイン結果データからは、token のみを localStorage に保存
         localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.token);
         const currentData: any = this.getStoredTeamdata() || {};
-        currentData.id = data.teamId;
+        currentData.id = data.team.id;
         currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
         localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
         return true;
