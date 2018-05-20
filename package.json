@@ -38,6 +38,7 @@
     "@angular/router": "6.0.0",
     "@nguniversal/express-engine": "^6.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
+    "angular2-jwt": "^0.2.3",
     "bootstrap-honoka": "^3.3.7-a",
     "compression": "^1.7.1",
     "core-js": "^2.4.1",
