@@ -32,3 +32,12 @@
   <label>団体ホームメージ</label>
   <input class="form-control" placeholder="https://schubert.jp" [(ngModel)]="team.url" rows="2" name="url">
 </div>
+<div class="field">
+  <!-- 団員募集フォームの際は表示させない予定 -->
+  <label>自由欄</label>
+  <textarea class="form-control" placeholder="主にシューベルトの曲をやる団体です" [(ngModel)]="team.description" rows="5" name="description"></textarea>
+</div>
+<div class="field">
+  <label>団体一覧掲載 ※チェックを付けると団体一覧に掲載され、一般公開されます</label>
+  <input class="form-control" type="checkbox" [(ngModel)]="team.isPublished" name="is-published">
+</div>
