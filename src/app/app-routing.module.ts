@@ -7,6 +7,7 @@ import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitsComponent } from './recruit/recruits.component';
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
+import { RecruitDetailPageComponent } from './recruit/recruit-detail-page.component';
 import { TeamResolver } from './team/team.resolve';
 import { TeamsResolver } from './team/teams.resolve';
 import { TeamsComponent } from './team/teams.component';
