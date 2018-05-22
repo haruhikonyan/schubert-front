@@ -1,19 +1,31 @@
 <div class="container">
   <h1>{{ recruit.team.name }}</h1>
 
-  <div>
-    <div class="panel-heading">
-      <a>{{recruit.title}}</a>
-    </div>
-    <div class="panel-body">
+  <div class="row">
+    <div class="col-md-12">
       <div>
-        <label *ngFor="let type of recruit.team.types" class="label label-info">
+        <span *ngFor="let type of recruit.team.types" class="badge">
           {{type.name}}
-        </label>
+        </span>
       </div>
-      <div>{{recruit.team.name}}</div>
-      <div>練習場所:{{recruit.practicePlace}}</div>
-      <div>練習時間:{{recruit.practiceTime}}</div>
+      <div class="row">
+        <div class="col-sm-offset-1 col-md-11">
+          <p>練習場所:{{ recruit.practicePlace}}</p>
+          <p>練習時間:{{ recruit.practiceTime}}</p>
+          <p>連絡先:{{ recruit.team.mail }}</p>
+          <p>URL:<a href="{{ recruit.team.url }}"></a></p>
+          <p>募集楽器:<br>
+              &nbsp;&nbsp;弦楽器:
+                <span class="badge">1stヴァイオリン</span>
+                              <span class="badge">2stヴァイオリン</span>
+                              <span class="badge">ヴィオラ</span>
+                              <span class="badge">チェロ</span>
+                              <span class="badge">コントラバス</span>
+              <br>
+          </p>
+          <p>ふぇえええ</p>
+        </div>
+        </div>
     </div>
   </div>
 </div>
