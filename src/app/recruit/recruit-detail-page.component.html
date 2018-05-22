@@ -14,15 +14,15 @@
           <p>練習時間:{{ recruit.practiceTime}}</p>
           <p>連絡先:{{ recruit.team.mail }}</p>
           <p>URL:<a href="{{ recruit.team.url }}"></a></p>
-          <p>募集楽器:<br>
-              &nbsp;&nbsp;弦楽器:
-                <span class="badge">1stヴァイオリン</span>
-                              <span class="badge">2stヴァイオリン</span>
-                              <span class="badge">ヴィオラ</span>
-                              <span class="badge">チェロ</span>
-                              <span class="badge">コントラバス</span>
-              <br>
-          </p>
+          <p>募集楽器:</p>
+          <div class="col-sm-offset-1" *ngFor="let instrument of recruit.instruments">
+            {{ instrument.instrumentCategory.name }}:
+            <span class="badge">{{ instrument.name }}</span>
+            <span class="badge">2stヴァイオリン</span>
+            <span class="badge">ヴィオラ</span>
+            <span class="badge">チェロ</span>
+            <span class="badge">コントラバス</span>
+          </div>
           <p>ふぇえええ</p>
         </div>
       </div>
