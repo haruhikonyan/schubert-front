@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: 'recruits/new', component: RecruitNewPageComponent},
   { path: 'recruits/:recruitId/edit', component: RecruitEditPageComponent,
                                       resolve: { recruit: RecruitResolver }},
+  { path: 'recruits/:recruitId', component: RecruitDetailPageComponent,
+                                      resolve: { recruit: RecruitResolver }},
   { path: 'teams', component: TeamsComponent,
                    resolve: { teams: TeamsResolver }},
   { path: 'teams/new', component: TeamNewPageComponent},

@@ -37,7 +37,9 @@
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
   <div *ngFor="let recruit of recruits" class="panel panel-info">
-    <div class="panel-heading">{{recruit.title}}</div>
+    <div class="panel-heading">
+      <a>{{recruit.title}}</a>
+    </div>
     <div class="panel-body">
       <div>
         <label *ngFor="let type of recruit.team.types" class="label label-info">
