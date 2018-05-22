@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Team } from './../team.model';
 import { TeamService } from './../team.service';
@@ -12,7 +13,8 @@ export class TeamNewPageComponent implements OnInit {
 
   team: Team;
   constructor(
-    private teamService: TeamService
+    private teamService: TeamService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -21,7 +23,10 @@ export class TeamNewPageComponent implements OnInit {
 
   createTeamButtonClickHander(): void {
     this.teamService.createTeam(this.team)
-      .subscribe();
+      .subscribe((team: Team) => {
+        this.router.navigate(['teams', team.id]);
+        // TODO 同時にログイン処理をする
+      });
   }
 
 }
