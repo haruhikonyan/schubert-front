@@ -19,7 +19,7 @@
 <div>この団体は非公開です</div>
 </ng-template>
 
-<form (ngSubmit)="editTeamButtonClickHander()">
+<form (ngSubmit)="moveAdminTeamButtonClickHander()">
   <div class="form-group" *ngIf="!isLoggedIn">
     <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
         placeholder="Password">
@@ -27,7 +27,7 @@
   <div class="form-group m-b-0">
     <button type="submit" class="btn btn-primary btn-block p-y-1 m-b-1">
       <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-      団体編集
+      団体管理画面へ
     </button>
     <div class="alert alert-danger m-t-1" *ngIf="canShowflushMessage">
       <small>パスワードの入力に誤りがあります</small>

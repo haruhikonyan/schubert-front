@@ -12,6 +12,7 @@ import { TeamsResolver } from './team/teams.resolve';
 import { TeamsComponent } from './team/teams.component';
 import { TeamDetailComponent } from './team/team-detail.component';
 import { TeamNewPageComponent } from './team/team-editor/team-new-page.component';
+import { AdminComponent } from './team/admin/admin.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { ConcertComponent } from './concert/concert.component';
 import { AboutComponent } from './about/about.component';
@@ -27,10 +28,11 @@ const routes: Routes = [
   { path: 'teams', component: TeamsComponent,
                    resolve: { teams: TeamsResolver }},
   { path: 'teams/new', component: TeamNewPageComponent},
-  { path: 'teams/:teamId/edit', component: TeamEditPageComponent,
-                                resolve: { recruit: TeamResolver }},
   { path: 'teams/:teamId', component: TeamDetailComponent,
                            resolve: { team: TeamResolver }},
+  { path: 'teams/:teamId/edit', component: TeamEditPageComponent,
+                                resolve: { recruit: TeamResolver }},
+  { path: 'teams/:teamId/admin', component: AdminComponent},
   { path: 'concerts', component: ConcertComponent},
   { path: 'about', component: AboutComponent}
 ];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Team } from './team.model';
 import { TeamService } from './team.service';
@@ -23,6 +23,7 @@ export class TeamDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private teamService: TeamService,
     private authService: AuthService
   ) { }
@@ -34,11 +35,11 @@ export class TeamDetailComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedInByTeamId(this.team.id);
   }
 
-  editTeamButtonClickHander(): void {
+  moveAdminTeamButtonClickHander(): void {
     // エラー表示を消す
     this.canShowflushMessage = false;
     if (this.isLoggedIn) {
-      // TODO team編集画面かadmin画面に飛ばす
+      this.router.navigate(['teams', this.team.id, 'admin']);
     }
     else {
       // 別 team でログイン中の場合もあるので一旦ログアウトさせる
@@ -47,8 +48,7 @@ export class TeamDetailComponent implements OnInit {
       this.authService.login(this.team.id, this.password)
       .subscribe((isLoginSuccessful: boolean) => {
           if (isLoginSuccessful) {
-            console.log('ログイン成功');
-            // TODO team編集画面かadmin画面に飛ばす
+            this.router.navigate(['teams', this.team.id, 'admin']);
           }
         },
         (error: Error) => {
