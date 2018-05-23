@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>{{ recruit.team.name }}</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <span *ngFor="let type of recruit.team.types" class="badge">
+          {{type.name}}
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-1 col-md-11">
+          <p>練習場所:{{ recruit.practicePlace}}</p>
+          <p>練習時間:{{ recruit.practiceTime}}</p>
+          <p>連絡先:{{ recruit.team.mail }}</p>
+          <p>URL:<a href="{{ recruit.team.url }}"></a></p>
+          <p>募集楽器:</p>
+          <div class="col-sm-offset-1">
+            <app-instrument [instruments]="recruit.instruments"></app-instrument>
+          </div>
+          <p>{{ recruit.description }}</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">パスワード TBD</label>
+        <div class="col-sm-4">
+          <input type="password" class="form-control" id="inputPassword" placeholder="TBD">
+        </div>
+        <div class="col-sm-2 btn btn-default">編集</div>
+      </div>
+
+    </div>
+  </div>
+
+  <a [routerLink]="['../']">団員募集に戻る</a>
+</div>

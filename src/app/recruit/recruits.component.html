@@ -37,7 +37,9 @@
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
   <div *ngFor="let recruit of recruits" class="panel panel-info">
-    <div class="panel-heading">{{recruit.title}}</div>
+    <div class="panel-heading">
+      <a [routerLink]="['./', recruit.id]">{{recruit.title}}</a>
+    </div>
     <div class="panel-body">
       <div>
         <label *ngFor="let type of recruit.team.types" class="label label-info">
@@ -48,6 +50,7 @@
       <div>練習場所:{{recruit.practicePlace}}</div>
       <div>練習時間:{{recruit.practiceTime}}</div>
       <div>募集楽器:
+        <!-- <app-instrument [instruments]="recruit.instruments"></app-instrument> -->
         <div *ngFor="let ic of appService.instrumentCategories">
           <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic); first as isFirst">
             <span *ngIf="isFirst">{{ic.name}}</span>

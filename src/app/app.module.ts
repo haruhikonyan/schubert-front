@@ -29,6 +29,8 @@ import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
+import { RecruitDetailPageComponent } from './recruit/recruit-detail-page.component';
+import { InstrumentComponent } from './recruit/instrument.component';
 import { TeamNewPageComponent } from './team/team-editor/team-new-page.component';
 import { TeamFormComponent } from './team/team-editor/team-form.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
@@ -58,6 +60,8 @@ const AUTH_PROVIDERS = {
     RecruitEditPageComponent,
     RecruitFormComponent,
     RecruitNewPageComponent,
+    RecruitDetailPageComponent,
+    InstrumentComponent,
     TeamNewPageComponent,
     TeamFormComponent,
     TeamEditPageComponent,
