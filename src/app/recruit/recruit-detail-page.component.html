@@ -15,9 +15,8 @@
           <p>連絡先:{{ recruit.team.mail }}</p>
           <p>URL:<a href="{{ recruit.team.url }}"></a></p>
           <p>募集楽器:</p>
-          <div class="col-sm-offset-1" *ngFor="let key of retainCategories">
-            {{ key }}:
-            <span class="badge" *ngFor="let name of instrumentsGroupByCategory[key]">{{ name }}</span>
+          <div class="col-sm-offset-1">
+            <app-instrument [instruments]="recruit.instruments"></app-instrument>
           </div>
           <p>{{ recruit.description }}</p>
         </div>
