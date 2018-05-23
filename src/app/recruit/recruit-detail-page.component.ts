@@ -11,8 +11,11 @@ import { Instrument } from '../app.model';
 })
 export class RecruitDetailPageComponent implements OnInit {
 
-  // htmlでobjectをkeyで分解するために定義
-  objectKeys = Object.keys;
+  // recruit情報に含まれるinstrumentsをCategory別に分けた時のCategory名のリスト
+  get retainCategories(): string[] {
+    return Object.keys(this.instrumentsGroupByCategory);
+  }
+
 
   recruit: Recruit;
   instrumentsGroupByCategory: any = {};
