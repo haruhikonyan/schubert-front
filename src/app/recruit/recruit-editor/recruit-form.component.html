@@ -5,7 +5,7 @@
     <label>募集タイトル</label>
     <input class="form-control" placeholder="一緒にオーケストラで弾いてくれる弦楽器大募集！" [(ngModel)]="recruit.title" rows="2" name="title">
   </div>
-  <ng-container *ngIf="recruit?.team?.id == null">
+  <ng-container *ngIf="recruit?.team != null && recruit.team.id == null">
     <app-team-form [team]="recruit.team"></app-team-form>
   </ng-container>
   <div class="field">

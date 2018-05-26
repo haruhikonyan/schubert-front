@@ -1,7 +1,6 @@
 <h1>団体管理者画面</h1>
 
-<!-- teamId を含めたリンクにしてteam新規作成しない団員募集にする -->
-<div><a [routerLink]="['../../new']">新しく団員募集を出す(TBD)</a></div>
+<div><a [routerLink]="['/recruits/new']" [queryParams]='{ teamId: team?.id}'>新しく団員募集を出す</a></div>
 <div><a [routerLink]="['../edit']">団体を編集する</a></div>
 <div><a [routerLink]="['./']">団体を削除する(TBD、ここにいる？)</a></div>
 <div><a [routerLink]="['../']">戻る</a></div>
