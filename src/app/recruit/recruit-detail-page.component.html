@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>{{ recruit.team.name }}</h1>
-
+  <h1>{{ recruit.title }}</h1>
+  <h3>{{ recruit.team.name }}</h3>
   <div class="row">
     <div class="col-md-12">
       <div>
@@ -21,16 +21,22 @@
           <p class="sbt-message-content">{{ recruit.description }}</p>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">パスワード TBD</label>
-        <div class="col-sm-4">
-          <input type="password" class="form-control" id="inputPassword" placeholder="TBD">
+      <form (ngSubmit)="moveEditRecruitButtonClickHander()">
+        <div class="form-group" *ngIf="!isLoggedIn">
+          <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
+              placeholder="Password">
         </div>
-        <div class="col-sm-2 btn btn-default">編集</div>
-      </div>
-
+        <div class="form-group mb-0">
+          <button type="submit" class="btn btn-primary btn-block py-1 mb-1">
+            <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            団員募集を編集する
+          </button>
+          <div class="alert alert-danger mt-1" *ngIf="canShowflushMessage">
+            <small>パスワードの入力に誤りがあります</small>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-
   <a [routerLink]="['../']">団員募集に戻る</a>
 </div>
