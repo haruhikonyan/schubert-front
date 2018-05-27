@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TeamService } from './../../team/team.service';
 import { RecruitService } from './../recruit.service';
@@ -19,6 +19,7 @@ export class RecruitNewPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private recruitService: RecruitService,
     private teamService: TeamService
   ) { }
@@ -42,7 +43,10 @@ export class RecruitNewPageComponent implements OnInit {
 
   createRecruitButtonClickHander(): void {
     this.recruitService.createRecruit(this.recruit)
-      .subscribe();
+    .subscribe((recruit: Recruit) => {
+      this.router.navigate(['recruits', recruit.id]);
+      // TODO teamも一緒に作成であれば同時にログイン処理をする
+    });
   }
 
 }
