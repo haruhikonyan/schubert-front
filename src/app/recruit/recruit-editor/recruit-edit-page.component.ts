@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { RecruitService } from './../recruit.service';
 import { Recruit } from './../recruit.model';
 
 @Component({
@@ -14,10 +15,18 @@ export class RecruitEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private recruitService: RecruitService,
   ) { }
 
   ngOnInit() {
     this.recruit = this.route.snapshot.data['recruit'];
   }
 
+  editRecruitButtonClickHander(): void {
+    this.recruitService.editRecruit(this.recruit)
+    .subscribe((recruit: Recruit) => {
+      this.router.navigate(['recruits', recruit.id]);
+    });
+  }
 }

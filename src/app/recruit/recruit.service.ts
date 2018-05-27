@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response, Headers,
          URLSearchParams, ResponseContentType } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
 
+import { Observable } from 'rxjs';
+
+import { AuthHttp } from 'angular2-jwt';
+import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -18,6 +20,7 @@ export class RecruitService {
 
   constructor(
     private http: Http,
+    private authHttp: AuthHttp
   ) { }
 
   getRecruits(seachCondition: SearchCondition = null): Observable<Recruit[]> {
@@ -42,13 +45,6 @@ export class RecruitService {
                     .map((r: Response) => r.json() as Recruit);
   }
 
-  createRecruit(recruit: Recruit): Observable<Recruit> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
-
-    return this.http.post(this.endpointUrl, {recruit: recruit}, options)
-                    .map((r: Response) => r.json() as Recruit);
-  }
-
   /**
    * SearchConditionを元にbackに渡すためのパラメータを取得
    *
@@ -66,6 +62,22 @@ export class RecruitService {
     params.set('instrumentIds', condition.instrumentIds);
     // TODO 条件を増やした場合はparamsにセットするコードを増やすこと
     return params;
+  }
+
+  createRecruit(recruit: Recruit): Observable<Recruit> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+
+    return this.http.post(this.endpointUrl, {recruit: recruit}, options)
+                    .map((r: Response) => r.json() as Recruit);
+  }
+
+  editRecruit(recruit: Recruit): Observable<Recruit> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    // TODO backから送られてくるidがstringになったら toString() を外す
+    const url: string = urljoin(this.endpointUrl, recruit.id.toString());
+
+    return this.authHttp.put(url, {recruit: recruit}, options)
+                    .map((r: Response) => r.json() as Recruit);
   }
 
   /**

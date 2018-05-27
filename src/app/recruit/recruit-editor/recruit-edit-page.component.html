@@ -6,10 +6,10 @@
 
 
   <div class="actions">
-    <button>団員募集を保存する</button>
+    <button (click)="editRecruitButtonClickHander()">団員募集を保存する</button>
   </div>
 
   <!-- 募集詳細画面へのリンク -->
-  <a [routerLink]="['/recruits']">団員募集に戻る</a>
+  <a [routerLink]="['/recruits', recruit.id]">団員募集詳細に戻る</a>
   </div>
 </div>
