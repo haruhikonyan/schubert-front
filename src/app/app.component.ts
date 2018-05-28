@@ -9,6 +9,8 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
 
+  isCollapsed: boolean = true;
+
   constructor(private appServise: AppService) { }
 
   ngOnInit() {
