@@ -2,7 +2,7 @@
   <label>団体名</label>
   <input class="form-control" placeholder="シューベルト管弦楽団" [(ngModel)]="team.name" rows="2" name="name">
 </div>
-<div class="field" *ngIf="team.id == nill">
+<div class="field" *ngIf="team.id == null">
   <label>password</label>
   <input type="password" class="form-control" [(ngModel)]="team.password" rows="2" name="password">
 </div>
