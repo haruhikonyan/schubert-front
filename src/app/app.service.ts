@@ -103,6 +103,16 @@ export class AppService {
 
 
   /**
+   * ng2-select で利用可能な形式の Object の配列を返す(なんでもありver)
+   */
+  ng2selectConverter(items: any[]): Array<{id: number, text: string}> {
+    return items.map((item: any) => {
+      return { id: item.id, text: item.name };
+    });
+  }
+
+
+  /**
    * このサービスで利用する基本の RequestOptions を作成する
    * @return {RequestOptions}
    */

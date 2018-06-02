@@ -24,6 +24,7 @@
       [items]="appService.ng2selectInstruments"
       (selected)="instrumentSelected($event)"
       (removed)="instrumentRemoved($event)"
+      [active]="appService.ng2selectConverter(recruit.instruments)"
       placeholder="募集楽器を選択してください">
     </ng-select>
   </div>
