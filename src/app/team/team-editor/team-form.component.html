@@ -2,7 +2,7 @@
   <label>団体名</label>
   <input class="form-control" placeholder="シューベルト管弦楽団" [(ngModel)]="team.name" rows="2" name="name">
 </div>
-<div class="field">
+<div class="field" *ngIf="team.id == nill">
   <label>password</label>
   <input type="password" class="form-control" [(ngModel)]="team.password" rows="2" name="password">
 </div>
@@ -12,6 +12,7 @@
     [items]="appService.ng2selectTypes"
     (selected)="typeSelected($event)"
     (removed)="typeRemoved($event)"
+    [active]="appService.ng2selectConverter(team.types)"
     placeholder="団体種別を選択してください">
   </ng-select>
 </div>
@@ -21,6 +22,7 @@
     [items]="appService.ng2selectRegions"
     (selected)="regionSelected($event)"
     (removed)="regionRemoved($event)"
+    [active]="appService.ng2selectConverter(team.regions)"
     placeholder="活動地域を選択してください">
   </ng-select>
 </div>
