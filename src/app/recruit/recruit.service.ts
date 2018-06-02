@@ -3,9 +3,9 @@ import { Http, RequestOptions, Response, Headers,
          URLSearchParams, ResponseContentType } from '@angular/http';
 
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 import { AuthHttp } from 'angular2-jwt';
-import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -73,8 +73,7 @@ export class RecruitService {
 
   editRecruit(recruit: Recruit): Observable<Recruit> {
     const options: RequestOptions = this.generateBasicRequestOptions();
-    // TODO backから送られてくるidがstringになったら toString() を外す
-    const url: string = urljoin(this.endpointUrl, recruit.id.toString());
+    const url: string = urljoin(this.endpointUrl, recruit.id);
 
     return this.authHttp.put(url, {recruit: recruit}, options)
                     .map((r: Response) => r.json() as Recruit);

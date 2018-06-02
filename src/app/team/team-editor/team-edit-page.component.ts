@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TeamService } from './../team.service';
+import { Team } from './../team.model';
 
 @Component({
   selector: 'app-team-edit-page',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamEditPageComponent implements OnInit {
 
-  constructor() { }
+  team: Team;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private teamService: TeamService,
+  ) { }
 
   ngOnInit() {
+    this.team = this.route.snapshot.data['team'];
+  }
+
+  editRecruitButtonClickHander(): void {
+    this.teamService.editTeam(this.team)
+    .subscribe((team: Team) => {
+      this.router.navigate(['teams', team.id, 'admin']);
+    });
   }
 
 }

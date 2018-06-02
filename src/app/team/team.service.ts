@@ -4,6 +4,7 @@ import { Http, RequestOptions, Response, Headers,
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import { AuthHttp } from 'angular2-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -17,6 +18,7 @@ export class TeamService {
 
   constructor(
     private http: Http,
+    private authHttp: AuthHttp,
   ) { }
 
   getTeams(): Observable<Team[]> {
@@ -38,6 +40,14 @@ export class TeamService {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.post(this.endpointUrl, {team: team}, options)
+                    .map((r: Response) => r.json() as Team);
+  }
+
+  editTeam(team: Team): Observable<Team> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, team.id);
+
+    return this.authHttp.put(url, {team: team}, options)
                     .map((r: Response) => r.json() as Team);
   }
 

@@ -1,3 +1,15 @@
-<p>
-  team-edit-page works!
-</p>
+<div class="container">
+    <div class="row">
+    <h1>団体編集</h1>
+
+    <app-team-form [team]="team"></app-team-form>
+
+
+    <div class="actions">
+      <button (click)="editTeamButtonClickHander()">団体を保存する</button>
+    </div>
+
+    <!-- 募集詳細画面へのリンク -->
+    <a [routerLink]="['/teams', team.id, 'admin']">団体管理ページに戻る</a>
+    </div>
+  </div>
