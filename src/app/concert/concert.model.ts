@@ -1,3 +1,4 @@
+import { Region } from './../app.model';
 import { Team } from './../team/team.model';
 
 /**
@@ -11,7 +12,29 @@ export class Concert {
   cirtainTime: Date;
   description: string;
   team: Team;
-  hole: any;
-  conductors: any[];
+  hole: Hole;
+  conductors: Conductor[];
   repertoires: any[];
+}
+
+/**
+ * Hole Entity
+ */
+export class Hole {
+  id: number;
+  name: string;
+  address: string;
+  url: string;
+  description: string;
+  region: Region;
+}
+
+/**
+ * Conductor Entity
+ */
+export class Conductor {
+  id: number;
+  name: string;
+  description: string;
+  url: string;
 }
