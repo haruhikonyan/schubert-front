@@ -1,3 +1,15 @@
-<p>
-  concert works!
-</p>
+<div class="container">
+  <h1>演奏会</h1>
+
+  <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
+  <a *ngFor="let concert of concerts" class="panel panel-info" [routerLink]="['./', concert.id]" style="text-decoration:none;">
+    <div class="panel-heading">
+      {{concert.title}}
+    </div>
+    <div class="panel-body">
+      <div>{{concert.team.name}}</div>
+      <div>開場:{{concert.doorsOpen}}</div>
+      <div>会場:{{concert.hole.name}}</div>
+    </div>
+  </a>
+</div>

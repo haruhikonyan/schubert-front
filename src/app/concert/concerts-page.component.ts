@@ -10,14 +10,17 @@ import { Concert } from './concert.model';
 })
 export class ConcertsPageComponent implements OnInit {
 
+  concerts: Concert[];
+
   constructor(
     private concertService: ConcertService
   ) { }
 
   ngOnInit() {
+    // サービスメソッド呼び出し
     this.concertService.getConcerts()
       .map((concerts: Concert[]) => {
-        console.log(concerts);
+        this.concerts = concerts;
       })
       .subscribe();
   }
