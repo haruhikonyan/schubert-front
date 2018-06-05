@@ -46,7 +46,6 @@ export class Repertoire {
   id: number;
   arranger: string;
   description: string;
-  concertId: string;
   tune: Tune;
   solists: Solist[];
 }
@@ -58,7 +57,7 @@ export class Tune {
   id: number;
   title: string;
   description: string;
-  composer: any;
+  composer: Composer;
 }
 
 /**
