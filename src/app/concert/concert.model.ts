@@ -14,7 +14,7 @@ export class Concert {
   team: Team;
   hole: Hole;
   conductors: Conductor[];
-  repertoires: any[];
+  repertoires: Repertoire[];
 }
 
 /**
@@ -37,4 +37,16 @@ export class Conductor {
   name: string;
   description: string;
   url: string;
+}
+
+/**
+ * Repertoire Entity
+ */
+export class Repertoire {
+  id: number;
+  arranger: string;
+  description: string;
+  concertId: string;
+  tune: any;
+  solists: any[];
 }
