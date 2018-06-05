@@ -18,7 +18,7 @@ import { RecruitsComponent } from './recruit/recruits.component';
 import { TeamsComponent } from './team/teams.component';
 import { TeamDetailComponent } from './team/team-detail.component';
 import { AboutComponent } from './about/about.component';
-import { ConcertComponent } from './concert/concert.component';
+import { ConcertsPageComponent } from './concert/concerts-page.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamsResolver } from './team/teams.resolve';
@@ -57,7 +57,7 @@ const AUTH_PROVIDERS = {
     TeamsComponent,
     TeamDetailComponent,
     AboutComponent,
-    ConcertComponent,
+    ConcertsPageComponent,
     RecruitEditPageComponent,
     RecruitFormComponent,
     RecruitNewPageComponent,
