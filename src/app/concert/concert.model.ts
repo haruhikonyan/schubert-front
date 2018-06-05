@@ -1,4 +1,4 @@
-import { Region } from './../app.model';
+import { Region, Instrument } from './../app.model';
 import { Team } from './../team/team.model';
 
 /**
@@ -47,6 +47,47 @@ export class Repertoire {
   arranger: string;
   description: string;
   concertId: string;
-  tune: any;
-  solists: any[];
+  tune: Tune;
+  solists: Solist[];
+}
+
+/**
+ * Tune Entity
+ */
+export class Tune {
+  id: number;
+  title: string;
+  description: string;
+  composer: any;
+}
+
+/**
+ * Solist Entity
+ */
+export class Solist {
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+  instrument: Instrument;
+}
+
+/**
+ * Composer Entity
+ */
+export class Composer {
+  id: number;
+  lastName: string;
+  fullName: string;
+  description: string;
+  countries: Country[];
+}
+
+/**
+ * Country Entity
+ */
+export class Country {
+  id: number;
+  name: string;
+  description: string;
 }
