@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://schubert-back.herokuapp.com",
+    "target": "https://schubert-back.haruhiko.work",
     "secure": true,
     "changeOrigin": true
   }

@@ -76,7 +76,7 @@ export class Solist {
  */
 export class Composer {
   id: number;
-  lastName: string;
+  displayName: string;
   fullName: string;
   description: string;
   countries: Country[];
