@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import * as urljoin from 'url-join';
 
 import { environment } from '../environments/environment';
-import { Type, Instrument, InstrumentCategory, Region } from './app.model';
+import { Type, Instrument, InstrumentCategory, Region, CanonicalRoute } from './app.model';
 
 
 @Injectable()
@@ -16,10 +16,13 @@ export class AppService {
   private apiUrl: string = environment.apiUrl;
 
   // サイトで汎用的に使うモデルは AppService で持っておく
+  // 下記4つはフォームでしか使わないからそっちに移す
   types: Type[] = [];
   instruments: Instrument[] = [];
   instrumentCategories: InstrumentCategory[] = [];
   regions: Region[] = [];
+
+  canonicalRoutes: CanonicalRoute[] = [];
 
   constructor(
     private http: Http,
@@ -109,6 +112,16 @@ export class AppService {
     return items.map((item: any) => {
       return { id: item.id, text: item.name };
     });
+  }
+
+  getCanonicalRoutes(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.apiUrl, '/canonical_routes');
+
+    this.http.get(url, options)
+              .map((r: Response) => r.json() as CanonicalRoute[])
+              .map((canonicalRoutes: CanonicalRoute[]) => this.canonicalRoutes = canonicalRoutes)
+              .subscribe();
   }
 
 

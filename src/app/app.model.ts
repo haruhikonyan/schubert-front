@@ -29,6 +29,19 @@ export class Instrument {
 }
 
 /**
+ * CanonicalRoute Entity
+ */
+export class CanonicalRoute {
+  id: number;
+  canonicalId: string;
+  canonicalModelName: string;
+  label: string;
+  orderInCategory: number;
+  isListedOnTop: boolean;
+  isListedOnModelTop: boolean;
+}
+
+/**
  * InstrumentCategory Entity
  */
 export class InstrumentCategory {
