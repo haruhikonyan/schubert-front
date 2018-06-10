@@ -4,5 +4,5 @@
 <p>SSRできてんだぜ！</p>
 
 <div *ngFor="let canonicalRoute of canonicalRoutesForTop">
-  <a [routerLink]="['./recruits', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
+  <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
 </div>
