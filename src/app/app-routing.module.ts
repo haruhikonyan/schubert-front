@@ -9,6 +9,7 @@ import { RecruitsComponent } from './recruit/recruits.component';
 import { RecruitNewPageComponent } from './recruit/recruit-editor/recruit-new-page.component';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitDetailPageComponent } from './recruit/recruit-detail-page.component';
+import { RecruitCanonicalHomeComponent } from './recruit/recruit-canonical-home/recruit-canonical-home.component';
 import { TeamResolver } from './team/team.resolve';
 import { TeamsResolver } from './team/teams.resolve';
 import { TeamsComponent } from './team/teams.component';
@@ -28,8 +29,8 @@ const routes: Routes = [
   { path: 'recruits/new', component: RecruitNewPageComponent},
   { path: 'recruits/:recruitId/edit', component: RecruitEditPageComponent,
                                       resolve: { recruit: RecruitResolver }},
-  { path: 'recruits/cr/:canonicalModelName', component: RecruitsComponent,
-                                             resolve: { recruits: RecruitsResolver }},
+  { path: 'recruits/cr/:canonicalModelName', component: RecruitCanonicalHomeComponent,
+                                             resolve: { canonicalRoutes: CanonicalRoutesResolver }},
   { path: 'recruits/cr/:canonicalModelName/:canonicalId', component: RecruitsComponent,
                                                           resolve: { recruits: RecruitsResolver }},
   { path: 'recruits/:recruitId', component: RecruitDetailPageComponent,

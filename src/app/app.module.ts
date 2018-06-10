@@ -37,6 +37,7 @@ import { TeamNewPageComponent } from './team/team-editor/team-new-page.component
 import { TeamFormComponent } from './team/team-editor/team-form.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { AdminComponent } from './team/admin/admin.component';
+import { RecruitCanonicalHomeComponent } from './recruit/recruit-canonical-home/recruit-canonical-home.component';
 
 // configure angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -67,7 +68,8 @@ const AUTH_PROVIDERS = {
     TeamNewPageComponent,
     TeamFormComponent,
     TeamEditPageComponent,
-    AdminComponent
+    AdminComponent,
+    RecruitCanonicalHomeComponent
   ],
   imports: [
     AppRoutingModule,

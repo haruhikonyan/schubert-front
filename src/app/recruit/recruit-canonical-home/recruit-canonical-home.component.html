@@ -1,0 +1,3 @@
+<div *ngFor="let canonicalRoute of canonicalRoutesForModel">
+    <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
+  </div>

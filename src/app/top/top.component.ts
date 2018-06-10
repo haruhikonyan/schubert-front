@@ -1,8 +1,8 @@
-import { CanonicalRoute } from './../app.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AppService } from './../app.service';
+import { CanonicalRoute } from './../app.model';
 
 @Component({
   selector: 'app-top',
