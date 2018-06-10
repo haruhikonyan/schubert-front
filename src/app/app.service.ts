@@ -114,14 +114,12 @@ export class AppService {
     });
   }
 
-  getCanonicalRoutes(): void {
+  getCanonicalRoutes(): Observable<CanonicalRoute[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.apiUrl, '/canonical_routes');
 
-    this.http.get(url, options)
-              .map((r: Response) => r.json() as CanonicalRoute[])
-              .map((canonicalRoutes: CanonicalRoute[]) => this.canonicalRoutes = canonicalRoutes)
-              .subscribe();
+    return this.http.get(url, options)
+                    .map((r: Response) => r.json() as CanonicalRoute[]);
   }
 
 

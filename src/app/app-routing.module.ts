@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './top/top.component';
+import { CanonicalRoutesResolver } from './canonical-routes.resolve';
 import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitsComponent } from './recruit/recruits.component';
@@ -20,7 +21,8 @@ import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
-  { path: '', component: TopComponent},
+  { path: '', component: TopComponent,
+              resolve: { canonicalRoutes: CanonicalRoutesResolver }},
   { path: 'recruits', component: RecruitsComponent,
                       resolve: { recruits: RecruitsResolver }},
   { path: 'recruits/new', component: RecruitNewPageComponent},

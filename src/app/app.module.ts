@@ -13,6 +13,7 @@ import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { CanonicalRoutesResolver } from './canonical-routes.resolve';
 import { TopComponent } from './top/top.component';
 import { RecruitsComponent } from './recruit/recruits.component';
 import { TeamsComponent } from './team/teams.component';
@@ -89,6 +90,7 @@ const AUTH_PROVIDERS = {
     RecruitService,
     RecruitResolver,
     RecruitsResolver,
+    CanonicalRoutesResolver,
   ],
   bootstrap: [AppComponent]
 })
