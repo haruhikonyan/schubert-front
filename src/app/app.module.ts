@@ -27,6 +27,7 @@ import { TeamResolver } from './team/team.resolve';
 import { TeamService } from './team/team.service';
 import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitResolver } from './recruit/recruit.resolve';
+import { RecruitsCanonicalSearchResolver } from './recruit/recruits-canonical-search.resolve';
 import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
@@ -92,6 +93,7 @@ const AUTH_PROVIDERS = {
     RecruitService,
     RecruitResolver,
     RecruitsResolver,
+    RecruitsCanonicalSearchResolver,
     CanonicalRoutesResolver,
   ],
   bootstrap: [AppComponent]
