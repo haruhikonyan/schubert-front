@@ -36,7 +36,7 @@
   </div>
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
-  <a *ngFor="let recruit of recruits" class="panel panel-info" [routerLink]="['./', recruit.id]" style="text-decoration:none;">
+  <a *ngFor="let recruit of recruits" class="panel panel-info" [routerLink]="['/recruits', recruit.id]" style="text-decoration:none;">
     <div class="panel-heading">
       {{recruit.title}}
     </div>
