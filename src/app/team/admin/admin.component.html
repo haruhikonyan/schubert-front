@@ -6,5 +6,4 @@
 <p *ngFor="let recruit of recruits"><a [routerLink]="['/recruits', recruit.id]">{{recruit.title}}</a></p>
 <div><a [routerLink]="['/recruits/new']" [queryParams]='{ teamId: team?.id}'>新しく団員募集を出す</a></div>
 <div><a [routerLink]="['./']">団体のパスワードを変更する(TBD)</a></div>
-<div><a [routerLink]="['./']">団体を削除する(TBD、ここにいる？)</a></div>
 <div><a [routerLink]="['../']">戻る</a></div>
