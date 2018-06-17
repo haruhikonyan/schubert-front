@@ -115,7 +115,7 @@ export class RecruitsComponent implements OnInit {
     // パラメータを元にconditionを作成
     const params: {[key: string]: any} = this.route.snapshot.queryParams;
     // キーワード
-    this.condition.freeWord =  params['freeWord'];
+    this.condition.freeWords =  params['freeWords'];
     // 募集楽器
     this.condition.instrumentIds = params['instrumentIds'];
     // 団体種別
@@ -138,7 +138,7 @@ export class RecruitsComponent implements OnInit {
       let value = this.condition[key];
 
       // 全文検索クエリの場合は空文字列チェック
-      if (key === 'freeWord') {
+      if (key === 'freeWords') {
         if (value != null && value.trim().length > 0) {
           value = value.trim();
         }

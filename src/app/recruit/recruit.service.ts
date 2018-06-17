@@ -71,8 +71,8 @@ export class RecruitService {
   getAdditionalSearchParams(condition: SearchCondition): URLSearchParams {
     const params: URLSearchParams = new URLSearchParams();
     // 空文字列チェック
-    if (condition.freeWord != null && condition.freeWord.trim().length > 0) {
-      params.set('freeWord', condition.freeWord);
+    if (condition.freeWords != null && condition.freeWords.trim().length > 0) {
+      params.set('freeWords', condition.freeWords);
     }
     params.set('typeIds', condition.typeIds);
     params.set('instrumentIds', condition.instrumentIds);

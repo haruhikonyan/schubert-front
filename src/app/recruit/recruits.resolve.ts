@@ -17,7 +17,7 @@ export class RecruitsResolver implements Resolve<Recruit[]> {
     const condition: SearchCondition = new SearchCondition();
     condition.typeIds = route.queryParams['typeIds'];
     condition.instrumentIds = route.queryParams['instrumentIds'];
-    condition.freeWord = route.queryParams['freeWord'];
+    condition.freeWords = route.queryParams['freeWords'];
 
     return this.recruitService.getRecruits(condition);
   }
