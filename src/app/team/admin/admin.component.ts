@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TeamService } from './../../team/team.service';
 import { Team } from '../../team/team.model';
+import { RecruitService } from './../../recruit/recruit.service';
+import { Recruit } from './../../recruit/recruit.model';
 
 @Component({
   selector: 'app-admin',
@@ -13,10 +15,12 @@ import { Team } from '../../team/team.model';
 export class AdminComponent implements OnInit {
 
   team: Team;
+  recruits: Recruit[];
 
   constructor(
-    private teamService: TeamService,
     private route: ActivatedRoute,
+    private teamService: TeamService,
+    private recruitService: RecruitService,
   ) { }
 
 
@@ -27,5 +31,12 @@ export class AdminComponent implements OnInit {
         this.team = team;
       })
       .subscribe();
+
+    this.recruitService.getRecruitsByTeam(teamId)
+      .map((recruits: Recruit[]) => {
+        this.recruits = recruits;
+      })
+      .subscribe();
+
   }
 }

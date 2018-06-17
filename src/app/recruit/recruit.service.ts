@@ -37,6 +37,14 @@ export class RecruitService {
                     .map((r: Response) => r.json() as Recruit[]);
   }
 
+  getRecruitsByTeam(teamId: string): Observable<Recruit[]> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, 'team', teamId);
+
+    return this.authHttp.get(url, options)
+                    .map((r: Response) => r.json() as Recruit[]);
+  }
+
   searchByCanonical(canonicalModelName: string, canonicalId: string): Observable<Recruit[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'search-by-canonical', canonicalModelName, canonicalId);
