@@ -29,7 +29,7 @@ export class ConcertService {
                     .map((r: Response) => r.json() as Concert[]);
   }
 
-  getConcert(id: number): Observable<Concert> {
+  getConcert(id: string): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, id);
     const options: RequestOptions = this.generateBasicRequestOptions();
 
