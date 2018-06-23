@@ -9,6 +9,7 @@ import { AuthHttp } from 'angular2-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
+import { Instrument, Type } from './../app.model';
 import { Recruit, SearchCondition } from './recruit.model';
 
 
@@ -103,4 +104,33 @@ export class RecruitService {
     return new RequestOptions({ withCredentials: true });
   }
 
+
+
+  setSearchConditionTypeIdsByTypes(searchCondition: SearchCondition, types: Type[]) {
+    searchCondition.typeIds = types.map((type: Type) => {
+      return type.id;
+    }).toString();
+  }
+
+  setSearchConditionInstrumentIdsByInstruments(searchCondition: SearchCondition, instruments: Instrument[]) {
+    searchCondition.instrumentIds = instruments.map((instrument: Instrument) => {
+      return instrument.id;
+    }).toString();
+  }
+
+  getTypesBySearchCondition(searchCondition: SearchCondition, typesMaster: Type[]): Type[] {
+    return searchCondition.typeIds.split(',').map((typeId: string) => {
+      return typesMaster.find((type: Type) => {
+        return type.id.toString() === typeId;
+      });
+    });
+  }
+
+  getInstrumentsBySearchCondition(searchCondition: SearchCondition, instrumentsMaster: Instrument[]): Instrument[] {
+    return searchCondition.instrumentIds.split(',').map((instrumentId: string) => {
+      return instrumentsMaster.find((instrument: Instrument) => {
+        return instrument.id.toString() === instrumentId;
+      });
+    });
+  }
 }

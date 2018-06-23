@@ -26,12 +26,15 @@ export class RecruitsComponent implements OnInit {
    * @memberof RecruitsComponent
    */
   get selectedTypes(): Array<{id: number, text: string}> {
-    // TODO multiに対応。その際filter内の比較部分が変わるはず
-    const selTypes: Array<{id: number, text: string}> = this.appService.ng2selectTypes
-      .filter((data) => data.id.toString() === this.condition.typeIds);
-
-    return selTypes || [];
-  }
+    if (this.condition.typeIds == null) {
+      return [];
+    }
+    return this.condition.typeIds.split(',').map((typeId: string) => {
+      return this.appService.ng2selectTypes.find((t: {id: number, text: string}) => {
+        return t.id.toString() === typeId;
+      });
+    });
+}
 
   /**
    * 募集楽器の選択中のデータを返す
@@ -41,11 +44,14 @@ export class RecruitsComponent implements OnInit {
    * @memberof RecruitsComponent
    */
   get selectedInstruments(): Array<{id: number, text: string}> {
-    // TODO multiに対応。その際filter内の比較部分が変わるはず
-    const selInstruments: Array<{id: number, text: string}> = this.appService.ng2selectInstruments
-      .filter((data) => data.id.toString() === this.condition.instrumentIds);
-
-    return selInstruments || [];
+    if (this.condition.instrumentIds == null) {
+      return [];
+    }
+    return this.condition.instrumentIds.split(',').map((instrumentId: string) => {
+      return this.appService.ng2selectInstruments.find((i: {id: number, text: string}) => {
+        return i.id.toString() === instrumentId;
+      });
+    });
   }
 
   constructor(
@@ -71,23 +77,44 @@ export class RecruitsComponent implements OnInit {
   }
 
   /**
-   * 団体種別を選択した際に recruit に追加する
+   * 団体種別を選択した際に condition.typeIds に追加する
    * @param value
    */
-  typeSelectHandler(value: any): void {
-    this.condition.typeIds = this.appService.types.find((type: Type) => {
-      return type.id === value.id;
-    }).id.toString();
+  typeSelectHandler(id: number): void {
+    const selectValue = id.toString();
+    const typeIdList: string[] = this.condition.typeIds == null ? [] : this.condition.typeIds.split(',');
+    this.condition.typeIds = typeIdList.concat(selectValue).toString();
   }
 
+  typeRemoveHandler(id: number): void {
+    const removeValue = id.toString();
+    let typeIdList: string[] = this.condition.typeIds == null ? [] : this.condition.typeIds.split(',');
+
+    typeIdList = typeIdList.filter((i: string) => {
+      return i !== removeValue;
+    });
+    this.condition.typeIds = typeIdList.length === 0 ? null : typeIdList.toString();
+  }
+
+
   /**
-   * 募集楽器を選択した際に recruit に追加する
+   * 募集楽器を選択した際に condition.instrumentIds に追加する
    * @param value
    */
-  instrumentSelectHandler(value: any): void {
-    this.condition.instrumentIds = this.appService.instruments.find((instrument: Instrument) => {
-      return instrument.id === value.id;
-    }).id.toString();
+  instrumentSelectHandler(id: number): void {
+    const selectValue = id.toString();
+    const instrumentIdList: string[] = this.condition.instrumentIds == null ? [] : this.condition.instrumentIds.split(',');
+    this.condition.instrumentIds = instrumentIdList.concat(selectValue).toString();
+  }
+
+  instrumentRemoveHandler(id: number): void {
+    const removeValue = id.toString();
+    let instrumentIdList: string[] = this.condition.instrumentIds == null ? [] : this.condition.instrumentIds.split(',');
+
+    instrumentIdList = instrumentIdList.filter((i: string) => {
+      return i !== removeValue;
+    });
+    this.condition.instrumentIds = instrumentIdList.length === 0 ? null : instrumentIdList.toString();
   }
 
   /**
