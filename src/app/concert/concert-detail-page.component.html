@@ -1,12 +1,10 @@
 <div class="container">
-  <h1>演奏会</h1>
+  <h1>演奏会情報詳細</h1>
 
   <!-- TODO recruit-card.component 的なものへコンポーネント化 -->
-  <div class="panel panel-default" *ngFor="let concert of concerts">
+  <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">
-        <a [routerLink]="['./', concert.id]">{{ concert.title }}</a>
-      </h3>
+      <h3 class="panel-title">{{ concert.title }}</h3>
     </div>
     <div class="panel-body">
       <div class="d-flex">

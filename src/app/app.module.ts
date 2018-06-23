@@ -19,7 +19,9 @@ import { RecruitsComponent } from './recruit/recruits.component';
 import { TeamsComponent } from './team/teams.component';
 import { TeamDetailComponent } from './team/team-detail.component';
 import { AboutComponent } from './about/about.component';
+import { ConcertResolver } from './concert/concert.resolve';
 import { ConcertsPageComponent } from './concert/concerts-page.component';
+import { ConcertDetailPageComponent } from './concert/concert-detail-page.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamsResolver } from './team/teams.resolve';
@@ -61,6 +63,7 @@ const AUTH_PROVIDERS = {
     TeamDetailComponent,
     AboutComponent,
     ConcertsPageComponent,
+    ConcertDetailPageComponent,
     RecruitEditPageComponent,
     RecruitFormComponent,
     RecruitNewPageComponent,
@@ -95,6 +98,7 @@ const AUTH_PROVIDERS = {
     RecruitsResolver,
     RecruitsCanonicalSearchResolver,
     CanonicalRoutesResolver,
+    ConcertResolver,
   ],
   bootstrap: [AppComponent]
 })
