@@ -22,6 +22,9 @@ import { AboutComponent } from './about/about.component';
 import { ConcertResolver } from './concert/concert.resolve';
 import { ConcertsPageComponent } from './concert/concerts-page.component';
 import { ConcertDetailPageComponent } from './concert/concert-detail-page.component';
+import { ConcertFormComponent } from './concert/concert-editor/concert-form.component';
+import { ConcertEditPageComponent } from './concert/concert-editor/concert-edit-page.component';
+import { ConcertNewPageComponent } from './concert/concert-editor/concert-new-page.component';
 import { AppService } from './app.service';
 import { ConcertService } from './concert/concert.service';
 import { TeamsResolver } from './team/teams.resolve';
@@ -64,6 +67,9 @@ const AUTH_PROVIDERS = {
     AboutComponent,
     ConcertsPageComponent,
     ConcertDetailPageComponent,
+    ConcertFormComponent,
+    ConcertEditPageComponent,
+    ConcertNewPageComponent,
     RecruitEditPageComponent,
     RecruitFormComponent,
     RecruitNewPageComponent,

@@ -21,6 +21,8 @@ import { AdminComponent } from './team/admin/admin.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { ConcertsPageComponent } from './concert/concerts-page.component';
 import { ConcertDetailPageComponent } from './concert/concert-detail-page.component';
+import { ConcertEditPageComponent } from './concert/concert-editor/concert-edit-page.component';
+import { ConcertNewPageComponent } from './concert/concert-editor/concert-new-page.component';
 import { AboutComponent } from './about/about.component';
 
 
@@ -47,6 +49,9 @@ const routes: Routes = [
                                 resolve: { team: TeamResolver }},
   { path: 'teams/:teamId/admin', component: AdminComponent},
   { path: 'concerts', component: ConcertsPageComponent},
+  { path: 'concerts/new', component: ConcertNewPageComponent},
+  { path: 'concerts/:concertId/edit', component: ConcertEditPageComponent,
+                                      resolve: { concert: ConcertResolver }},
   { path: 'concerts/:concertId', component: ConcertDetailPageComponent,
                                  resolve: { concert: ConcertResolver }},
   { path: 'about', component: AboutComponent}
