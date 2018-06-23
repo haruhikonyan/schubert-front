@@ -23,7 +23,6 @@
     <input type="text" class="form-control" [(ngModel)]="concert.date" rows="2" name="date"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-    <timepicker [showMeridian]="false" [(ngModel)]="concert.date" name="date-time"></timepicker>
   </div>
 
   <div class="field">
@@ -33,5 +32,14 @@
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
     <timepicker [showMeridian]="false" [(ngModel)]="concert.doorsOpen" name="doors-open-time"></timepicker>
+  </div>
+
+  <div class="field">
+    <label>開演</label>
+    <!-- TODO スタイル調整 １行表示にするとか -->
+    <input type="text" class="form-control" [(ngModel)]="concert.cirtainTime" rows="2" name="cirtain-time"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+    <timepicker [showMeridian]="false" [(ngModel)]="concert.cirtainTime" name="cirtain-time-time"></timepicker>
   </div>
 </form>
