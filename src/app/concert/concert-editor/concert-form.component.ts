@@ -21,4 +21,13 @@ export class ConcertFormComponent implements OnInit {
 
   }
 
+  /**
+  * 開催日変更イベントハンドラ
+  * 開場、開演データの日時を合わせる
+  */
+  dateChangeHandler(value: Date) {
+    this.concert.cirtainTime = value;
+    this.concert.doorsOpen = value;
+  }
+
 }
