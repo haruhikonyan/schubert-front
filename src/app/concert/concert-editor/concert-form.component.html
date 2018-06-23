@@ -2,53 +2,36 @@
 <form #f="ngForm">
 
   <div class="field">
-    <label>募集タイトル</label>
-    <input class="form-control" placeholder="一緒にオーケストラで弾いてくれる弦楽器大募集！" [(ngModel)]="concert.title" rows="2" name="title">
+    <label>タイトル</label>
+    <input class="form-control" placeholder="はるの大演奏会" [(ngModel)]="concert.title" name="title">
   </div>
+
+  <div class="field">
+    <label>詳細</label>
+    <textarea class="form-control" placeholder="はるの大演奏会は毎年４月に演奏が行われる定期の演奏会です。始まりは古く、昭和６０年・・・" 
+      [(ngModel)]="concert.description" rows="5" name="description"></textarea>
+  </div>
+
   <ng-container *ngIf="concert?.team != null && concert.team.id == null">
     <app-team-form [team]="concert.team"></app-team-form>
   </ng-container>
-  <div class="field">
-    <label>練習場所</label>
-    <input class="form-control" placeholder="江東区、豊島区の公共施設" [(ngModel)]="concert.practicePlace" rows="2" name="practice-place">
-  </div>
+
 
   <div class="field">
-    <label>練習時間</label>
-    <input class="form-control" placeholder="日曜午前中心、本番前は午前午後" [(ngModel)]="concert.practiceTime" rows="2" name="practice-time">
-  </div>
-
-  <div class="field">
-    <label>募集楽器</label>
-    <ng-select [multiple]="true"
-      [items]="appService.ng2selectInstruments"
-      (selected)="instrumentSelected($event)"
-      (removed)="instrumentRemoved($event)"
-      [active]="appService.ng2selectConverter(concert.instruments)"
-      placeholder="募集楽器を選択してください">
-    </ng-select>
-  </div>
-
-  <div class="field">
-    <label>自由欄</label>
-    <textarea class="form-control" placeholder="一緒にシューベルトの曲をやりませんか？" [(ngModel)]="concert.description" rows="5" name="description"></textarea>
-  </div>
-
-  <div class="field">
-    <label>掲載開始期間</label>
+    <label>開催日</label>
     <!-- TODO スタイル調整 １行表示にするとか -->
-    <input type="text" class="form-control" [(ngModel)]="concert.publishedFrom" rows="2" name="published-from-date"
+    <input type="text" class="form-control" [(ngModel)]="concert.date" rows="2" name="date"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-    <timepicker [showMeridian]="false" [(ngModel)]="concert.publishedFrom" name="published-from-time"></timepicker>
+    <timepicker [showMeridian]="false" [(ngModel)]="concert.date" name="date-time"></timepicker>
   </div>
 
   <div class="field">
-    <label>掲載終了期間</label>
+    <label>開場</label>
     <!-- TODO スタイル調整 １行表示にするとか -->
-    <input type="text" class="form-control" [(ngModel)]="concert.publishedTo" rows="2" name="published-to-date"
+    <input type="text" class="form-control" [(ngModel)]="concert.doorsOpen" rows="2" name="doors-open"
       bsDatepicker
       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-    <timepicker [showMeridian]="false" [(ngModel)]="concert.publishedTo" name="published-to-time"></timepicker>
+    <timepicker [showMeridian]="false" [(ngModel)]="concert.doorsOpen" name="doors-open-time"></timepicker>
   </div>
 </form>
