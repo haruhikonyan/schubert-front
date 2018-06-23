@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { AppService } from './../app.service';
+import { CanonicalRoute } from './../app.model';
 
 @Component({
   selector: 'app-top',
@@ -7,10 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private appService: AppService
+  ) { }
+
+  canonicalRoutesForTop: CanonicalRoute[];
 
   ngOnInit() {
-    console.log('hoge');
+    if (this.appService.canonicalRoutes.length === 0 ) {
+      this.route.data.forEach((data: any) => {
+        this.appService.canonicalRoutes = data.canonicalRoutes;
+      });
+    }
+    this.canonicalRoutesForTop = this.appService.canonicalRoutes.filter((canonicalroute: CanonicalRoute) => {
+      return canonicalroute.isListedOnTop;
+    });
   }
 
 }

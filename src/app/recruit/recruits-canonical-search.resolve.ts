@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Recruit, SearchCondition } from './recruit.model';
 import { RecruitService } from './recruit.service';
 
-export class RecruitsResolver implements Resolve<Recruit[]> {
+export class RecruitsCanonicalSearchResolver implements Resolve<Recruit[]> {
 
   constructor(
     @Inject(forwardRef(() => Router)) private router: Router,
@@ -13,13 +13,9 @@ export class RecruitsResolver implements Resolve<Recruit[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Recruit[]> {
-    // パラメータを元にcondition作成
-    const condition: SearchCondition = new SearchCondition();
-    condition.typeIds = route.queryParams['typeIds'];
-    condition.instrumentIds = route.queryParams['instrumentIds'];
-    condition.freeWords = route.queryParams['freeWords'];
+    const canonicalModelName: string = route.params['canonicalModelName'];
+    const canonicalId: string = route.params['canonicalId'];
 
-    return this.recruitService.getRecruits(condition);
+    return this.recruitService.searchByCanonical(canonicalModelName, canonicalId);
   }
-
 }

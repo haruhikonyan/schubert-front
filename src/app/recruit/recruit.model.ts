@@ -35,6 +35,6 @@ export class SearchCondition {
   isPublished: boolean;
   typeIds: string;
   instrumentIds: string;
-  freeWord: string;
+  freeWords: string;
   // TODO 条件追加
 }

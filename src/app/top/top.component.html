@@ -2,3 +2,7 @@
 <p>Angular はじめました</p>
 <p>開発者大募集</p>
 <p>SSRできてんだぜ！</p>
+
+<div *ngFor="let canonicalRoute of canonicalRoutesForTop">
+  <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
+</div>

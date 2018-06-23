@@ -13,6 +13,7 @@ import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { CanonicalRoutesResolver } from './canonical-routes.resolve';
 import { TopComponent } from './top/top.component';
 import { RecruitsComponent } from './recruit/recruits.component';
 import { TeamsComponent } from './team/teams.component';
@@ -26,6 +27,7 @@ import { TeamResolver } from './team/team.resolve';
 import { TeamService } from './team/team.service';
 import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitResolver } from './recruit/recruit.resolve';
+import { RecruitsCanonicalSearchResolver } from './recruit/recruits-canonical-search.resolve';
 import { RecruitService } from './recruit/recruit.service';
 import { RecruitEditPageComponent } from './recruit/recruit-editor/recruit-edit-page.component';
 import { RecruitFormComponent } from './recruit/recruit-editor/recruit-form.component';
@@ -36,6 +38,7 @@ import { TeamNewPageComponent } from './team/team-editor/team-new-page.component
 import { TeamFormComponent } from './team/team-editor/team-form.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { AdminComponent } from './team/admin/admin.component';
+import { RecruitCanonicalHomeComponent } from './recruit/recruit-canonical-home/recruit-canonical-home.component';
 
 // configure angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -66,7 +69,8 @@ const AUTH_PROVIDERS = {
     TeamNewPageComponent,
     TeamFormComponent,
     TeamEditPageComponent,
-    AdminComponent
+    AdminComponent,
+    RecruitCanonicalHomeComponent
   ],
   imports: [
     AppRoutingModule,
@@ -89,6 +93,8 @@ const AUTH_PROVIDERS = {
     RecruitService,
     RecruitResolver,
     RecruitsResolver,
+    RecruitsCanonicalSearchResolver,
+    CanonicalRoutesResolver,
   ],
   bootstrap: [AppComponent]
 })
