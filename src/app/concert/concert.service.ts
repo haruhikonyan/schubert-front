@@ -24,10 +24,17 @@ export class ConcertService {
 
   getConcerts(): Observable<Concert[]> {
     const options: RequestOptions = this.generateBasicRequestOptions();
-    const params: URLSearchParams = new URLSearchParams();
 
     return this.http.get(this.endpointUrl, options)
                     .map((r: Response) => r.json() as Concert[]);
+  }
+
+  getConcert(id: number): Observable<Concert> {
+    const url: string = urljoin(this.endpointUrl, id);
+    const options: RequestOptions = this.generateBasicRequestOptions();
+
+    return this.http.get(url, options)
+                    .map((r: Response) => r.json() as Concert);
   }
 
   /**
