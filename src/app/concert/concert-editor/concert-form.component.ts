@@ -26,8 +26,10 @@ export class ConcertFormComponent implements OnInit {
   * 開場、開演データの日時を合わせる
   */
   dateChangeHandler(value: Date) {
-    this.concert.cirtainTime = value;
-    this.concert.doorsOpen = value;
+    // TODO 開催日の日付をベースに開場、開演データに設定されている時刻をセットしてやる
+    const baseDate: Date = new Date(value);
+    this.concert.cirtainTime = value; // new Date(baseDate.setHours(this.concert.cirtainTime.getHours()));
+    this.concert.doorsOpen = value; // new Date(baseDate.setHours(this.concert.doorsOpen.getHours()));
   }
 
 }
