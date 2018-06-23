@@ -37,6 +37,29 @@ export class ConcertService {
                     .map((r: Response) => r.json() as Concert);
   }
 
+  createConcert(concert: Concert): Observable<Concert> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+
+    return this.http.post(this.endpointUrl, {concert: Concert}, options)
+                    .map((r: Response) => r.json() as Concert);
+  }
+
+  editConcert(concert: Concert): Observable<Concert> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, concert.id);
+
+    return this.authHttp.put(url, {concert: Concert}, options)
+                    .map((r: Response) => r.json() as Concert);
+  }
+
+  deleteConcert(concert: Concert): Observable<Concert> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, concert.id);
+
+    return this.authHttp.delete(url, options)
+                    .map((r: Response) => r.json() as Concert);
+  }
+
   /**
    * このサービスで利用する基本の RequestOptions を作成する
    * @return {RequestOptions}
