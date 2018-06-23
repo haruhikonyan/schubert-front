@@ -16,18 +16,10 @@ export class ConcertDetailPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private concertService: ConcertService
-  ) {
-    // get params from route
-    const id: string = route.snapshot.params['id'];
-     // サービスメソッド呼び出し
-     this.concertService.getConcert(id)
-      .map((concert: Concert) => {
-        this.concert = concert;
-      })
-      .subscribe();
-  }
+  ) {}
 
   ngOnInit() {
+    this.concert = this.route.snapshot.data['concert'];
   }
 
 }

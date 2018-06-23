@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './top/top.component';
 import { CanonicalRoutesResolver } from './canonical-routes.resolve';
+import { ConcertResolver } from './concert/concert.resolve';
 import { RecruitResolver } from './recruit/recruit.resolve';
 import { RecruitsResolver } from './recruit/recruits.resolve';
 import { RecruitsCanonicalSearchResolver } from './recruit/recruits-canonical-search.resolve';
@@ -19,6 +20,7 @@ import { TeamNewPageComponent } from './team/team-editor/team-new-page.component
 import { AdminComponent } from './team/admin/admin.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { ConcertsPageComponent } from './concert/concerts-page.component';
+import { ConcertDetailPageComponent } from './concert/concert-detail-page.component';
 import { AboutComponent } from './about/about.component';
 
 
@@ -45,6 +47,8 @@ const routes: Routes = [
                                 resolve: { team: TeamResolver }},
   { path: 'teams/:teamId/admin', component: AdminComponent},
   { path: 'concerts', component: ConcertsPageComponent},
+  { path: 'concerts/:concertId', component: ConcertDetailPageComponent,
+                                 resolve: { concert: ConcertResolver }},
   { path: 'about', component: AboutComponent}
 ];
 
