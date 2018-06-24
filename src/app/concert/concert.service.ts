@@ -26,7 +26,16 @@ export class ConcertService {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Concert[]);
+                    .map((r: Response) => r.json() as Concert[])
+                    .map((concerts: Concert[]) => {
+                      // Date 型に変換する
+                      concerts.forEach((concert: Concert) => {
+                        concert.cirtainTime = new Date(concert.cirtainTime);
+                        concert.date = new Date(concert.date);
+                        concert.doorsOpen  = new Date(concert.doorsOpen);
+                      });
+                      return concerts;
+                    });
   }
 
   getConcert(id: string): Observable<Concert> {
@@ -34,7 +43,14 @@ export class ConcertService {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Concert);
+                    .map((r: Response) => r.json() as Concert)
+                    .map((concert: Concert) => {
+                      // Date型に変換する
+                      concert.cirtainTime = new Date(concert.cirtainTime);
+                      concert.date = new Date(concert.date);
+                      concert.doorsOpen  = new Date(concert.doorsOpen);
+                      return concert;
+                    });
   }
 
   createConcert(concert: Concert): Observable<Concert> {
