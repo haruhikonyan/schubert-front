@@ -11,7 +11,7 @@ export class Team {
   mail: string;
   url: string;
   description: string;
-  isPublished: boolean;
+  isPublished: boolean = false;
   types: Type[] = [];
   regions: Region[] = [];
 }
