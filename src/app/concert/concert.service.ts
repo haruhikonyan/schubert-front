@@ -26,7 +26,15 @@ export class ConcertService {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Concert[]);
+                    .map((r: Response) => r.json() as Concert[])
+                    .map((concerts: Concert[]) => {
+                      // Date 型に変換する
+                      concerts.forEach((concert: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(concert);
+                      });
+                      return concerts;
+                    });
   }
 
   getConcert(id: string): Observable<Concert> {
@@ -34,22 +42,37 @@ export class ConcertService {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
     return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Concert);
+                    .map((r: Response) => r.json() as Concert)
+                    .map((concert: Concert) => {
+                      // Date型に変換する
+                      this.convertToDate(concert);
+                      return concert;
+                    });
   }
 
   createConcert(concert: Concert): Observable<Concert> {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.post(this.endpointUrl, {concert: Concert}, options)
-                    .map((r: Response) => r.json() as Concert);
+    return this.http.post(this.endpointUrl, { concert }, options)
+                    .map((r: Response) => r.json() as Concert)
+                    .map((c: Concert) => {
+                      // Date型に変換する
+                      this.convertToDate(c);
+                      return c;
+                    });
   }
 
   editConcert(concert: Concert): Observable<Concert> {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.put(url, {concert: Concert}, options)
-                    .map((r: Response) => r.json() as Concert);
+    return this.authHttp.put(url, { concert }, options)
+                    .map((r: Response) => r.json() as Concert)
+                    .map((c: Concert) => {
+                      // Date型に変換する
+                      this.convertToDate(c);
+                      return c;
+                    });;
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
@@ -66,6 +89,19 @@ export class ConcertService {
    */
   private generateBasicRequestOptions(): RequestOptions {
     return new RequestOptions({ withCredentials: true });
+  }
+
+  /**
+   * Concertモデルの日付データをDate型に変換する
+   *
+   * @private
+   * @param {Concert} concert
+   * @memberof ConcertService
+   */
+  private convertToDate(concert: Concert) {
+    concert.cirtainTime = new Date(concert.cirtainTime);
+    concert.date = new Date(concert.date);
+    concert.doorsOpen  = new Date(concert.doorsOpen);
   }
 
 }
