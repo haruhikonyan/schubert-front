@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
 import { TeamService } from './../../team/team.service';
 import { Team } from '../../team/team.model';
 import { RecruitService } from './../../recruit/recruit.service';
 import { Recruit } from './../../recruit/recruit.model';
+import { ConcertService } from './../../concert/concert.service';
+import { Concert } from './../../concert/concert.model';
 
 @Component({
   selector: 'app-admin',
@@ -16,11 +17,13 @@ export class AdminComponent implements OnInit {
 
   team: Team;
   recruits: Recruit[];
+  concerts: Concert[];
 
   constructor(
     private route: ActivatedRoute,
     private teamService: TeamService,
     private recruitService: RecruitService,
+    private concertService: ConcertService,
   ) { }
 
 
@@ -35,6 +38,12 @@ export class AdminComponent implements OnInit {
     this.recruitService.getRecruitsByTeam(teamId)
       .map((recruits: Recruit[]) => {
         this.recruits = recruits;
+      })
+      .subscribe();
+
+    this.concertService.getConcertsByTeam(teamId)
+      .map((concerts: Concert[]) => {
+        this.concerts = concerts;
       })
       .subscribe();
 
