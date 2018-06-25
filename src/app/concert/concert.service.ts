@@ -88,7 +88,7 @@ export class ConcertService {
                       // Date型に変換する
                       this.convertToDate(c);
                       return c;
-                    });;
+                    });
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
