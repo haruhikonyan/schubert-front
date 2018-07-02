@@ -17,6 +17,8 @@ export class InstrumentsComponent implements OnInit {
   // 募集楽器のリスト
   @Input()
   instruments: Instrument[];
+  @Input()
+  displayShortName: boolean = false;
 
   // 募集楽器をカテゴリgroupingしたデータ
   instrumentsGroupByCategory: any = {};
@@ -27,9 +29,11 @@ export class InstrumentsComponent implements OnInit {
 
   ngOnInit() {
     // カテゴリ別に募集楽器をグルーピングする
+    // 楽器名を短縮表示させる場合は displayShortName を true にする。（default は false）
     this.instruments.forEach((val: Instrument, index: number, array: Instrument[]) => {
       const data: string[] = this.instrumentsGroupByCategory[val.instrumentCategory.name] || [];
-      this.instrumentsGroupByCategory[val.instrumentCategory.name] = data.concat(val.name);
+      const instrumentName = (this.displayShortName ? val.shortName : val.name);
+      this.instrumentsGroupByCategory[val.instrumentCategory.name] = data.concat(instrumentName);
     });
   }
 

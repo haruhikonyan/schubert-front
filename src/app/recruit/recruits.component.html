@@ -52,13 +52,7 @@
       <div>練習場所:{{recruit.practicePlace}}</div>
       <div>練習時間:{{recruit.practiceTime}}</div>
       <div>募集楽器:
-        <!-- <app-instruments [instruments]="recruit.instruments"></app-instruments> -->
-        <div *ngFor="let ic of appService.instrumentCategories">
-          <span *ngFor="let instrument of filteredInsturmentsByCategory(recruit.instruments, ic); first as isFirst">
-            <span *ngIf="isFirst">{{ic.name}}</span>
-            <span class="badge badge-default">{{instrument.shortName}}</span>
-          </span>
-        </div>
+        <app-instruments [instruments]="recruit.instruments" [displayShortName]="true"></app-instruments>
       </div>
     </div>
   </a>
