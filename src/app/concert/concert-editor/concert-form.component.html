@@ -13,9 +13,9 @@
   </div>
 
   <div class="field">
-    <label>団体</label>
-    <select [(ngModel)]="concert.team" name="team">
-      <option>未選択</option>
+    <label class="d-block">団体</label>
+    <select [compareWith]="compareFunc" [(ngModel)]="concert.team" name="team">
+      <option value="" disabled>未選択</option>
       <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}</option>
     </select>
   </div>

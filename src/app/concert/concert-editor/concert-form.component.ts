@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Concert } from './../concert.model';
+import { Team } from '../../team/team.model';
 import { AppService } from './../../app.service';
 import { TeamService } from '../../team/team.service';
-import { Team } from '../../team/team.model';
 
 @Component({
   selector: 'app-concert-form',
@@ -30,6 +30,18 @@ export class ConcertFormComponent implements OnInit {
       })
       .subscribe();
   }
+
+  /**
+   * selectタグのデータ比較を行う
+   *
+   * @param {Team} t1
+   * @param {Team} t2
+   * @returns {boolean}
+   * @memberof ConcertFormComponent
+   */
+  compareFunc(t1: Team, t2: Team): boolean {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
+}
 
   /**
   * 開催日変更イベントハンドラ
