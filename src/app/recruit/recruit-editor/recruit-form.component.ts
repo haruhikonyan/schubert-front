@@ -1,9 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppService } from './../../app.service';
 import { Recruit } from '../recruit.model';
 import { Instrument } from '../../app.model';
+import { ConcertService } from './../../concert/concert.service';
+import { Concert } from '../../concert/concert.model';
 
 @Component({
   selector: 'app-recruit-form',
@@ -14,7 +17,11 @@ export class RecruitFormComponent implements OnInit {
 
   @Input()
   recruit: Recruit;
+
+  @Input()
+  concerts: Concert[] = [];
   constructor(
+    private route: ActivatedRoute,
     public appService: AppService
   ) { }
 

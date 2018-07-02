@@ -5,6 +5,8 @@ import { TeamService } from './../../team/team.service';
 import { RecruitService } from './../recruit.service';
 import { Recruit } from '../recruit.model';
 import { Team } from '../../team/team.model';
+import { ConcertService } from './../../concert/concert.service';
+import { Concert } from './../../concert/concert.model';
 
 @Component({
   selector: 'app-recruit-new-page',
@@ -14,6 +16,7 @@ import { Team } from '../../team/team.model';
 export class RecruitNewPageComponent implements OnInit {
 
   recruit: Recruit;
+  concerts: Concert[] = [];
 
   title: string;
 
@@ -21,7 +24,8 @@ export class RecruitNewPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private recruitService: RecruitService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private concertService: ConcertService
   ) { }
 
   ngOnInit() {
@@ -36,6 +40,11 @@ export class RecruitNewPageComponent implements OnInit {
         .map((team: Team) => {
           this.recruit.team = team;
           this.title = `${this.recruit.team.name}の団員募集新規作成`;
+        })
+        .subscribe();
+      this.concertService.getConcertsByTeam(teamId)
+        .map((concerts: Concert[]) => {
+          this.concerts = concerts;
         })
         .subscribe();
     }

@@ -3,7 +3,7 @@
   <h1>団員募集編集</h1>
   <a *ngIf="recruit?.team != null && recruit.team.id != null && recruit.team.isPublished" [routerLink]="['/teams', recruit.team.id, 'edit']">団体情報を編集する</a>
 
-  <app-recruit-form [recruit]="recruit"></app-recruit-form>
+  <app-recruit-form [recruit]="recruit" [concerts]="concerts"></app-recruit-form>
 
 
   <div class="actions">
