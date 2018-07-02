@@ -5,7 +5,7 @@
     <label>募集タイトル</label>
     <input class="form-control" placeholder="一緒にオーケストラで弾いてくれる弦楽器大募集！" [(ngModel)]="recruit.title" rows="2" name="title">
   </div>
-  <ng-container *ngIf="recruit?.team != null && recruit.team.id == null || !recruit.team.isPublished">
+  <ng-container *ngIf="recruit.team != null && (recruit.team.id == null || !recruit.team.isPublished)">
     <app-team-form [team]="recruit.team"></app-team-form>
   </ng-container>
   <div class="field">
@@ -27,6 +27,14 @@
       [active]="appService.ng2selectConverter(recruit.instruments)"
       placeholder="募集楽器を選択してください">
     </ng-select>
+  </div>
+
+  <div class="field" *ngIf="recruit.team?.id != null">
+    <label>募集演奏会</label>
+    <select [(ngModel)]="recruit.concert" name="concert" class="form-control">
+      <option [ngValue]="undefined">選択なし</option>
+      <option *ngFor="let concert of concerts" [ngValue]="concert" [selected]="concert.id === recruit.concert?.id">{{concert.title}}</option>
+    </select>
   </div>
 
   <div class="field">

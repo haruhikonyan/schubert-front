@@ -4,6 +4,9 @@
 <!-- TODO 募集終わったやつと募集中のやつの出し分けとかしたい 今は全部 -->
 <p>募集したことのあるの団員募集</p>
 <p *ngFor="let recruit of recruits"><a [routerLink]="['/recruits', recruit.id]">{{recruit.title}}</a></p>
+<!-- TODO 演奏会終わったやつとまだのやつの出し分けとかしたい 今は全部 -->
+<p>宣伝したことのある演奏会</p>
+<p *ngFor="let concert of concerts"><a [routerLink]="['/concerts', concert.id]">{{concert.title}}</a></p>
 <div><a [routerLink]="['/recruits/new']" [queryParams]='{ teamId: team?.id}'>新しく団員募集を出す</a></div>
 <div><a [routerLink]="['./']">団体のパスワードを変更する(TBD)</a></div>
 <div><a [routerLink]="['../']">戻る</a></div>

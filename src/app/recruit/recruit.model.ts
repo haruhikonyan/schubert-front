@@ -1,5 +1,6 @@
 import { Team } from '../team/team.model';
 import { Instrument } from '../app.model';
+import { Concert } from './../concert/concert.model';
 
 
 /**
@@ -15,6 +16,7 @@ export class Recruit {
   publishedTo: Date = new Date();
   team: Team;
   instruments: Instrument[] = [];
+  concert: Concert;
   constructor() {
     // date-fns とか使ったらもっとスマートにできるかも？
     // 初期値は現在の日付かつ時間は０時０分０秒にしたい

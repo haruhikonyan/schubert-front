@@ -37,6 +37,22 @@ export class ConcertService {
                     });
   }
 
+  getConcertsByTeam(teamId: string): Observable<Concert[]> {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const url: string = urljoin(this.endpointUrl, 'team', teamId);
+
+    return this.http.get(this.endpointUrl, options)
+                    .map((r: Response) => r.json() as Concert[])
+                    .map((concerts: Concert[]) => {
+                      // Date 型に変換する
+                      concerts.forEach((concert: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(concert);
+                      });
+                      return concerts;
+                    });
+  }
+
   getConcert(id: string): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, id);
     const options: RequestOptions = this.generateBasicRequestOptions();
@@ -72,7 +88,7 @@ export class ConcertService {
                       // Date型に変換する
                       this.convertToDate(c);
                       return c;
-                    });;
+                    });
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
