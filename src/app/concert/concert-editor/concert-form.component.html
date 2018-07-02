@@ -8,14 +8,17 @@
 
   <div class="field">
     <label>詳細</label>
-    <textarea class="form-control" placeholder="はるの大演奏会は毎年４月に演奏が行われる定期の演奏会です。始まりは古く、昭和６０年・・・" 
+    <textarea class="form-control" placeholder="はるの大演奏会は毎年４月に演奏が行われる定期の演奏会です。始まりは古く、昭和６０年・・・"
       [(ngModel)]="concert.description" rows="5" name="description"></textarea>
   </div>
 
-  <ng-container *ngIf="concert?.team != null && concert.team.id == null">
-    <app-team-form [team]="concert.team"></app-team-form>
-  </ng-container>
-
+  <div class="field">
+    <label>団体</label>
+    <select [(ngModel)]="concert.team" name="team">
+      <option>未選択</option>
+      <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}</option>
+    </select>
+  </div>
 
   <div class="field">
     <label>開催日</label>

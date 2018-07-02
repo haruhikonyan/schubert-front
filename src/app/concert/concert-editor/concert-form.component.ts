@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AppService } from './../../app.service';
 import { Concert } from './../concert.model';
+import { AppService } from './../../app.service';
+import { TeamService } from '../../team/team.service';
+import { Team } from '../../team/team.model';
 
 @Component({
   selector: 'app-concert-form',
@@ -13,12 +15,20 @@ export class ConcertFormComponent implements OnInit {
 
   @Input()
   concert: Concert;
+
+  teams: Team[];
+
   constructor(
-    public appService: AppService
+    public appService: AppService,
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {
-
+    this.teamService.getTeams()
+      .map((teams: Team[]) => {
+        this.teams = teams;
+      })
+      .subscribe();
   }
 
   /**
