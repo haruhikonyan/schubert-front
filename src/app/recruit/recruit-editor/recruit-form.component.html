@@ -32,8 +32,8 @@
   <div class="field" *ngIf="recruit.team?.id != null">
     <label>募集演奏会</label>
     <select [(ngModel)]="recruit.concert" name="concert" class="form-control">
-      <option *ngIf="recruit.concert == null" [ngValue]="null">団員募集に演奏会情報を紐づけることができます</option>
-      <option *ngFor="let concert of concerts" [ngValue]="concert.id" [selected]="content?.id === recruit?.content?.id">{{concert.title}}</option>
+      <option [ngValue]="undefined">選択なし</option>
+      <option *ngFor="let concert of concerts" [ngValue]="concert" [selected]="concert.id === recruit.concert?.id">{{concert.title}}</option>
     </select>
   </div>
 
