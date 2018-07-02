@@ -28,8 +28,8 @@ export class InstrumentsComponent implements OnInit {
   ngOnInit() {
     // カテゴリ別に募集楽器をグルーピングする
     this.instruments.forEach((val: Instrument, index: number, array: Instrument[]) => {
-      const datas: string[] = this.instrumentsGroupByCategory[val.instrumentCategory.name] || [];
-      this.instrumentsGroupByCategory[val.instrumentCategory.name] = datas.concat(val.name);
+      const data: string[] = this.instrumentsGroupByCategory[val.instrumentCategory.name] || [];
+      this.instrumentsGroupByCategory[val.instrumentCategory.name] = data.concat(val.name);
     });
   }
 
