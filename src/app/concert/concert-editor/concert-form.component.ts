@@ -2,9 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Concert, Hole } from './../concert.model';
-import { Team } from '../../team/team.model';
 import { AppService } from './../../app.service';
-import { TeamService } from '../../team/team.service';
 
 @Component({
   selector: 'app-concert-form',
@@ -16,26 +14,18 @@ export class ConcertFormComponent implements OnInit {
   @Input()
   concert: Concert;
 
-  teams: Team[];
-
   constructor(
     public appService: AppService,
-    private teamService: TeamService
   ) { }
 
   ngOnInit() {
-    this.teamService.getTeams()
-      .map((teams: Team[]) => {
-        this.teams = teams;
-      })
-      .subscribe();
   }
 
   /**
    * selectタグのデータ比較を行う
    *
-   * @param {Team} t1
-   * @param {Team} t2
+   * @param {any} t1
+   * @param {any} t2
    * @returns {boolean}
    * @memberof ConcertFormComponent
    */

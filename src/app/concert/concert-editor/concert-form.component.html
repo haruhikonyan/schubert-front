@@ -13,14 +13,6 @@
   </div>
 
   <div class="field">
-    <label class="d-block">団体</label>
-    <select [compareWith]="compareFunc" [(ngModel)]="concert.team" name="team">
-      <option value="" disabled>未選択</option>
-      <option *ngFor="let team of teams" [ngValue]="team">{{team.name}}</option>
-    </select>
-  </div>
-
-  <div class="field">
       <label class="d-block">会場</label>
       <select [compareWith]="compareFunc" [(ngModel)]="concert.hole" name="hole">
         <option value="" disabled>未選択</option>
