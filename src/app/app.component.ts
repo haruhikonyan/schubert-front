@@ -18,5 +18,6 @@ export class AppComponent implements OnInit {
     this.appServise.getInstruments();
     this.appServise.getInstrumentCategories();
     this.appServise.getRegions();
+    this.appServise.getHoles();
   }
 }

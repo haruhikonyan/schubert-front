@@ -8,6 +8,7 @@ import * as urljoin from 'url-join';
 
 import { environment } from '../environments/environment';
 import { Type, Instrument, InstrumentCategory, Region, CanonicalRoute } from './app.model';
+import { Hole } from './concert/concert.model';
 
 
 @Injectable()
@@ -21,6 +22,7 @@ export class AppService {
   instruments: Instrument[] = [];
   instrumentCategories: InstrumentCategory[] = [];
   regions: Region[] = [];
+  holes: Hole[];
 
   canonicalRoutes: CanonicalRoute[] = [];
 
@@ -65,6 +67,16 @@ export class AppService {
     this.http.get(endpointUrl, options)
              .map((r: Response) => r.json() as Region[])
              .map((regions: Region[]) => this.regions = regions)
+             .subscribe();
+  }
+
+  getHoles(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/holes');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Hole[])
+             .map((holes: Hole[]) => this.holes = holes)
              .subscribe();
   }
 

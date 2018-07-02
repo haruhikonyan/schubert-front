@@ -21,6 +21,14 @@
   </div>
 
   <div class="field">
+      <label class="d-block">会場</label>
+      <select [compareWith]="compareFunc" [(ngModel)]="concert.hole" name="hole">
+        <option value="" disabled>未選択</option>
+        <option *ngFor="let hole of appService.holes" [ngValue]="hole">{{hole.name}}</option>
+      </select>
+    </div>
+
+  <div class="field">
     <label>開催日</label>
     <!-- TODO スタイル調整 １行表示にするとか -->
     <input type="text" class="form-control" [(ngModel)]="concert.date" (bsValueChange)="dateChangeHandler($event)"

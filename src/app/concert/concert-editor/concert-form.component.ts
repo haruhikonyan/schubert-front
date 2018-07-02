@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Concert } from './../concert.model';
+import { Concert, Hole } from './../concert.model';
 import { Team } from '../../team/team.model';
 import { AppService } from './../../app.service';
 import { TeamService } from '../../team/team.service';
@@ -39,8 +39,8 @@ export class ConcertFormComponent implements OnInit {
    * @returns {boolean}
    * @memberof ConcertFormComponent
    */
-  compareFunc(t1: Team, t2: Team): boolean {
-    return t1 && t2 ? t1.id === t2.id : t1 === t2;
+  compareFunc(data1: any, data2: any): boolean {
+    return data1 && data2 ? data1.id === data2.id : data1 === data2;
 }
 
   /**
