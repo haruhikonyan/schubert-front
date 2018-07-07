@@ -89,7 +89,16 @@
     </div>
   </div>
 
-  <div *ngFor="let canonicalRoute of canonicalRoutesForTop">
-    <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>団員募集を探す</h4>
+
+      <div *ngFor="let canonicalRoute of canonicalRoutesForTop">
+        <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>演奏会を探す</h4>
+    </div>
   </div>
 </div>
