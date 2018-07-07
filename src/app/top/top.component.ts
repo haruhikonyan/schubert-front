@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AppService } from './../app.service';
 import { CanonicalRoute } from './../app.model';
+import { SearchCondition } from './../recruit/recruit.model';
+import { RecruitService } from './../recruit/recruit.service';
 
 @Component({
   selector: 'app-top',
@@ -13,10 +15,12 @@ export class TopComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private appService: AppService
+    private appService: AppService,
+    private recruitService: RecruitService
   ) { }
 
   canonicalRoutesForTop: CanonicalRoute[];
+  condition: SearchCondition = new SearchCondition();
 
   ngOnInit() {
     if (this.appService.canonicalRoutes.length === 0 ) {
@@ -28,5 +32,22 @@ export class TopComponent implements OnInit {
       return canonicalroute.isListedOnTop;
     });
   }
-
+  /**
+   * 団員募集検索ボタンクリックハンドラ
+   *
+   * @memberof RecruitsComponent
+   */
+  searchRecruitBtnClickHandler(): void {
+    console.log(this.condition.freeWords);
+    // TODO 実装
+  }
+  /**
+   * 演奏会検索ボタンクリックハンドラ
+   *
+   * @memberof RecruitsComponent
+   */
+  searchConcertBtnClickHandler(): void {
+    console.log(this.condition.freeWords);
+    // TODO 実装
+  }
 }
