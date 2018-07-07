@@ -21,6 +21,74 @@
     </div>
   </div>
 
+  <h3>新着団員募集</h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let nr of newRecruits">
+      <!-- TODO カードをコンポーネント化する -->
+      <a [routerLink]="['./recruits', nr.id]" style="text-decoration:none;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{nr.title}}
+          </div>
+          <div class="panel-body">
+            <div>{{nr.team.name}}</div>
+            <div>練習場所:{{nr.practicePlace}}</div>
+            <div>練習時間:{{nr.practiceTime}}</div>
+            <div>募集楽器:
+              <div class="col-sm-offset-1">
+                <app-instruments [instruments]="nr.instruments" [displayShortName]="true"></app-instruments>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <h3>演奏会アクセスランキング</h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let hc of hotConcerts">
+      <!-- TODO カードをコンポーネント化する -->
+      <a [routerLink]="['./concerts', hc.id]" style="text-decoration:none;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{hc.title}}
+          </div>
+          <div class="panel-body">
+            <div>指揮者：{{hc.conductors[0].name}}</div>
+            <div>日時:{{hc.date | date:"yyyy/MM/dd"}}</div>
+            <div>場所:{{hc.hole.name}}</div>
+            <div>
+              {{hc.repertoires[0].tune.composer.displayName}}<br>
+              {{hc.repertoires[0].tune.title}}
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <h3>間近の演奏会</h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let nc of nearestConcerts">
+      <!-- TODO カードをコンポーネント化する -->
+      <a [routerLink]="['./concerts', nc.id]" style="text-decoration:none;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{nc.title}}
+          </div>
+          <div class="panel-body">
+            <div>指揮者：{{nc.conductors[0].name}}</div>
+            <div>日時:{{nc.date | date:"yyyy/MM/dd"}}</div>
+            <div>場所:{{nc.hole.name}}</div>
+            <div>
+              {{nc.repertoires[0].tune.composer.displayName}}<br>
+              {{nc.repertoires[0].tune.title}}
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
   <div *ngFor="let canonicalRoute of canonicalRoutesForTop">
     <a [routerLink]="['./recruits/cr', canonicalRoute.canonicalModelName, canonicalRoute.canonicalId]">{{canonicalRoute.label}}の募集</a>
   </div>

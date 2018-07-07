@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AppService } from './../app.service';
 import { CanonicalRoute } from './../app.model';
-import { SearchCondition } from './../recruit/recruit.model';
+import { SearchCondition, Recruit } from './../recruit/recruit.model';
 import { RecruitService } from './../recruit/recruit.service';
+import { ConcertService } from './../concert/concert.service';
+import { Concert } from './../concert/concert.model';
 
 @Component({
   selector: 'app-top',
@@ -16,11 +18,16 @@ export class TopComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private appService: AppService,
-    private recruitService: RecruitService
+    private recruitService: RecruitService,
+    private concertService: ConcertService
   ) { }
 
   canonicalRoutesForTop: CanonicalRoute[];
   condition: SearchCondition = new SearchCondition();
+
+  newRecruits: Recruit[] = [];
+  hotConcerts: Concert[] = [];
+  nearestConcerts: Concert[] = [];
 
   ngOnInit() {
     if (this.appService.canonicalRoutes.length === 0 ) {
@@ -31,6 +38,21 @@ export class TopComponent implements OnInit {
     this.canonicalRoutesForTop = this.appService.canonicalRoutes.filter((canonicalroute: CanonicalRoute) => {
       return canonicalroute.isListedOnTop;
     });
+
+    // TODO ちゃんとしたメソッドで取得する
+    this.recruitService.getRecruits()
+      .map((recruits: Recruit[]) => {
+        this.newRecruits = recruits.slice(0, 3);
+      })
+      .subscribe();
+
+    // TODO ちゃんとしたメソッドで取得する
+    this.concertService.getConcerts()
+      .map((concerts: Concert[]) => {
+        this.hotConcerts = concerts.slice(0, 3);
+        this.nearestConcerts = concerts.slice(0, 3);
+      })
+      .subscribe();
   }
   /**
    * 団員募集検索ボタンクリックハンドラ
