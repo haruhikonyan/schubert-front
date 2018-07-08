@@ -41,7 +41,7 @@ export class ConcertService {
     const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.http.get(this.endpointUrl, options)
+    return this.authHttp.get(url, options)
                     .map((r: Response) => r.json() as Concert[])
                     .map((concerts: Concert[]) => {
                       // Date 型に変換する
