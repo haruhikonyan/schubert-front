@@ -24,7 +24,7 @@
     <label>開催日</label>
     <!-- TODO スタイル調整 １行表示にするとか -->
     <input type="text" class="form-control" [(ngModel)]="concert.date" (bsValueChange)="dateChangeHandler($event)"
-      rows="2" name="date" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+      rows="2" name="date" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" autocomplete="off">
   </div>
 
   <div class="field">

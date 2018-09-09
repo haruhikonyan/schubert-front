@@ -25,4 +25,11 @@ export class ConcertNewPageComponent implements OnInit {
     this.concert = new Concert();
   }
 
+  createConcertButtonClickHander(): void {
+    this.concertService.createConcert(this.concert)
+      .subscribe((concert: Concert) => {
+        this.router.navigate(['concert', concert.id]);
+      });
+  }
+
 }
