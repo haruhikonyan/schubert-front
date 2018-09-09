@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Concert, Hole } from './../concert.model';
+import { Concert, Hole, Conductor } from './../concert.model';
 import { AppService } from './../../app.service';
 
 @Component({
@@ -44,4 +44,12 @@ export class ConcertFormComponent implements OnInit {
     this.concert.doorsOpen = new Date(baseDate.setHours(this.concert.doorsOpen.getHours(), this.concert.doorsOpen.getMinutes()));
   }
 
+
+  conductorSelectHandler(conductorId: string, index: number) {
+    this.concert.conductors[index] = this.appService.conductors.find(c => c.id === Number(conductorId));
+  }
+
+  addConductorHandler() {
+    this.concert.conductors.push(new Conductor());
+  }
 }

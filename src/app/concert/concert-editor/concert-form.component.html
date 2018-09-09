@@ -13,12 +13,12 @@
   </div>
 
   <div class="field">
-      <label class="d-block">会場</label>
-      <select [compareWith]="compareFunc" [(ngModel)]="concert.hole" name="hole">
-        <option value="" disabled>未選択</option>
-        <option *ngFor="let hole of appService.holes" [ngValue]="hole">{{hole.name}}</option>
-      </select>
-    </div>
+    <label class="d-block">会場</label>
+    <select [compareWith]="compareFunc" [(ngModel)]="concert.hole" name="hole">
+      <option value="" disabled>未選択</option>
+      <option *ngFor="let hole of appService.holes" [ngValue]="hole">{{hole.name}}</option>
+    </select>
+  </div>
 
   <div class="field">
     <label>開催日</label>
@@ -37,3 +37,15 @@
     <timepicker [showMeridian]="false" [(ngModel)]="concert.cirtainTime" name="cirtain-time-time"></timepicker>
   </div>
 </form>
+
+<div class="field">
+  <label class="d-block">指揮者</label>
+  <ng-container *ngFor="let conductor of concert.conductors; index as i">
+    <select (change)="conductorSelectHandler($event.target.value, i)">
+      <option value="" disabled>未選択</option>
+      <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
+    </select>
+  </ng-container>
+  <span class="btn btn-primary" (click)="addConductorHandler()">指揮者追加</span>
+</div>
+{{concert.conductors[0].name}}
