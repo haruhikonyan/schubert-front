@@ -52,4 +52,8 @@ export class ConcertFormComponent implements OnInit {
   addConductorHandler() {
     this.concert.conductors.push(new Conductor());
   }
+
+  deleteConductorHandler(index: number) {
+    this.concert.conductors.splice(index, 1);
+  }
 }

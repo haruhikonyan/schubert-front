@@ -40,12 +40,12 @@
 
 <div class="field">
   <label class="d-block">指揮者</label>
-  <ng-container *ngFor="let conductor of concert.conductors; index as i">
+  <div *ngFor="let conductor of concert.conductors; index as i">
     <select (change)="conductorSelectHandler($event.target.value, i)">
       <option value="" disabled>未選択</option>
       <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
     </select>
-  </ng-container>
+    <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteConductorHandler(i)">指揮者削除</span>
+  </div>
   <span class="btn btn-primary" (click)="addConductorHandler()">指揮者追加</span>
 </div>
-{{concert.conductors[0].name}}
