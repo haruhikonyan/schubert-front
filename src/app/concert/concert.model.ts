@@ -13,8 +13,8 @@ export class Concert {
   description: string;
   team: Team;
   hole: Hole;
-  conductors: Conductor[] = [];
-  repertoires: Repertoire[] = [];
+  conductors: Conductor[] = [new Conductor()];
+  repertoires: Repertoire[] = [new Repertoire()];
 }
 
 /**
@@ -46,8 +46,8 @@ export class Repertoire {
   id: number;
   arranger: string;
   description: string;
-  tune: Tune;
-  solists: Solist[] = [];
+  tune: Tune = new Tune();
+  solists: Solist[];
 }
 
 /**

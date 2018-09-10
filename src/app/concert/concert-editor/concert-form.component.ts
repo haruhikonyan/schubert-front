@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Concert, Hole, Conductor } from './../concert.model';
+import { Concert, Hole, Conductor, Repertoire } from './../concert.model';
 import { AppService } from './../../app.service';
 
 @Component({
@@ -55,5 +55,13 @@ export class ConcertFormComponent implements OnInit {
 
   deleteConductorHandler(index: number) {
     this.concert.conductors.splice(index, 1);
+  }
+
+  addRepertoireHandler() {
+    this.concert.repertoires.push(new Repertoire());
+  }
+
+  deleteRepertoireHandler(index: number) {
+    this.concert.repertoires.splice(index, 1);
   }
 }

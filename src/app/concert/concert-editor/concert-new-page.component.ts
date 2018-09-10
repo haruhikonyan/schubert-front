@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Concert, Conductor, Repertoire } from './../concert.model';
+import { Concert, Conductor, Repertoire, Tune } from './../concert.model';
 import { ConcertService } from './../concert.service';
 
 @Component({
@@ -23,8 +23,6 @@ export class ConcertNewPageComponent implements OnInit {
 
   ngOnInit() {
     this.concert = new Concert();
-    this.concert.conductors.push(new Conductor());
-    this.concert.repertoires.push(new Repertoire());
   }
 
   createConcertButtonClickHander(): void {

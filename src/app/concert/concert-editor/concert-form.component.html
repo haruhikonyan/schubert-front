@@ -36,16 +36,28 @@
     <label>開演時間</label>
     <timepicker [showMeridian]="false" [(ngModel)]="concert.cirtainTime" name="cirtain-time-time"></timepicker>
   </div>
-</form>
 
-<div class="field">
-  <label class="d-block">指揮者</label>
-  <div *ngFor="let conductor of concert.conductors; index as i">
-    <select (change)="conductorSelectHandler($event.target.value, i)">
-      <option value="" disabled>未選択</option>
-      <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
-    </select>
-    <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteConductorHandler(i)">指揮者削除</span>
+  <div class="field">
+    <label class="d-block">指揮者</label>
+    <div *ngFor="let conductor of concert.conductors; index as i">
+      <select (change)="conductorSelectHandler($event.target.value, i)">
+        <option value="" disabled>未選択</option>
+        <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
+      </select>
+      <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteConductorHandler(i)">指揮者削除</span>
+    </div>
+    <span class="btn btn-primary" (click)="addConductorHandler()">指揮者追加</span>
   </div>
-  <span class="btn btn-primary" (click)="addConductorHandler()">指揮者追加</span>
-</div>
+
+  <div class="field">
+    <label class="d-block">曲目</label>
+    <div *ngFor="let repertoire of concert.repertoires; index as i">
+      <select (change)="repertoireSelectHandler($event.target.value, i)">
+        <option value="" disabled>未選択</option>
+        <option *ngFor="let tune of appService.tunes" [value]="tune.id" [selected]="tune.id === repertoire.tune.id">{{tune.composer.displayName}}:{{tune.title}}</option>
+      </select>
+      <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteRepertoireHandler(i)">曲目削除</span>
+    </div>
+    <span class="btn btn-primary" (click)="addRepertoireHandler()">曲目追加</span>
+  </div>
+</form>
