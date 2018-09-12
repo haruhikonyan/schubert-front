@@ -8,8 +8,8 @@ export class Concert {
   id: string;
   title: string;
   date: Date;
-  doorsOpen: Date;
-  cirtainTime: Date;
+  doorsOpen: Date = new Date();
+  cirtainTime: Date = new Date();
   description: string;
   team: Team;
   hole: Hole;
