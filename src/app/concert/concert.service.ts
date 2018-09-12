@@ -69,7 +69,7 @@ export class ConcertService {
   createConcert(concert: Concert): Observable<Concert> {
     const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.post(this.endpointUrl, { concert }, options)
+    return this.authHttp.post(this.endpointUrl, { concert }, options)
                     .map((r: Response) => r.json() as Concert)
                     .map((c: Concert) => {
                       // Date型に変換する

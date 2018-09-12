@@ -1,6 +1,10 @@
 <!-- TODO エラーあったら flash message を出す -->
 <form #f="ngForm">
 
+  <ng-container *ngIf="concert.team != null && (concert.team.id == null || !concert.team.isPublished)">
+    <app-team-form [team]="concert.team"></app-team-form>
+  </ng-container>
+
   <div class="field">
     <label>タイトル</label>
     <input class="form-control" placeholder="はるの大演奏会" [(ngModel)]="concert.title" name="title">
@@ -44,20 +48,27 @@
         <option value="" disabled>未選択</option>
         <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
       </select>
-      <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteConductorHandler(i)">指揮者削除</span>
+      <span *ngIf="i !== 0" class="btn btn-danger btn-xs" (click)="deleteConductorHandler(i)">指揮者削除</span>
     </div>
-    <span class="btn btn-primary" (click)="addConductorHandler()">指揮者追加</span>
+    <span class="btn btn-primary btn-xs" (click)="addConductorHandler()">指揮者追加</span>
   </div>
 
   <div class="field">
     <label class="d-block">曲目</label>
-    <div *ngFor="let repertoire of concert.repertoires; index as i">
-      <select (change)="repertoireSelectHandler($event.target.value, i)">
+    <div *ngFor="let repertoire of concert.repertoires; index as repertoireIndex">
+      <select (change)="tuneSelectHandler($event.target.value, repertoireIndex)">
         <option value="" disabled>未選択</option>
         <option *ngFor="let tune of appService.tunes" [value]="tune.id" [selected]="tune.id === repertoire.tune.id">{{tune.composer.displayName}}:{{tune.title}}</option>
       </select>
-      <span *ngIf="i !== 0" class="btn btn-danger" (click)="deleteRepertoireHandler(i)">曲目削除</span>
+      <div *ngFor="let solist of repertoire.solists; index as solistIndex">
+        <select (change)="solistSelectHandler($event.target.value, repertoireIndex ,solistIndex)">
+          <option value="" disabled>未選択</option>
+          <option *ngFor="let solist of appService.solists" [value]="solist.id" [selected]="solist.id === repertoire.solists[solistIndex].id">{{solist.name}}</option>
+        </select>
+      </div>
+      <span class="btn btn-primary btn-xs" (click)="showSolistAddFormHandler(repertoireIndex)">ソリスト追加</span>
+      <span *ngIf="repertoireIndex !== 0" class="btn btn-danger btn-xs" (click)="deleteRepertoireHandler(repertoireIndex)">曲目削除</span>
     </div>
-    <span class="btn btn-primary" (click)="addRepertoireHandler()">曲目追加</span>
+    <span class="btn btn-primary btn-xs" (click)="addRepertoireHandler()">曲目追加</span>
   </div>
 </form>

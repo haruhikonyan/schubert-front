@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Concert, Hole, Conductor, Repertoire } from './../concert.model';
+import { Concert, Hole, Conductor, Repertoire, Solist, Tune } from './../concert.model';
 import { AppService } from './../../app.service';
 
 @Component({
@@ -57,11 +57,22 @@ export class ConcertFormComponent implements OnInit {
     this.concert.conductors.splice(index, 1);
   }
 
+  tuneSelectHandler(tuneId: string, repertoireIndex: number) {
+    this.concert.repertoires[repertoireIndex].tune = this.appService.tunes.find(s => s.id === Number(tuneId));
+  }
+
   addRepertoireHandler() {
     this.concert.repertoires.push(new Repertoire());
   }
 
   deleteRepertoireHandler(index: number) {
     this.concert.repertoires.splice(index, 1);
+  }
+
+  showSolistAddFormHandler(index: number) {
+    this.concert.repertoires[index].solists.push(new Solist());
+  }
+  solistSelectHandler(solistId: string, repertoireIndex: number, solistIndex: number) {
+    this.concert.repertoires[repertoireIndex].solists[solistIndex] = this.appService.solists.find(s => s.id === Number(solistId));
   }
 }

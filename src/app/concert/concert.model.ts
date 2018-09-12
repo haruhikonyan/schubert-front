@@ -47,7 +47,7 @@ export class Repertoire {
   arranger: string;
   description: string;
   tune: Tune = new Tune();
-  solists: Solist[];
+  solists: Solist[] = [];
 }
 
 /**
