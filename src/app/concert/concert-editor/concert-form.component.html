@@ -43,12 +43,12 @@
 
   <div class="field">
     <label class="d-block">指揮者</label>
-    <div *ngFor="let conductor of concert.conductors; index as i">
-      <select (change)="conductorSelectHandler($event.target.value, i)">
+    <div *ngFor="let conductor of concert.conductors; index as conductorIndex">
+      <select (change)="conductorSelectHandler($event.target.value, conductorIndex)">
         <option value="" disabled>未選択</option>
-        <option *ngFor="let selectobleConductor of appService.conductors" [value]="selectobleConductor.id" [selected]="selectobleConductor.id === conductor.id">{{selectobleConductor.name}}</option>
+        <option *ngFor="let selectableConductor of appService.conductors" [value]="selectableConductor.id" [selected]="selectableConductor.id === conductor.id">{{selectableConductor.name}}</option>
       </select>
-      <span *ngIf="i !== 0" class="btn btn-danger btn-xs" (click)="deleteConductorHandler(i)">指揮者削除</span>
+      <span *ngIf="conductorIndex !== 0" class="btn btn-danger btn-xs" (click)="deleteConductorHandler(conductorIndex)">指揮者削除</span>
     </div>
     <span class="btn btn-primary btn-xs" (click)="addConductorHandler()">指揮者追加</span>
   </div>
@@ -58,12 +58,12 @@
     <div *ngFor="let repertoire of concert.repertoires; index as repertoireIndex">
       <select (change)="tuneSelectHandler($event.target.value, repertoireIndex)">
         <option value="" disabled>未選択</option>
-        <option *ngFor="let tune of appService.tunes" [value]="tune.id" [selected]="tune.id === repertoire.tune.id">{{tune.composer.displayName}}:{{tune.title}}</option>
+        <option *ngFor="let selectableTune of appService.tunes" [value]="selectableTune.id" [selected]="selectableTune.id === repertoire.tune.id">{{selectableTune.composer.displayName}}:{{selectableTune.title}}</option>
       </select>
       <div *ngFor="let solist of repertoire.solists; index as solistIndex">
         <select (change)="solistSelectHandler($event.target.value, repertoireIndex ,solistIndex)">
           <option value="" disabled>未選択</option>
-          <option *ngFor="let solist of appService.solists" [value]="solist.id" [selected]="solist.id === repertoire.solists[solistIndex].id">{{solist.name}}</option>
+          <option *ngFor="let selectableSolist of appService.solists" [value]="selectableSolist.id" [selected]="selectableSolist.id === solist.id">{{selectableSolist.name}}</option>
         </select>
       </div>
       <span class="btn btn-primary btn-xs" (click)="showSolistAddFormHandler(repertoireIndex)">ソリスト追加</span>
