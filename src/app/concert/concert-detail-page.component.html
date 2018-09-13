@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <form (ngSubmit)="moveEditConcertButtonClickHander()">
+  <form (ngSubmit)="editConcertButtonClickHandler()">
       <div class="form-group" *ngIf="!isLoggedIn">
         <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
             placeholder="Password">

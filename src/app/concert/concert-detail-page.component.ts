@@ -33,7 +33,7 @@ export class ConcertDetailPageComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedInByTeamId(this.concert.team.id);
   }
 
-  moveEditConcertButtonClickHander(): void {
+  editConcertButtonClickHandler(): void {
     // エラー表示を消す
     this.canShowflushMessage = false;
     if (this.isLoggedIn) {

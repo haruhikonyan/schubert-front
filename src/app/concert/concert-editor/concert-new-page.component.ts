@@ -41,7 +41,7 @@ export class ConcertNewPageComponent implements OnInit {
     }
   }
 
-  createConcertButtonClickHander(): void {
+  createConcertButtonClickHandler(): void {
     this.concertService.createConcert(this.concert)
       .subscribe((concert: Concert) => {
         this.router.navigate(['concerts', concert.id]);

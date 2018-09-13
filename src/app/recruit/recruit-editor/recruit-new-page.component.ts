@@ -50,7 +50,7 @@ export class RecruitNewPageComponent implements OnInit {
     }
   }
 
-  createRecruitButtonClickHander(): void {
+  createRecruitButtonClickHandler(): void {
     this.recruitService.createRecruit(this.recruit)
     .subscribe((recruit: Recruit) => {
       this.router.navigate(['recruits', recruit.id]);

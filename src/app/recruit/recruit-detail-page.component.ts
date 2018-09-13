@@ -44,7 +44,7 @@ export class RecruitDetailPageComponent implements OnInit {
     });
   }
 
-  moveEditRecruitButtonClickHander(): void {
+  editRecruitButtonClickHandler(): void {
     // エラー表示を消す
     this.canShowflushMessage = false;
     if (this.isLoggedIn) {

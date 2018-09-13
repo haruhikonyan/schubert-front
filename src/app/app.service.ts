@@ -17,11 +17,12 @@ export class AppService {
   private apiUrl: string = environment.apiUrl;
 
   // サイトで汎用的に使うモデルは AppService で持っておく
-  // フォームでしか使わないものは別serviceを作る？
+  // TODO フォームでしか使わないものは masterDataManagerService 的なもので持つようにする
   types: Type[] = [];
   instruments: Instrument[] = [];
   instrumentCategories: InstrumentCategory[] = [];
   regions: Region[] = [];
+  // TODO 以下は量が莫大になると思われるのでフォームからの検索で取得するようにする(廃止予定)
   holes: Hole[];
   conductors: Conductor[];
   tunes: Tune[];

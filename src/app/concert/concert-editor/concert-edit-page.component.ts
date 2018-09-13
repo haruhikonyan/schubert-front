@@ -23,7 +23,7 @@ export class ConcertEditPageComponent implements OnInit {
     this.concert = this.route.snapshot.data['concert'];
   }
 
-  editConcertButtonClickHander(): void {
+  editConcertButtonClickHandler(): void {
     this.concertService.editConcert(this.concert)
       .subscribe((concert: Concert) => {
         this.router.navigate(['concerts', concert.id]);

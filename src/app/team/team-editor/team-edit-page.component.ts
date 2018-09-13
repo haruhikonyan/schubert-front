@@ -23,7 +23,7 @@ export class TeamEditPageComponent implements OnInit {
     this.team = this.route.snapshot.data['team'];
   }
 
-  editTeamButtonClickHander(): void {
+  editTeamButtonClickHandler(): void {
     this.teamService.editTeam(this.team)
     .subscribe((team: Team) => {
       this.router.navigate(['teams', team.id, 'admin']);
