@@ -1,6 +1,10 @@
 <!-- TODO エラーあったら flash message を出す -->
 <form #f="ngForm">
 
+  <ng-container *ngIf="concert.team != null && (concert.team.id == null || !concert.team.isPublished)">
+    <app-team-form [team]="concert.team"></app-team-form>
+  </ng-container>
+
   <div class="field">
     <label>タイトル</label>
     <input class="form-control" placeholder="はるの大演奏会" [(ngModel)]="concert.title" name="title">
@@ -8,20 +12,23 @@
 
   <div class="field">
     <label>詳細</label>
-    <textarea class="form-control" placeholder="はるの大演奏会は毎年４月に演奏が行われる定期の演奏会です。始まりは古く、昭和６０年・・・" 
+    <textarea class="form-control" placeholder="はるの大演奏会は毎年４月に演奏が行われる定期の演奏会です。始まりは古く、昭和６０年・・・"
       [(ngModel)]="concert.description" rows="5" name="description"></textarea>
   </div>
 
-  <ng-container *ngIf="concert?.team != null && concert.team.id == null">
-    <app-team-form [team]="concert.team"></app-team-form>
-  </ng-container>
-
+  <div class="field">
+    <label class="d-block">会場</label>
+    <select [compareWith]="compareFunc" [(ngModel)]="concert.hole" name="hole">
+      <option value="" disabled>未選択</option>
+      <option *ngFor="let hole of appService.holes" [ngValue]="hole">{{hole.name}}</option>
+    </select>
+  </div>
 
   <div class="field">
     <label>開催日</label>
     <!-- TODO スタイル調整 １行表示にするとか -->
     <input type="text" class="form-control" [(ngModel)]="concert.date" (bsValueChange)="dateChangeHandler($event)"
-      rows="2" name="date" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+      rows="2" name="date" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" autocomplete="off">
   </div>
 
   <div class="field">
@@ -32,5 +39,36 @@
   <div class="field">
     <label>開演時間</label>
     <timepicker [showMeridian]="false" [(ngModel)]="concert.cirtainTime" name="cirtain-time-time"></timepicker>
+  </div>
+
+  <div class="field">
+    <label class="d-block">指揮者</label>
+    <div *ngFor="let conductor of concert.conductors; index as conductorIndex">
+      <select (change)="conductorSelectHandler($event.target.value, conductorIndex)">
+        <option value="" disabled>未選択</option>
+        <option *ngFor="let selectableConductor of appService.conductors" [value]="selectableConductor.id" [selected]="selectableConductor.id === conductor.id">{{selectableConductor.name}}</option>
+      </select>
+      <span *ngIf="conductorIndex !== 0" class="btn btn-danger btn-xs" (click)="deleteConductorHandler(conductorIndex)">指揮者削除</span>
+    </div>
+    <span class="btn btn-primary btn-xs" (click)="addConductorHandler()">指揮者追加</span>
+  </div>
+
+  <div class="field">
+    <label class="d-block">曲目</label>
+    <div *ngFor="let repertoire of concert.repertoires; index as repertoireIndex">
+      <select (change)="tuneSelectHandler($event.target.value, repertoireIndex)">
+        <option value="" disabled>未選択</option>
+        <option *ngFor="let selectableTune of appService.tunes" [value]="selectableTune.id" [selected]="selectableTune.id === repertoire.tune.id">{{selectableTune.composer.displayName}}:{{selectableTune.title}}</option>
+      </select>
+      <div *ngFor="let solist of repertoire.solists; index as solistIndex">
+        <select (change)="solistSelectHandler($event.target.value, repertoireIndex ,solistIndex)">
+          <option value="" disabled>未選択</option>
+          <option *ngFor="let selectableSolist of appService.solists" [value]="selectableSolist.id" [selected]="selectableSolist.id === solist.id">{{selectableSolist.name}}</option>
+        </select>
+      </div>
+      <span class="btn btn-primary btn-xs" (click)="showSolistAddFormHandler(repertoireIndex)">ソリスト追加</span>
+      <span *ngIf="repertoireIndex !== 0" class="btn btn-danger btn-xs" (click)="deleteRepertoireHandler(repertoireIndex)">曲目削除</span>
+    </div>
+    <span class="btn btn-primary btn-xs" (click)="addRepertoireHandler()">曲目追加</span>
   </div>
 </form>

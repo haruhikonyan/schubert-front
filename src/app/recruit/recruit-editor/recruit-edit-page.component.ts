@@ -33,7 +33,7 @@ export class RecruitEditPageComponent implements OnInit {
       .subscribe();
   }
 
-  editRecruitButtonClickHander(): void {
+  editRecruitButtonClickHandler(): void {
     this.recruitService.editRecruit(this.recruit)
     .subscribe((recruit: Recruit) => {
       this.router.navigate(['recruits', recruit.id]);

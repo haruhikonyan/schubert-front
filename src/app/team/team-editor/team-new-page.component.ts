@@ -21,7 +21,7 @@ export class TeamNewPageComponent implements OnInit {
     this.team = new Team();
   }
 
-  createTeamButtonClickHander(): void {
+  createTeamButtonClickHandler(): void {
     this.teamService.createTeam(this.team)
       .subscribe((team: Team) => {
         this.router.navigate(['teams', team.id]);

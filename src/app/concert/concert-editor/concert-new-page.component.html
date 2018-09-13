@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row">
 
-  <h1>TBD Title</h1>
+  <h1>{{title}}</h1>
 
   <app-concert-form [concert]="concert"></app-concert-form>
+
+  <div class="actions">
+    <button (click)="createConcertButtonClickHandler()">演奏会新規作成</button>
+  </div>
 
   <a [routerLink]="['/concerts']">演奏会一覧に戻る</a>
   </div>

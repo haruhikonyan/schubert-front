@@ -14,9 +14,16 @@ export class AppComponent implements OnInit {
   constructor(private appServise: AppService) { }
 
   ngOnInit() {
+    // TODO　フォーム以外では使わないのでここで取得はやめる
+    // そもそもフォームの時に都度取得でいいのでは？
+    // master-store.service 的なものを作って必要なところ取得済みかどうかを判断してなければという形にする
     this.appServise.getTypes();
     this.appServise.getInstruments();
     this.appServise.getInstrumentCategories();
     this.appServise.getRegions();
+    this.appServise.getHoles();
+    this.appServise.getConductors();
+    this.appServise.getTunes();
+    this.appServise.getSolists();
   }
 }

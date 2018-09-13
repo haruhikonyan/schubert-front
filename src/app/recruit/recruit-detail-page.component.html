@@ -21,7 +21,7 @@
           <p class="sbt-message-content">{{ recruit.description }}</p>
         </div>
       </div>
-      <form (ngSubmit)="moveEditRecruitButtonClickHander()">
+      <form (ngSubmit)="editRecruitButtonClickHandler()">
         <div class="form-group" *ngIf="!isLoggedIn">
           <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
               placeholder="Password">

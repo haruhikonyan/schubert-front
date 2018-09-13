@@ -19,7 +19,7 @@
 <div>この団体は非公開です</div>
 </ng-template>
 
-<form (ngSubmit)="moveAdminTeamButtonClickHander()">
+<form (ngSubmit)="moveAdminTeamButtonClickHandler()">
   <div class="form-group" *ngIf="!isLoggedIn">
     <input type="password" class="form-control input-lg" id="inputPassword" name="password" [(ngModel)]="password"
         placeholder="Password">

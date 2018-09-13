@@ -8,6 +8,7 @@ import * as urljoin from 'url-join';
 
 import { environment } from '../environments/environment';
 import { Type, Instrument, InstrumentCategory, Region, CanonicalRoute } from './app.model';
+import { Hole, Conductor, Tune, Solist } from './concert/concert.model';
 
 
 @Injectable()
@@ -16,11 +17,16 @@ export class AppService {
   private apiUrl: string = environment.apiUrl;
 
   // サイトで汎用的に使うモデルは AppService で持っておく
-  // 下記4つはフォームでしか使わないからそっちに移す
+  // TODO フォームでしか使わないものは masterDataManagerService 的なもので持つようにする
   types: Type[] = [];
   instruments: Instrument[] = [];
   instrumentCategories: InstrumentCategory[] = [];
   regions: Region[] = [];
+  // TODO 以下は量が莫大になると思われるのでフォームからの検索で取得するようにする(廃止予定)
+  holes: Hole[];
+  conductors: Conductor[];
+  tunes: Tune[];
+  solists: Solist[];
 
   canonicalRoutes: CanonicalRoute[] = [];
 
@@ -65,6 +71,46 @@ export class AppService {
     this.http.get(endpointUrl, options)
              .map((r: Response) => r.json() as Region[])
              .map((regions: Region[]) => this.regions = regions)
+             .subscribe();
+  }
+
+  getHoles(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/holes');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Hole[])
+             .map((holes: Hole[]) => this.holes = holes)
+             .subscribe();
+  }
+
+  getTunes(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/tunes');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Tune[])
+             .map((tunes: Tune[]) => this.tunes = tunes)
+             .subscribe();
+  }
+
+  getConductors(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/conductors');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Conductor[])
+             .map((conductors: Conductor[]) => this.conductors = conductors)
+             .subscribe();
+  }
+
+  getSolists(): void {
+    const options: RequestOptions = this.generateBasicRequestOptions();
+    const endpointUrl: string = urljoin(this.apiUrl, '/solists');
+
+    this.http.get(endpointUrl, options)
+             .map((r: Response) => r.json() as Solist[])
+             .map((solists: Solist[]) => this.solists = solists)
              .subscribe();
   }
 

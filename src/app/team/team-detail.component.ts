@@ -35,7 +35,7 @@ export class TeamDetailComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedInByTeamId(this.team.id);
   }
 
-  moveAdminTeamButtonClickHander(): void {
+  moveAdminTeamButtonClickHandler(): void {
     // エラー表示を消す
     this.canShowflushMessage = false;
     if (this.isLoggedIn) {

@@ -10,7 +10,7 @@ import { Concert } from './concert.model';
 })
 export class ConcertsPageComponent implements OnInit {
 
-  concerts: Concert[];
+  concerts: Concert[] = [];
 
   constructor(
     private concertService: ConcertService
