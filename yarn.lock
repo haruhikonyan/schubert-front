@@ -97,13 +97,13 @@
     "@angular-devkit/core" "0.8.2"
     rxjs "~6.2.0"
 
-"@angular/animations@^6.0.0":
+"@angular/animations@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-6.1.7.tgz#5d1ca6a2f2e5827ac751c88265b7916d17a732d0"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cli@^6.0.0":
+"@angular/cli@^6.2.2":
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-6.2.2.tgz#dab50dda4e5f763eda19413df7e53e5f50f95718"
   dependencies:
@@ -119,13 +119,13 @@
     symbol-observable "^1.2.0"
     yargs-parser "^10.0.0"
 
-"@angular/common@^6.0.0":
+"@angular/common@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-6.1.7.tgz#b94ae9f1c71b1223a305942f09aabf818f5ed2e9"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/compiler-cli@^6.0.0":
+"@angular/compiler-cli@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-6.1.7.tgz#60abdfb3cac6f50d41b2af905a5bfa2bf1f08b36"
   dependencies:
@@ -134,25 +134,25 @@
     reflect-metadata "^0.1.2"
     tsickle "^0.32.1"
 
-"@angular/compiler@^6.0.0":
+"@angular/compiler@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-6.1.7.tgz#cf4e40ec505130710122229481a90ca106bad855"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@^6.0.0":
+"@angular/core@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.1.7.tgz#036088227cbff7d3fc7af0c43c5af9db46149f16"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/forms@^6.0.0":
+"@angular/forms@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-6.1.7.tgz#42484c2ab1079fd34ddd637eb143db6a17be4990"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/http@^6.0.0":
+"@angular/http@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-6.1.7.tgz#21fbfaa1bd40b157c3df12a058678823b97df5ee"
   dependencies:
@@ -162,19 +162,19 @@
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-6.1.7.tgz#f25335c32a7617344cf92736753a434c46678ebb"
 
-"@angular/platform-browser-dynamic@^6.0.0":
+"@angular/platform-browser-dynamic@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-6.1.7.tgz#44381fc4ed990194b372553e6a99f4cc80852414"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser@^6.0.0":
+"@angular/platform-browser@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-6.1.7.tgz#21da4fbe6f407320ee50cdf9ab0b69b2e10eca50"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-server@^6.0.0":
+"@angular/platform-server@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-6.1.7.tgz#f02821826f135a90fe42f34dabb5b20755dc5608"
   dependencies:
@@ -182,7 +182,7 @@
     tslib "^1.9.0"
     xhr2 "^0.1.4"
 
-"@angular/router@^6.0.0":
+"@angular/router@^6.1.7":
   version "6.1.7"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-6.1.7.tgz#90294b2497649fd6d6d1507e6e447d9c153e8db8"
   dependencies:
@@ -991,17 +991,9 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap-honoka@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/bootstrap-honoka/-/bootstrap-honoka-4.1.3.tgz#49771f98e446bae0f04a2ef01b32e23b4793aaea"
-  dependencies:
-    bootstrap "4.1.3"
-    jquery "1.9.1 - 3"
-    popper.js "^1.14.3"
-
-bootstrap@4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.3.tgz#0eb371af2c8448e8c210411d0cb824a6409a12be"
+bootstrap-honoka@^3.3.7-a:
+  version "3.3.7-a"
+  resolved "https://registry.yarnpkg.com/bootstrap-honoka/-/bootstrap-honoka-3.3.7-a.tgz#7182fa3f9b0fe38336e4c9ff6d43f6d8f99bb27a"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -3773,10 +3765,6 @@ jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
-"jquery@1.9.1 - 3":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-
 js-base64@^2.1.8:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
@@ -5145,10 +5133,6 @@ pkg-dir@^2.0.0:
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-2.0.0.tgz#f6d5d1109e19d63edf428e0bd57e12777615334b"
   dependencies:
     find-up "^2.1.0"
-
-popper.js@^1.14.3:
-  version "1.14.4"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.4.tgz#8eec1d8ff02a5a3a152dd43414a15c7b79fd69b6"
 
 portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.13"
