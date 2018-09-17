@@ -5,7 +5,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
-import { AuthHttp } from 'angular2-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -20,8 +19,7 @@ export class RecruitService {
   private endpointUrl: string = urljoin(this.apiUrl, '/recruits');
 
   constructor(
-    private http: HttpClient,
-    private authHttp: AuthHttp
+    private http: HttpClient
   ) { }
 
   getRecruits(seachCondition: SearchCondition = null): Observable<Recruit[]> {
@@ -35,8 +33,7 @@ export class RecruitService {
   getRecruitsByTeam(teamId: string): Observable<Recruit[]> {
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.authHttp.get(url)
-                    .map((r) => r.json() as Recruit[]);
+    return this.http.get<Recruit[]>(url);
   }
 
   searchByCanonical(canonicalModelName: string, canonicalId: string): Observable<Recruit[]> {
@@ -78,8 +75,7 @@ export class RecruitService {
   editRecruit(recruit: Recruit): Observable<Recruit> {
     const url: string = urljoin(this.endpointUrl, recruit.id);
 
-    return this.authHttp.put(url, {recruit: recruit})
-                    .map((r) => r.json() as Recruit);
+    return this.http.put<Recruit>(url, {recruit: recruit});
   }
 
 

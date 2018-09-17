@@ -3,7 +3,7 @@ export namespace LocalStorageKeyConsts {
 
   /**
    * アクセストークンを localStorage に保存する際のキー名
-   *  angular2-jwt で利用されるデフォルトの Token Name を利用
+   *  @auth0/angular-jwt で利用されるデフォルトの Token Name を利用
    *
    * @type {string}
    * @memberOf LocalStorageKeyConsts

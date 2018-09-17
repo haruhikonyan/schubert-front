@@ -1,14 +1,13 @@
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SelectModule } from 'ng2-select';
-import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -45,18 +44,11 @@ import { TeamFormComponent } from './team/team-editor/team-form.component';
 import { TeamEditPageComponent } from './team/team-editor/team-edit-page.component';
 import { AdminComponent } from './team/admin/admin.component';
 import { RecruitCanonicalHomeComponent } from './recruit/recruit-canonical-home/recruit-canonical-home.component';
+import { LocalStorageKeyConsts } from './auth/local-storage-key.consts';
 
-// configure angular2-jwt
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    noJwtError: true,
-  }), http, options);
+export function jwtTokenGetter() {
+  return localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
 }
-const AUTH_PROVIDERS = {
-  provide: AuthHttp,
-  useFactory: authHttpServiceFactory,
-  deps: [Http, RequestOptions]
-};
 
 @NgModule({
   declarations: [
@@ -85,17 +77,21 @@ const AUTH_PROVIDERS = {
   imports: [
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
-    HttpModule,
     HttpClientModule,
     FormsModule,
     CollapseModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     SelectModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: jwtTokenGetter,
+        whitelistedDomains: environment.whitelistedDomains,
+        blacklistedRoutes: ['/api/teams/login']
+      }
+    })
   ],
   providers: [
-    AUTH_PROVIDERS,
-    JwtHelper,
     AppService,
     ConcertService,
     TeamService,

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
-import { AuthHttp } from 'angular2-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from './../../environments/environment';
@@ -17,8 +16,7 @@ export class ConcertService {
   private endpointUrl: string = urljoin(this.apiUrl, '/concerts');
 
   constructor(
-    private http: HttpClient,
-    private authHttp: AuthHttp
+    private http: HttpClient
   ) { }
 
   getConcerts(): Observable<Concert[]> {
@@ -37,8 +35,7 @@ export class ConcertService {
   getConcertsByTeam(teamId: string): Observable<Concert[]> {
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.authHttp.get(url)
-                    .map((r) => r.json() as Concert[])
+    return this.http.get<Concert[]>(url)
                     .map((concerts: Concert[]) => {
                       // Date 型に変換する
                       concerts.forEach((concert: Concert) => {
@@ -62,8 +59,7 @@ export class ConcertService {
 
   createConcert(concert: Concert): Observable<Concert> {
 
-    return this.authHttp.post(this.endpointUrl, { concert })
-                    .map((r) => r.json() as Concert)
+    return this.http.post<Concert>(this.endpointUrl, { concert })
                     .map((c: Concert) => {
                       // Date型に変換する
                       this.convertToDate(c);
@@ -74,8 +70,7 @@ export class ConcertService {
   editConcert(concert: Concert): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.put(url, { concert })
-                    .map((r) => r.json() as Concert)
+    return this.http.put<Concert>(url, { concert })
                     .map((c: Concert) => {
                       // Date型に変換する
                       this.convertToDate(c);
@@ -86,8 +81,7 @@ export class ConcertService {
   deleteConcert(concert: Concert): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.delete(url)
-                    .map((r) => r.json() as Concert);
+    return this.http.delete<Concert>(url);
   }
 
   /**

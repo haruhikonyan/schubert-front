@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
-import { AuthHttp } from 'angular2-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -16,8 +15,7 @@ export class TeamService {
   private endpointUrl: string = urljoin(this.apiUrl, '/teams');
 
   constructor(
-    private http: HttpClient,
-    private authHttp: AuthHttp,
+    private http: HttpClient
   ) { }
 
   getTeams(): Observable<Team[]> {
@@ -39,7 +37,6 @@ export class TeamService {
   editTeam(team: Team): Observable<Team> {
     const url: string = urljoin(this.endpointUrl, team.id);
 
-    return this.authHttp.put(url, {team: team})
-                    .map((r) => r.json() as Team);
+    return this.http.put<Team>(url, {team: team});
   }
 }

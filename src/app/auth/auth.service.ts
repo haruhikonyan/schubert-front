@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
@@ -27,7 +27,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelper = new JwtHelper()
+    private jwtHelper: JwtHelperService = new JwtHelperService()
   ) { }
 
   login(teamId: string, password: string): Observable<Boolean> {
@@ -64,7 +64,7 @@ export class AuthService {
 
   /**
    * localStorage に保存されているアクセストークンを返す
-   * angular2-jwt AuthHttp が使えないモジュール向けに用意している(EventSource など)
+   * @auth0/angular-jwt AuthHttp が使えないモジュール向けに用意している(EventSource など)
    *
    * @returns {string}
    *
@@ -83,7 +83,7 @@ export class AuthService {
    */
   isLoggedInByTeamId(id: string): boolean {
     const data: any = this.getStoredTeamData();
-    return tokenNotExpired() && data.teamId === id;
+    return !this.jwtHelper.isTokenExpired(this.getAccessToken()) && data.teamId === id;
   }
 
   logout(): void {
