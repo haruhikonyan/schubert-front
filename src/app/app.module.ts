@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -85,6 +86,7 @@ const AUTH_PROVIDERS = {
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'schubert-front' }),
     HttpModule,
+    HttpClientModule,
     FormsModule,
     CollapseModule.forRoot(),
     BsDatepickerModule.forRoot(),

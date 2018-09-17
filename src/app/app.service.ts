@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers,
-         URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -31,87 +30,63 @@ export class AppService {
   canonicalRoutes: CanonicalRoute[] = [];
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
   ) { }
 
   getTypes(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/types');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Type[])
-             .map((types: Type[]) => this.types = types)
-             .subscribe();
+    this.http.get<Type[]>(endpointUrl)
+             .subscribe((types: Type[]) => this.types = types);
   }
 
   getInstruments(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/instruments');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Instrument[])
-             .map((instruments: Instrument[]) => this.instruments = instruments)
-             .subscribe();
+    this.http.get<Instrument[]>(endpointUrl)
+             .subscribe((instruments: Instrument[]) => this.instruments = instruments);
   }
 
   getInstrumentCategories(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/instrument_categories');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as InstrumentCategory[])
-             .map((instrumentCategories: InstrumentCategory[]) => this.instrumentCategories = instrumentCategories)
-             .subscribe();
+    this.http.get<InstrumentCategory[]>(endpointUrl)
+             .subscribe((instrumentCategories: InstrumentCategory[]) => this.instrumentCategories = instrumentCategories);
   }
 
   getRegions(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/regions');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Region[])
-             .map((regions: Region[]) => this.regions = regions)
-             .subscribe();
+    this.http.get<Region[]>(endpointUrl)
+             .subscribe((regions: Region[]) => this.regions = regions);
   }
 
   getHoles(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/holes');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Hole[])
-             .map((holes: Hole[]) => this.holes = holes)
-             .subscribe();
+    this.http.get<Hole[]>(endpointUrl)
+             .subscribe((holes: Hole[]) => this.holes = holes);
   }
 
   getTunes(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/tunes');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Tune[])
-             .map((tunes: Tune[]) => this.tunes = tunes)
-             .subscribe();
+    this.http.get<Tune[]>(endpointUrl)
+             .subscribe((tunes: Tune[]) => this.tunes = tunes);
   }
 
   getConductors(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/conductors');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Conductor[])
-             .map((conductors: Conductor[]) => this.conductors = conductors)
-             .subscribe();
+    this.http.get<Conductor[]>(endpointUrl)
+             .subscribe((conductors: Conductor[]) => this.conductors = conductors);
   }
 
   getSolists(): void {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const endpointUrl: string = urljoin(this.apiUrl, '/solists');
 
-    this.http.get(endpointUrl, options)
-             .map((r: Response) => r.json() as Solist[])
-             .map((solists: Solist[]) => this.solists = solists)
-             .subscribe();
+    this.http.get<Solist[]>(endpointUrl)
+             .subscribe((solists: Solist[]) => this.solists = solists);
   }
 
   /**
@@ -161,20 +136,10 @@ export class AppService {
   }
 
   getCanonicalRoutes(): Observable<CanonicalRoute[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.apiUrl, '/canonical_routes');
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as CanonicalRoute[]);
+    return this.http.get<CanonicalRoute[]>(url);
   }
 
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
-  }
 }
 
