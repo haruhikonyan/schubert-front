@@ -1,6 +1,7 @@
+import { Team } from './../team/team.model';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
@@ -10,6 +11,10 @@ import * as urljoin from 'url-join';
 import { environment } from '../../environments/environment';
 import { LocalStorageKeyConsts } from './local-storage-key.consts';
 
+interface LoginResponse {
+  team: Team;
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,40 +26,24 @@ export class AuthService {
 
 
   constructor(
-    private http: Http,
-    private router: Router,
+    private http: HttpClient,
     private jwtHelper: JwtHelper = new JwtHelper()
   ) { }
 
-  /**
-   * username, password でログインする
-   *
-   * @param {string} username
-   * @param {string} password
-   * @returns {Observable<Boolean>} ログイン成功したかどうか
-   *
-   * @memberOf AuthService
-   */
   login(teamId: string, password: string): Observable<Boolean> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
-    // TODO back から送られてくる teamId は objectId にする
     const url: string = urljoin(this.endpointUrl, teamId.toString(), '/login');
 
-    return this.http.post(
-        url,
-        {password: password},
-        options)
-      .map((res: Response) => {
-        // 200 じゃない場合は false を返して抜ける
-        if (res.status !== 200) {
+    return this.http.post<LoginResponse>(url, {password: password})
+      .map((loginResponse: LoginResponse) => {
+        // TODO ステータスコードを見てハンドリングするようにする
+        // token が帰ってこない場合は false を返して抜ける
+        if (loginResponse.token == null) {
           return false;
         }
-        // 成功した場合は token をセットする
-        const data: any = res.json();
         // ログイン結果データからは、token のみを localStorage に保存
-        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.token);
+        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, loginResponse.token);
         const currentData: any = this.getStoredTeamData() || {};
-        currentData.teamId = data.team.id;
+        currentData.teamId = loginResponse.team.id;
         currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
         localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
         return true;
@@ -100,15 +89,5 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY);
     localStorage.removeItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
-  }
-
-
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
   }
 }

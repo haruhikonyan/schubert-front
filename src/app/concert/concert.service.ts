@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers,
-  URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -18,15 +17,13 @@ export class ConcertService {
   private endpointUrl: string = urljoin(this.apiUrl, '/concerts');
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private authHttp: AuthHttp
   ) { }
 
   getConcerts(): Observable<Concert[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Concert[])
+    return this.http.get<Concert[]>(this.endpointUrl)
                     .map((concerts: Concert[]) => {
                       // Date 型に変換する
                       concerts.forEach((concert: Concert) => {
@@ -38,11 +35,10 @@ export class ConcertService {
   }
 
   getConcertsByTeam(teamId: string): Observable<Concert[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.authHttp.get(url, options)
-                    .map((r: Response) => r.json() as Concert[])
+    return this.authHttp.get(url)
+                    .map((r) => r.json() as Concert[])
                     .map((concerts: Concert[]) => {
                       // Date 型に変換する
                       concerts.forEach((concert: Concert) => {
@@ -55,10 +51,8 @@ export class ConcertService {
 
   getConcert(id: string): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, id);
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Concert)
+    return this.http.get<Concert>(url)
                     .map((concert: Concert) => {
                       // Date型に変換する
                       this.convertToDate(concert);
@@ -67,10 +61,9 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.authHttp.post(this.endpointUrl, { concert }, options)
-                    .map((r: Response) => r.json() as Concert)
+    return this.authHttp.post(this.endpointUrl, { concert })
+                    .map((r) => r.json() as Concert)
                     .map((c: Concert) => {
                       // Date型に変換する
                       this.convertToDate(c);
@@ -79,11 +72,10 @@ export class ConcertService {
   }
 
   editConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.put(url, { concert }, options)
-                    .map((r: Response) => r.json() as Concert)
+    return this.authHttp.put(url, { concert })
+                    .map((r) => r.json() as Concert)
                     .map((c: Concert) => {
                       // Date型に変換する
                       this.convertToDate(c);
@@ -92,19 +84,10 @@ export class ConcertService {
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.delete(url, options)
-                    .map((r: Response) => r.json() as Concert);
-  }
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
+    return this.authHttp.delete(url)
+                    .map((r) => r.json() as Concert);
   }
 
   /**
