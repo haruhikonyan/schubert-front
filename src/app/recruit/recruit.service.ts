@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers,
-         URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -20,46 +20,35 @@ export class RecruitService {
   private endpointUrl: string = urljoin(this.apiUrl, '/recruits');
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private authHttp: AuthHttp
   ) { }
 
   getRecruits(seachCondition: SearchCondition = null): Observable<Recruit[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
-    const params: URLSearchParams = new URLSearchParams();
 
     // 検索条件オブジェクトがあれば条件追加
-    if (seachCondition != null) {
-      params.appendAll(this.getAdditionalSearchParams(seachCondition));
-    }
-    options.search = params;
+    const options = seachCondition != null ? { params: this.getAdditionalSearchParams(seachCondition) } : {};
 
-    return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Recruit[]);
+    return this.http.get<Recruit[]>(this.endpointUrl, options);
   }
 
   getRecruitsByTeam(teamId: string): Observable<Recruit[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.authHttp.get(url, options)
-                    .map((r: Response) => r.json() as Recruit[]);
+    return this.authHttp.get(url)
+                    .map((r) => r.json() as Recruit[]);
   }
 
   searchByCanonical(canonicalModelName: string, canonicalId: string): Observable<Recruit[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'search-by-canonical', canonicalModelName, canonicalId);
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Recruit[]);
+    return this.http.get<Recruit[]>(url);
   }
 
   getRecruit(id: string): Observable<Recruit> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, id);
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Recruit);
+    return this.http.get<Recruit>(url);
   }
 
   /**
@@ -69,8 +58,8 @@ export class RecruitService {
    * @returns {URLSearchParams}
    * @memberof RecruitService
    */
-  getAdditionalSearchParams(condition: SearchCondition): URLSearchParams {
-    const params: URLSearchParams = new URLSearchParams();
+  getAdditionalSearchParams(condition: SearchCondition): HttpParams {
+    const params: HttpParams = new HttpParams();
     // 空文字列チェック
     if (condition.freeWords != null && condition.freeWords.trim().length > 0) {
       params.set('freeWords', condition.freeWords);
@@ -82,26 +71,15 @@ export class RecruitService {
   }
 
   createRecruit(recruit: Recruit): Observable<Recruit> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.post(this.endpointUrl, {recruit: recruit}, options)
-                    .map((r: Response) => r.json() as Recruit);
+    return this.http.post<Recruit>(this.endpointUrl, {recruit: recruit});
   }
 
   editRecruit(recruit: Recruit): Observable<Recruit> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, recruit.id);
 
-    return this.authHttp.put(url, {recruit: recruit}, options)
-                    .map((r: Response) => r.json() as Recruit);
-  }
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
+    return this.authHttp.put(url, {recruit: recruit})
+                    .map((r) => r.json() as Recruit);
   }
 
 

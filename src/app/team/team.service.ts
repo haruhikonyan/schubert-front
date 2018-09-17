@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers,
-  URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -17,46 +16,30 @@ export class TeamService {
   private endpointUrl: string = urljoin(this.apiUrl, '/teams');
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private authHttp: AuthHttp,
   ) { }
 
   getTeams(): Observable<Team[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Team[]);
+    return this.http.get<Team[]>(this.endpointUrl);
   }
 
   getTeam(id: string): Observable<Team> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, id);
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Team);
+    return this.http.get<Team>(url);
   }
 
   createTeam(team: Team): Observable<Team> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.post(this.endpointUrl, {team: team}, options)
-                    .map((r: Response) => r.json() as Team);
+    return this.http.post<Team>(this.endpointUrl, {team: team});
   }
 
   editTeam(team: Team): Observable<Team> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, team.id);
 
-    return this.authHttp.put(url, {team: team}, options)
-                    .map((r: Response) => r.json() as Team);
-  }
-
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
+    return this.authHttp.put(url, {team: team})
+                    .map((r) => r.json() as Team);
   }
 }
