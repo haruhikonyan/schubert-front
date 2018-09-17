@@ -33,11 +33,10 @@ export class ConcertNewPageComponent implements OnInit {
     }
     else {
       this.teamService.getTeam(teamId)
-        .map((team: Team) => {
+        .subscribe((team: Team) => {
           this.concert.team = team;
           this.title = `${this.concert.team.name}の演奏会宣伝新規作成`;
-        })
-        .subscribe();
+        });
     }
   }
 

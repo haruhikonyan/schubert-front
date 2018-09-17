@@ -27,10 +27,9 @@ export class RecruitEditPageComponent implements OnInit {
     this.recruit = this.route.snapshot.data['recruit'];
 
     this.concertService.getConcertsByTeam(this.recruit.team.id)
-      .map((concerts: Concert[]) => {
+      .subscribe((concerts: Concert[]) => {
         this.concerts = concerts;
-      })
-      .subscribe();
+      });
   }
 
   editRecruitButtonClickHandler(): void {

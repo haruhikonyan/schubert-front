@@ -124,12 +124,11 @@ export class RecruitsComponent implements OnInit {
    */
   searchBtnClickHandler(): void {
     this.recruitService.getRecruits(this.condition)
-      .map((recruits: Recruit[]) => {
+      .subscribe((recruits: Recruit[]) => {
         // url書き換え
         this.updateUrl();
         this.recruits = recruits;
-      })
-      .subscribe();
+      });
   }
 
   /**
