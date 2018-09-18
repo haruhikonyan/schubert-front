@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+
 
 import * as urljoin from 'url-join';
 

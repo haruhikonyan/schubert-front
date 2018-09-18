@@ -46,7 +46,6 @@
     "ng2-select": "^2.0.0",
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.3.2",
-    "rxjs-compat": "^6.3.2",
     "ts-loader": "^5.1.1",
     "typescript": "^2.7.2",
     "url-join": "^4.0.0",

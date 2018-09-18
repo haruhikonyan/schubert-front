@@ -2,8 +2,9 @@ import { Team } from './../team/team.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as urljoin from 'url-join';
@@ -34,20 +35,22 @@ export class AuthService {
     const url: string = urljoin(this.endpointUrl, teamId.toString(), '/login');
 
     return this.http.post<LoginResponse>(url, {password: password})
-      .map((loginResponse: LoginResponse) => {
-        // TODO ステータスコードを見てハンドリングするようにする
-        // token が帰ってこない場合は false を返して抜ける
-        if (loginResponse.token == null) {
-          return false;
-        }
-        // ログイン結果データからは、token のみを localStorage に保存
-        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, loginResponse.token);
-        const currentData: any = this.getStoredTeamData() || {};
-        currentData.teamId = loginResponse.team.id;
-        currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
-        localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
-        return true;
-      });
+      .pipe(
+        map((loginResponse: LoginResponse) => {
+          // TODO ステータスコードを見てハンドリングするようにする
+          // token が帰ってこない場合は false を返して抜ける
+          if (loginResponse.token == null) {
+            return false;
+          }
+          // ログイン結果データからは、token のみを localStorage に保存
+          localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, loginResponse.token);
+          const currentData: any = this.getStoredTeamData() || {};
+          currentData.teamId = loginResponse.team.id;
+          currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
+          localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
+          return true;
+        })
+      );
   }
 
   /**

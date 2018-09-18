@@ -1,8 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+
 
 import * as urljoin from 'url-join';
 
@@ -22,60 +24,70 @@ export class ConcertService {
   getConcerts(): Observable<Concert[]> {
 
     return this.http.get<Concert[]>(this.endpointUrl)
-                    .map((concerts: Concert[]) => {
-                      // Date 型に変換する
-                      concerts.forEach((concert: Concert) => {
-                        // Date型に変換する
-                        this.convertToDate(concert);
-                      });
-                      return concerts;
-                    });
+                    .pipe(
+                      map((concerts: Concert[]) => {
+                        // Date 型に変換する
+                        concerts.forEach((concert: Concert) => {
+                          // Date型に変換する
+                          this.convertToDate(concert);
+                        });
+                        return concerts;
+                      })
+                    );
   }
 
   getConcertsByTeam(teamId: string): Observable<Concert[]> {
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
     return this.http.get<Concert[]>(url)
-                    .map((concerts: Concert[]) => {
-                      // Date 型に変換する
-                      concerts.forEach((concert: Concert) => {
-                        // Date型に変換する
-                        this.convertToDate(concert);
-                      });
-                      return concerts;
-                    });
+                    .pipe(
+                      map((concerts: Concert[]) => {
+                        // Date 型に変換する
+                        concerts.forEach((concert: Concert) => {
+                          // Date型に変換する
+                          this.convertToDate(concert);
+                        });
+                        return concerts;
+                      })
+                    );
   }
 
   getConcert(id: string): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, id);
 
     return this.http.get<Concert>(url)
-                    .map((concert: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(concert);
-                      return concert;
-                    });
+                    .pipe(
+                      map((concert: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(concert);
+                        return concert;
+                      })
+                    );
   }
 
   createConcert(concert: Concert): Observable<Concert> {
 
     return this.http.post<Concert>(this.endpointUrl, { concert })
-                    .map((c: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(c);
-                      return c;
-                    });
+                    .pipe(
+                      map((c: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(c);
+                        return c;
+                      })
+                    );
   }
 
   editConcert(concert: Concert): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, concert.id);
 
     return this.http.put<Concert>(url, { concert })
-                    .map((c: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(c);
-                      return c;
-                    });
+                    .pipe(
+                      map((c: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(c);
+                        return c;
+                      })
+                    );
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
