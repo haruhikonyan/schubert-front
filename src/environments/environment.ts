@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4200/api',
+  apiUrl: 'http://localhost:3000/api',
   // apiUrl: 'https://schubert-back.herokuapp.com/api,
-  whitelistedDomains: ['localhost:4200']
+  whitelistedDomains: ['localhost:3000']
 };

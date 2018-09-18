@@ -18,8 +18,7 @@
     "serve:ssr": "node dist/server.js",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:client-and-server-bundles": "ng build --prod && ng run schubert-front:server",
-    "postinstall": "npm run build:client-and-server-bundles && npm run webpack:server",
-    "migrate-rxjs": "rxjs-5-to-6-migrate -p src/tsconfig.app.json"
+    "postinstall": "npm run build:client-and-server-bundles && npm run webpack:server"
   },
   "private": true,
   "dependencies": {
