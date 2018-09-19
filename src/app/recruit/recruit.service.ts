@@ -56,13 +56,17 @@ export class RecruitService {
    * @memberof RecruitService
    */
   getAdditionalSearchParams(condition: SearchCondition): HttpParams {
-    const params: HttpParams = new HttpParams();
+    let params: HttpParams = new HttpParams();
     // 空文字列チェック
     if (condition.freeWords != null && condition.freeWords.trim().length > 0) {
-      params.set('freeWords', condition.freeWords);
+      params = params.append('freeWords', condition.freeWords);
     }
-    params.set('typeIds', condition.typeIds);
-    params.set('instrumentIds', condition.instrumentIds);
+    if (condition.typeIds != null) {
+      params = params.set('typeIds', condition.typeIds);
+    }
+    if (condition.instrumentIds != null) {
+      params = params.set('instrumentIds', condition.instrumentIds);
+    }
     // TODO 条件を増やした場合はparamsにセットするコードを増やすこと
     return params;
   }
