@@ -1,13 +1,15 @@
+
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SelectModule } from 'ng2-select';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 // import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -46,8 +48,21 @@ import { AdminComponent } from './team/admin/admin.component';
 import { RecruitCanonicalHomeComponent } from './recruit/recruit-canonical-home/recruit-canonical-home.component';
 import { LocalStorageKeyConsts } from './auth/local-storage-key.consts';
 
-export function jwtTokenGetter() {
-  return localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
+// export function jwtTokenGetter(platformId) {
+//   return localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
+// }
+
+// see https://github.com/auth0/angular2-jwt/issues/30#issuecomment-397707616
+export function jwtOptionsFactory(platformId) {
+  return {
+    tokenGetter: () => {
+      return isPlatformBrowser(platformId) ?
+        localStorage.getItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY) :
+        null;
+    },
+    whitelistedDomains: environment.whitelistedDomains,
+    blacklistedRoutes: ['/api/teams/login']
+  };
 }
 
 @NgModule({
@@ -84,10 +99,10 @@ export function jwtTokenGetter() {
     TimepickerModule.forRoot(),
     SelectModule,
     JwtModule.forRoot({
-      config: {
-        tokenGetter: jwtTokenGetter,
-        whitelistedDomains: environment.whitelistedDomains,
-        blacklistedRoutes: ['/api/teams/login']
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [PLATFORM_ID]
       }
     })
   ],

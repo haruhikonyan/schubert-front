@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-
 import { Observable } from 'rxjs';
-
 
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
 import { Instrument, Type } from './../app.model';
 import { Recruit, SearchCondition } from './recruit.model';
-
 
 @Injectable()
 export class RecruitService {
