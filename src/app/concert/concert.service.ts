@@ -1,11 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response, Headers,
-  URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
 
-import { AuthHttp } from 'angular2-jwt';
+
 import * as urljoin from 'url-join';
 
 import { environment } from './../../environments/environment';
@@ -18,93 +18,82 @@ export class ConcertService {
   private endpointUrl: string = urljoin(this.apiUrl, '/concerts');
 
   constructor(
-    private http: Http,
-    private authHttp: AuthHttp
+    private http: HttpClient
   ) { }
 
   getConcerts(): Observable<Concert[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.get(this.endpointUrl, options)
-                    .map((r: Response) => r.json() as Concert[])
-                    .map((concerts: Concert[]) => {
-                      // Date 型に変換する
-                      concerts.forEach((concert: Concert) => {
-                        // Date型に変換する
-                        this.convertToDate(concert);
-                      });
-                      return concerts;
-                    });
+    return this.http.get<Concert[]>(this.endpointUrl)
+                    .pipe(
+                      map((concerts: Concert[]) => {
+                        // Date 型に変換する
+                        concerts.forEach((concert: Concert) => {
+                          // Date型に変換する
+                          this.convertToDate(concert);
+                        });
+                        return concerts;
+                      })
+                    );
   }
 
   getConcertsByTeam(teamId: string): Observable<Concert[]> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, 'team', teamId);
 
-    return this.authHttp.get(url, options)
-                    .map((r: Response) => r.json() as Concert[])
-                    .map((concerts: Concert[]) => {
-                      // Date 型に変換する
-                      concerts.forEach((concert: Concert) => {
-                        // Date型に変換する
-                        this.convertToDate(concert);
-                      });
-                      return concerts;
-                    });
+    return this.http.get<Concert[]>(url)
+                    .pipe(
+                      map((concerts: Concert[]) => {
+                        // Date 型に変換する
+                        concerts.forEach((concert: Concert) => {
+                          // Date型に変換する
+                          this.convertToDate(concert);
+                        });
+                        return concerts;
+                      })
+                    );
   }
 
   getConcert(id: string): Observable<Concert> {
     const url: string = urljoin(this.endpointUrl, id);
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.http.get(url, options)
-                    .map((r: Response) => r.json() as Concert)
-                    .map((concert: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(concert);
-                      return concert;
-                    });
+    return this.http.get<Concert>(url)
+                    .pipe(
+                      map((concert: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(concert);
+                        return concert;
+                      })
+                    );
   }
 
   createConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
 
-    return this.authHttp.post(this.endpointUrl, { concert }, options)
-                    .map((r: Response) => r.json() as Concert)
-                    .map((c: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(c);
-                      return c;
-                    });
+    return this.http.post<Concert>(this.endpointUrl, { concert })
+                    .pipe(
+                      map((c: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(c);
+                        return c;
+                      })
+                    );
   }
 
   editConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.put(url, { concert }, options)
-                    .map((r: Response) => r.json() as Concert)
-                    .map((c: Concert) => {
-                      // Date型に変換する
-                      this.convertToDate(c);
-                      return c;
-                    });
+    return this.http.put<Concert>(url, { concert })
+                    .pipe(
+                      map((c: Concert) => {
+                        // Date型に変換する
+                        this.convertToDate(c);
+                        return c;
+                      })
+                    );
   }
 
   deleteConcert(concert: Concert): Observable<Concert> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
     const url: string = urljoin(this.endpointUrl, concert.id);
 
-    return this.authHttp.delete(url, options)
-                    .map((r: Response) => r.json() as Concert);
-  }
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
+    return this.http.delete<Concert>(url);
   }
 
   /**

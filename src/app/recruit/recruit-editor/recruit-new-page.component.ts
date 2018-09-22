@@ -37,16 +37,14 @@ export class RecruitNewPageComponent implements OnInit {
     }
     else {
       this.teamService.getTeam(teamId)
-        .map((team: Team) => {
+        .subscribe((team: Team) => {
           this.recruit.team = team;
           this.title = `${this.recruit.team.name}の団員募集新規作成`;
-        })
-        .subscribe();
+        });
       this.concertService.getConcertsByTeam(teamId)
-        .map((concerts: Concert[]) => {
+        .subscribe((concerts: Concert[]) => {
           this.concerts = concerts;
-        })
-        .subscribe();
+        });
     }
   }
 

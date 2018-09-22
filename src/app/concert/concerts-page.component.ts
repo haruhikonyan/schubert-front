@@ -19,10 +19,9 @@ export class ConcertsPageComponent implements OnInit {
   ngOnInit() {
     // サービスメソッド呼び出し
     this.concertService.getConcerts()
-      .map((concerts: Concert[]) => {
+      .subscribe((concerts: Concert[]) => {
         this.concerts = concerts;
-      })
-      .subscribe();
+      });
   }
 
 }

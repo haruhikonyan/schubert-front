@@ -1,15 +1,21 @@
+import { Team } from './../team/team.model';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+import { HttpClient } from '@angular/common/http';
 
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
+import { JwtHelperService } from '@auth0/angular-jwt';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
 import { LocalStorageKeyConsts } from './local-storage-key.consts';
 
+interface LoginResponse {
+  team: Team;
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,44 +27,30 @@ export class AuthService {
 
 
   constructor(
-    private http: Http,
-    private router: Router,
-    private jwtHelper: JwtHelper = new JwtHelper()
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService = new JwtHelperService()
   ) { }
 
-  /**
-   * username, password でログインする
-   *
-   * @param {string} username
-   * @param {string} password
-   * @returns {Observable<Boolean>} ログイン成功したかどうか
-   *
-   * @memberOf AuthService
-   */
   login(teamId: string, password: string): Observable<Boolean> {
-    const options: RequestOptions = this.generateBasicRequestOptions();
-    // TODO back から送られてくる teamId は objectId にする
     const url: string = urljoin(this.endpointUrl, teamId.toString(), '/login');
 
-    return this.http.post(
-        url,
-        {password: password},
-        options)
-      .map((res: Response) => {
-        // 200 じゃない場合は false を返して抜ける
-        if (res.status !== 200) {
-          return false;
-        }
-        // 成功した場合は token をセットする
-        const data: any = res.json();
-        // ログイン結果データからは、token のみを localStorage に保存
-        localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, data.token);
-        const currentData: any = this.getStoredTeamData() || {};
-        currentData.teamId = data.team.id;
-        currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
-        localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
-        return true;
-      });
+    return this.http.post<LoginResponse>(url, {password: password})
+      .pipe(
+        map((loginResponse: LoginResponse) => {
+          // TODO ステータスコードを見てハンドリングするようにする
+          // token が帰ってこない場合は false を返して抜ける
+          if (loginResponse.token == null) {
+            return false;
+          }
+          // ログイン結果データからは、token のみを localStorage に保存
+          localStorage.setItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY, loginResponse.token);
+          const currentData: any = this.getStoredTeamData() || {};
+          currentData.teamId = loginResponse.team.id;
+          currentData.expirationDate = this.jwtHelper.getTokenExpirationDate(this.getAccessToken());
+          localStorage.setItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY, JSON.stringify(currentData));
+          return true;
+        })
+      );
   }
 
   /**
@@ -75,7 +67,7 @@ export class AuthService {
 
   /**
    * localStorage に保存されているアクセストークンを返す
-   * angular2-jwt AuthHttp が使えないモジュール向けに用意している(EventSource など)
+   * @auth0/angular-jwt AuthHttp が使えないモジュール向けに用意している(EventSource など)
    *
    * @returns {string}
    *
@@ -94,21 +86,11 @@ export class AuthService {
    */
   isLoggedInByTeamId(id: string): boolean {
     const data: any = this.getStoredTeamData();
-    return tokenNotExpired() && data.teamId === id;
+    return !this.jwtHelper.isTokenExpired(this.getAccessToken()) && data.teamId === id;
   }
 
   logout(): void {
     localStorage.removeItem(LocalStorageKeyConsts.STORED_TEAM_DATA_KEY);
     localStorage.removeItem(LocalStorageKeyConsts.ACCESS_TOKEN_ITEM_KEY);
-  }
-
-
-
-  /**
-   * このサービスで利用する基本の RequestOptions を作成する
-   * @return {RequestOptions}
-   */
-  private generateBasicRequestOptions(): RequestOptions {
-    return new RequestOptions({ withCredentials: true });
   }
 }

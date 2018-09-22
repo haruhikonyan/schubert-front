@@ -41,18 +41,16 @@ export class TopComponent implements OnInit {
 
     // TODO ちゃんとしたメソッドで取得する
     this.recruitService.getRecruits()
-      .map((recruits: Recruit[]) => {
+      .subscribe((recruits: Recruit[]) => {
         this.newRecruits = recruits.slice(0, 3);
-      })
-      .subscribe();
+      });
 
     // TODO ちゃんとしたメソッドで取得する
     this.concertService.getConcerts()
-      .map((concerts: Concert[]) => {
+      .subscribe((concerts: Concert[]) => {
         this.hotConcerts = concerts.slice(0, 3);
         this.nearestConcerts = concerts.slice(0, 3);
-      })
-      .subscribe();
+      });
   }
   /**
    * 団員募集検索ボタンクリックハンドラ

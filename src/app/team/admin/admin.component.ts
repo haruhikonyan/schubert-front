@@ -30,22 +30,19 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     const teamId = this.route.snapshot.params.teamId;
     this.teamService.getTeam(teamId)
-      .map((team: Team) => {
+      .subscribe((team: Team) => {
         this.team = team;
-      })
-      .subscribe();
+      });
 
     this.recruitService.getRecruitsByTeam(teamId)
-      .map((recruits: Recruit[]) => {
+      .subscribe((recruits: Recruit[]) => {
         this.recruits = recruits;
-      })
-      .subscribe();
+      });
 
     this.concertService.getConcertsByTeam(teamId)
-      .map((concerts: Concert[]) => {
+      .subscribe((concerts: Concert[]) => {
         this.concerts = concerts;
-      })
-      .subscribe();
+      });
 
   }
 }
