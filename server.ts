@@ -41,6 +41,10 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
   res.render('index', { req });
 });
 
